@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/25 23:05:52 by abosc            ###   ########.fr       */
+/*   Updated: 2025/08/26 17:21:16 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 static int	minimap_asset_init(t_data *data, t_window win)
 {
-	data->mini_texture[0] = xpm_img(win.mlx, "assets/black.xpm", A_SIZE);
+	data->mini_texture[0] = xpm_img(win.mlx, "assets/black.xpm", TILE_SIZE);
 	if (!data->mini_texture[0])
 		return (0);
-	data->mini_texture[1] = xpm_img(win.mlx, "assets/cobble.xpm", A_SIZE);
+	ft_printf("1\n");
+	data->mini_texture[1] = xpm_img(win.mlx, "assets/cobble.xpm", TILE_SIZE);
 	if (!data->mini_texture[1])
 		return (1);
-	data->mini_texture[2] = xpm_img(win.mlx, "assets/Lava.xpm", A_SIZE);
+	ft_printf("2\n");
+	data->mini_texture[2] = xpm_img(win.mlx, "assets/Lava.xpm", TILE_SIZE);
 	if (!data->mini_texture[2])
 		return (2);
+	ft_printf("ok\n");
 	return (3);
 }
 
@@ -30,13 +33,13 @@ static void	ifs(t_data *data, t_window win, char tile, int x, int y)
 {
 	if (tile == '0')
 		mlx_put_image_to_window(win.mlx, win.window, data->mini_texture[0],
-			x * A_SIZE, y * A_SIZE);
+			x * TILE_SIZE, y * TILE_SIZE);
 	else if (tile == '1')
 		mlx_put_image_to_window(win.mlx, win.window, data->mini_texture[1],
-			x * A_SIZE, y * A_SIZE);
+			x * TILE_SIZE, y * TILE_SIZE);
 	else if (tile == ' ')
 		mlx_put_image_to_window(win.mlx, win.window, data->mini_texture[2],
-			x * A_SIZE, y * A_SIZE);
+			x * TILE_SIZE, y * TILE_SIZE);
 
 }
 
@@ -46,7 +49,10 @@ void	minimap_handling(t_data *data)
 	int	x;
 
 	if (minimap_asset_init(data, data->win) != 3)
+	{
+		ft_printf(ASSET_INIT);
 		exit_w_code(1, data);
+	}
 	y = 0;
 	while (data->map.map[y])
 	{
@@ -66,7 +72,7 @@ void	minimap_handling(t_data *data)
 		j = 0;
 		while (j < 5)
 		{
-			mlx_pixel_put(data->win.mlx, data->win.window, (int)data->player.pos[X] * 20 + i , (int)data->player.pos[Y] * 20 + j, 255255000);
+			mlx_pixel_put(data->win.mlx, data->win.window, (int)data->player.pos[X] * 20 + i , (int)data->player.pos[Y] * 20 + j, 0255000000);
 			j++;
 		}
 		i++;

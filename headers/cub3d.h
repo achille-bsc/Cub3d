@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/25 23:34:56 by abosc            ###   ########.fr       */
+/*   Updated: 2025/08/26 17:03:11 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 # define HEIGHT				1080
 # define WIDTH				1920
 # define RENDER_DIST
-# define FPS_MAX			60
-# define FOV
+# define MAX_FPS			60
+# define FOV				66
 # define MV_SPEED			0.2
 # define ROT_SPEED
+# define TILE_SIZE			20
 
 # define KEYPRESS			2
 # define KEYRELEASE			3
