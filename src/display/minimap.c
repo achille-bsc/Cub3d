@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 17:21:16 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/26 18:36:30 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ static int	minimap_asset_init(t_data *data, t_window win)
 	data->mini_texture[0] = xpm_img(win.mlx, "assets/black.xpm", TILE_SIZE);
 	if (!data->mini_texture[0])
 		return (0);
-	ft_printf("1\n");
-	data->mini_texture[1] = xpm_img(win.mlx, "assets/cobble.xpm", TILE_SIZE);
+	data->mini_texture[1] = xpm_img(win.mlx, "assets/cobsble.xpm", TILE_SIZE);
 	if (!data->mini_texture[1])
 		return (1);
-	ft_printf("2\n");
 	data->mini_texture[2] = xpm_img(win.mlx, "assets/Lava.xpm", TILE_SIZE);
 	if (!data->mini_texture[2])
 		return (2);
-	ft_printf("ok\n");
 	return (3);
 }
 
@@ -47,10 +44,12 @@ void	minimap_handling(t_data *data)
 {
 	int	y;
 	int	x;
+	int	res;
 
-	if (minimap_asset_init(data, data->win) != 3)
+	res = minimap_asset_init(data, data->win);
+	if (res != 3)
 	{
-		ft_printf(ASSET_INIT);
+		ft_printf(ASSET_INIT, res);
 		exit_w_code(1, data);
 	}
 	y = 0;
@@ -64,6 +63,14 @@ void	minimap_handling(t_data *data)
 		}
 		y++;
 	}
+	int	a = 0;
+	while (data->mini_texture[a])
+	{
+		mlx_destroy_image(data->win.mlx, data->mini_texture[a]);
+		data->mini_texture[a] = NULL;
+		a++;
+	}
+
 	int	i;
 	int	j;
 	i = 0;

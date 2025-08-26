@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 17:00:18 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/26 18:13:46 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	events(t_data *data);
 
 /* EXIT */
 
+int		clean_quit(t_data *data);
 void	exit_w_code(int code, t_data *data);
 
 
