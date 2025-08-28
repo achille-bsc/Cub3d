@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 05:04:22 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 21:06:06 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 /* PARSING */
 
 bool	parser(t_data *data, char *map_path);
-bool	parse_data(t_data *data, char **file);
+bool	dispatch_data(t_data *data, char **file);
+void	dispatch_error_handling(t_parsing_errors err);
 
 /* MINIMAP */
 
@@ -41,7 +42,6 @@ void	events(t_data *data);
 
 int		clean_quit(t_data *data);
 void	exit_w_code(int code, t_data *data);
-void	free_str_array(char *src[]);
-
+void	free_pars_info(t_data *data);
 
 #endif

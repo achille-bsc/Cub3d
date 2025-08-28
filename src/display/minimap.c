@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 05:58:08 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 21:03:55 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	minimap_handling(t_data *data)
 	res = minimap_asset_init(data, data->win);
 	if (res != 3)
 	{
-		ft_printf(ASSET_INIT, res);
+		ft_printf(_ASSET_INIT, res);
 		exit_w_code(1, data);
 	}
 	y = 0;

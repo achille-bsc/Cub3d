@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/08/28 05:12:46 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/08/28 20:32:06 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,8 +90,8 @@ ERS_STR		=	\033[2K\r
 
 SRC		=	main.c utils.c exit.c												\
 			$(EV)/events.c														\
-			$(DP)/display.c $(DP)/minimap.c $(PS)/parsing.c $(PS)/pars_data.c	\
-			$(DP)/display_utils.c
+			$(DP)/display.c $(DP)/minimap.c $(DP)/display_utils.c				\
+			$(PS)/parsing.c $(PS)/pars_data.c $(PS)/error_handling.c
 
 #	OBJS CONVERSION
 

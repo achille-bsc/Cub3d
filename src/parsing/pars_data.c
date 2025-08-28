@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:05:01 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/08/28 05:58:08 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 21:05:57 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,21 @@ static bool	is_map(char *file)
 	return (true);
 }
 
-static bool	is_all_data_parsed(t_data *data)
+static t_parsing_errors	is_all_data_parsed(t_data *data)
 {
-	if (!data->colors[CEILING] || !data->colors[FLOOR] || !data->text[NO]
-		|| !data->text[SO] || !data->text[WE] || !data->text[EA])
-		return (false);
-	return (true);
+	if (!data->colors[CEILING])
+		return (ERR_CEILING);
+	if (!data->colors[FLOOR])
+		return (ERR_FLOOR);
+	if (!data->text[NO])
+		return (ERR_NORTH);
+	if (!data->text[SO])
+		return (ERR_SOUTH);
+	if (!data->text[WE])
+		return (ERR_WEST);
+	if (!data->text[EA])
+		return (ERR_EAST);
+	return (DISPATCH_OK);
 }
 
 static bool	parse_colors(t_data *data, char *file)
@@ -80,9 +89,10 @@ static bool	parse_img(t_data *data, char *file)
 	return (true);
 }
 
-bool	parse_data(t_data *data, char **file)
+bool	dispatch_data(t_data *data, char **file)
 {
-	int	i;
+	t_parsing_errors	res;
+	int					i;
 
 	i = 0;
 	while (file[i])
@@ -91,16 +101,17 @@ bool	parse_data(t_data *data, char **file)
 			return (false);
 		if (!parse_colors(data, file[i]))
 			return (false);
-		if (is_map(file[i]) && is_all_data_parsed(data))
+		res = is_all_data_parsed(data);
+		if (is_map(file[i]) && res == DISPATCH_OK)
 		{
 			data->map.map = ft_arraydup(file + i);
 			if (!data->map.map)
 				return (false);
 			return (true);
 		}
-		else if (is_map(file[i]) && !is_all_data_parsed(data))
-			return (ft_printf(DATA), false);
+		else if (is_map(file[i]) && res != DISPATCH_OK)
+			return (dispatch_error_handling(res), false);
 		i++;
 	}
-	return (ft_printf(DATA), false);
+	return (ft_printf(_FILE_DATA), false);
 }
