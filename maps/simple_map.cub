@@ -1,7 +1,7 @@
-NO ../assets/
-SO ../assets/
-WE ../assets/
-EA ../assets/
+NO ../assets/north.xpm
+SO ../assets/south.xpm
+WE ../assets/west.xpm
+EA ../assets/east.xpm
 
 F 220,100,0
 C 225,30,0

@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/08/26 17:01:25 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/08/28 05:12:46 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ INCLUDES			:=	$(INC_DIR)/
 
 DP					:=	display
 EV					:=	events
+PS					:=	parsing
 
 # COLORS_DEFINITIONS
 
@@ -87,8 +88,10 @@ ERS_STR		=	\033[2K\r
 
 #	SRC FILES
 
-SRC		=	main.c exit.c $(EV)/events.c $(DP)/display_utils.c $(DP)/display.c	\
-			$(DP)/minimap.c
+SRC		=	main.c utils.c exit.c												\
+			$(EV)/events.c														\
+			$(DP)/display.c $(DP)/minimap.c $(PS)/parsing.c $(PS)/pars_data.c	\
+			$(DP)/display_utils.c
 
 #	OBJS CONVERSION
 

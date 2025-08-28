@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 18:31:07 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 05:39:16 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,6 @@
 // 		return (false);
 // 	return (true);
 // }
-
-static void	map_maker(t_map *map, char *map_path)
-{
-	char	*buffer;
-	int		fd;
-
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf(FILE, map_path);
-		return ;
-	}
-	buffer = get_all_file(fd);
-	map->map = ft_split(buffer, '\n');
-	free(buffer);
-	return ;
-}
 
 static bool	_mlx_init(t_data *data)
 {
@@ -64,8 +47,7 @@ int	main(int argc, char **argv)
 	data = ft_calloc(sizeof(t_data));
 	if (!data)
 		return (1);
-	map_maker(&data->map, argv[1]);
-	if (!data->map.map)
+	if (!parser(data, argv[1]))
 		return (1);
 	// if (!data_init(data))
 	// 	return (1);

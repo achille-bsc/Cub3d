@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 18:36:30 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 05:58:08 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	minimap_asset_init(t_data *data, t_window win)
 	data->mini_texture[0] = xpm_img(win.mlx, "assets/black.xpm", TILE_SIZE);
 	if (!data->mini_texture[0])
 		return (0);
-	data->mini_texture[1] = xpm_img(win.mlx, "assets/cobsble.xpm", TILE_SIZE);
+	data->mini_texture[1] = xpm_img(win.mlx, "assets/cobble.xpm", TILE_SIZE);
 	if (!data->mini_texture[1])
 		return (1);
 	data->mini_texture[2] = xpm_img(win.mlx, "assets/Lava.xpm", TILE_SIZE);

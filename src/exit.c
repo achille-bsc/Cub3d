@@ -6,11 +6,23 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 18:36:20 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 06:29:16 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_str_array(char *src[])
+{
+	int	i;
+
+	i = 0;
+	while (src[i])
+	{
+		ft_str_reset(&src[i]);
+		i++;
+	}
+}
 
 void	exit_w_code(int code, t_data *data)
 {
@@ -27,6 +39,8 @@ void	exit_w_code(int code, t_data *data)
 		mlx_destroy_display(data->win.mlx);
 		free(data->win.mlx);
 	}
+	free_str_array(data->colors);
+	free_str_array(data->text);
 	ft_freeall("%d%m", &data->map.map, &data);
 	exit(code);
 }

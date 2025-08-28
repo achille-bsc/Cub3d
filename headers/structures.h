@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 20:28:20 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/28 05:57:48 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ enum e_pos_axis
 
 enum e_img_orientation
 {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST,
+	NO,
+	SO,
+	WE,
+	EA,
 	NUL,
 }	;
 
@@ -68,9 +68,10 @@ typedef struct s_movement
 
 typedef struct s_data
 {
+	char		*text[5];
 	void		*texture[5];
 	void		*mini_texture[4];
-	char		*colours[3];
+	char		*colors[3];
 	size_t		old_time;
 	size_t		time;
 	t_movement	move;
