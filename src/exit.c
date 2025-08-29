@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 21:04:46 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 06:58:12 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	exit_w_code(int code, t_data *data)
 		free(data->win.mlx);
 	}
 	free_pars_info(data);
-	ft_freeall("%d%m", &data->map.map, &data);
+	ft_freeall("%d%d%m", &data->map.map, &data->map.dummy, &data);
 	exit(code);
 }
 

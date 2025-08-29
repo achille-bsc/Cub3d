@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/08/29 01:53:41 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 07:25:56 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	colors_verification(t_data *data)
 		if (!color)
 			return (false);
 		if (ft_darraylen(color) != 3)
-			return (ft_printf(_RGB), ft_freedarray(color), false);
+			return (ft_printf(_RGB_FORMAT), ft_freedarray(color), false);
 		rgb[RED] = ft_atoi(color[RED]);
 		rgb[GREEN] = ft_atoi(color[GREEN]);
 		rgb[BLUE] = ft_atoi(color[BLUE]);
@@ -43,7 +43,7 @@ static bool	colors_verification(t_data *data)
 		data->rgb[i] = (rgb[RED] << 16) + (rgb[GREEN] << 8) + rgb[BLUE];
 		i++;
 	}
-	data->rgb[PLAYER] = (255 << 16) + (255);
+	data->rgb[PLAYER] = (255 << 16);
 	return (true);
 }
 
@@ -54,7 +54,7 @@ static char	**file_opening(char *map_path)
 	int		fd;
 
 	if (ft_strncmp(map_path + (ft_strlen(map_path) - 4), ".cub", 4))
-		return (ft_printf(_FILE_EXTENTION), NULL);
+		return (ft_printf(_FILE_EXTENSION), NULL);
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 	{
@@ -76,8 +76,9 @@ bool	parser(t_data *data, char *map_path)
 	fullfile = file_opening(map_path);
 	if (!fullfile)
 		return (free(data), false);
-	if (!dispatch_data(data, fullfile) || !colors_verification(data))
-		return (free_pars_info(data), ft_freeall("%d%d%m", &fullfile,
-				&data->map.map, &data), false);
+	if (!dispatch_data(data, fullfile) || !colors_verification(data)
+		|| !map_parsing(data, data->map.map))
+		return (free_pars_info(data), ft_freeall("%d%d%d%m", &fullfile,
+				&data->map.map, &data->map.dummy, &data), false);
 	return (ft_freedarray(fullfile), true);
 }

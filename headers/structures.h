@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 01:38:05 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 06:37:51 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_window
 typedef struct s_map
 {
 	char	**map;
+	char	**dummy;
 }			t_map;
 
 typedef struct s_movement

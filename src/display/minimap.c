@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 01:39:13 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 07:44:46 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ void	minimap_handling(t_data *data)
 
 	int	i;
 	int	j;
-	i = 0;
+	i = -2;
+	ft_printf("%i %i\n", (int)data->player.pos[Y], (int)data->player.pos[X]);
 	while (i < 5)
 	{
-		j = 0;
+		j = -2;
 		while (j < 5)
 		{
 			mlx_pixel_put(data->win.mlx, data->win.window, (int)data->player.pos[X] * 20 + i , (int)data->player.pos[Y] * 20 + j, data->rgb[PLAYER]);
@@ -84,5 +85,4 @@ void	minimap_handling(t_data *data)
 		}
 		i++;
 	}
-
 }

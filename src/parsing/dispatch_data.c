@@ -6,13 +6,13 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:05:01 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/08/29 02:07:28 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 06:11:33 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	is_map(char *file)
+static bool	_is_map(char *file)
 {
 	int	i;
 
@@ -102,14 +102,14 @@ bool	dispatch_data(t_data *data, char **file)
 		if (!parse_colors(data, file[i]))
 			return (false);
 		res = is_all_data_parsed(data);
-		if (is_map(file[i]) && res == DISPATCH_OK)
+		if (_is_map(file[i]) && res == DISPATCH_OK)
 		{
 			data->map.map = ft_arraydup(file + i);
 			if (!data->map.map)
 				return (false);
 			return (true);
 		}
-		else if (is_map(file[i]) && res != DISPATCH_OK)
+		else if (_is_map(file[i]) && res != DISPATCH_OK)
 			return (dispatch_error_handling(res), false);
 		i++;
 	}
