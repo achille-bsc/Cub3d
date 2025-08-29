@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 21:04:32 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 01:38:05 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ enum e_up_down
 {
 	FLOOR,
 	CEILING,
+	PLAYER,
+}	;
+
+enum e_colors
+{
+	RED,
+	GREEN,
+	BLUE,
 }	;
 
 typedef struct s_player
@@ -83,6 +91,7 @@ typedef struct s_data
 	void		*texture[4];
 	void		*mini_texture[4];
 	char		*colors[2];
+	int			rgb[3];
 	size_t		old_time;
 	size_t		time;
 	t_movement	move;

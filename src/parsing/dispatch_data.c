@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_data.c                                        :+:      :+:    :+:   */
+/*   dispatch_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:05:01 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/08/28 21:05:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 02:07:28 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,5 @@ bool	dispatch_data(t_data *data, char **file)
 			return (dispatch_error_handling(res), false);
 		i++;
 	}
-	return (ft_printf(_FILE_DATA), false);
+	return (ft_printf(_MAP_DATA), false);
 }
