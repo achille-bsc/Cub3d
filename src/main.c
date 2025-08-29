@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 21:03:13 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 09:55:25 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char **argv)
 		return (1);
 	// /* TODO: KEYMAP INIT */
 	events(data);
-	// raycaster(data);
 	display(data);
 	mlx_loop(data->win.mlx);
 	return (0);
