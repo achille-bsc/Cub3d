@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 18:13:46 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 06:08:15 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 
 # include "cub3d.h"
 
+/* PARSING */
+
+bool	parser(t_data *data, char *map_path);
+bool	dispatch_data(t_data *data, char **file);
+void	dispatch_error_handling(t_parsing_errors err);
+bool	map_parsing(t_data *data, char **map);
 
 /* MINIMAP */
 
 void	minimap_handling(t_data *data);
 
-/* DISPLAY UTILS */
+/* UTILS */
 
+char	*skipchar(char *src, int offset, char skiped);
 void	*xpm_img(void *mlx, char *path, int size);
+bool	is_spawn(char c);
+bool	is_map(char c);
 
 /* DISPLAY */
 
@@ -36,6 +45,6 @@ void	events(t_data *data);
 
 int		clean_quit(t_data *data);
 void	exit_w_code(int code, t_data *data);
-
+void	free_pars_info(t_data *data);
 
 #endif

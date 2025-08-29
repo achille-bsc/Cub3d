@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/26 20:28:20 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/29 06:37:51 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,36 @@ enum e_pos_axis
 
 enum e_img_orientation
 {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST,
+	NO,
+	SO,
+	WE,
+	EA,
 	NUL,
 }	;
+
+typedef enum e_parsing_errors
+{
+	ERR_CEILING,
+	ERR_FLOOR,
+	ERR_NORTH,
+	ERR_SOUTH,
+	ERR_WEST,
+	ERR_EAST,
+	DISPATCH_OK,
+}	t_parsing_errors;
 
 enum e_up_down
 {
 	FLOOR,
 	CEILING,
+	PLAYER,
+}	;
+
+enum e_colors
+{
+	RED,
+	GREEN,
+	BLUE,
 }	;
 
 typedef struct s_player
@@ -52,6 +71,7 @@ typedef struct s_window
 typedef struct s_map
 {
 	char	**map;
+	char	**dummy;
 }			t_map;
 
 typedef struct s_movement
@@ -68,9 +88,11 @@ typedef struct s_movement
 
 typedef struct s_data
 {
-	void		*texture[5];
+	char		*text[4];
+	void		*texture[4];
 	void		*mini_texture[4];
-	char		*colours[3];
+	char		*colors[2];
+	int			rgb[3];
 	size_t		old_time;
 	size_t		time;
 	t_movement	move;

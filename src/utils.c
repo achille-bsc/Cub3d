@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_utils.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 23:05:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 20:33:02 by lvan-bre         ###   ########.fr       */
+/*   Created: 2025/08/28 03:26:53 by lvan-bre          #+#    #+#             */
+/*   Updated: 2025/08/28 04:17:13 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
-void	*xpm_img(void *mlx, char *path, int size)
+char	*skipchar(char *src, int offset, char skiped)
 {
-	return (mlx_xpm_file_to_image(mlx, path, &size, &size));
+	char	*buffer;
+	int		i;
+
+	i = offset;
+	while (src[i] == skiped)
+		i++;
+	buffer = ft_strdup(src + i);
+	return (buffer);
 }
