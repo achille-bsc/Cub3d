@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 06:37:51 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:38:17 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@ enum e_pos_axis
 	X,
 	Y,
 }	;
+
+typedef struct s_camera
+{
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+
+	int mapX;
+	int mapY;
+
+	double deltaDistX;
+	double deltaDistY;
+
+	double	sideDistX;
+	double	sideDistY;
+	
+	int	stepX;
+	int	stepY;
+}	t_camera;
 
 enum e_img_orientation
 {
@@ -55,6 +74,7 @@ enum e_colors
 	BLUE,
 }	;
 
+
 typedef struct s_player
 {
 	double	pos[2];
@@ -66,6 +86,11 @@ typedef struct s_window
 {
 	void		*mlx;
 	void		*window;
+	void		*img;
+	char		*img_ptr;
+	int			bit_by_pix;
+	int			line_length;
+	int			endian;
 }				t_window;
 
 typedef struct s_map
@@ -97,8 +122,8 @@ typedef struct s_data
 	size_t		time;
 	t_movement	move;
 	t_map		map;
-	t_window	win;
-	t_player	player;
+	t_window	*win;
+	t_player	*player;
 }				t_data;
 
 #endif
