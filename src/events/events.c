@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/25 23:07:07 by abosc            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:40:30 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	clean_quit(t_data *data)
-{
-	if (data->win.window)
-		mlx_destroy_window(data->win.mlx, data->win.window);
-	if (data->win.window)
-	{
-		mlx_loop_end(data->win.mlx);
-		mlx_destroy_display(data->win.mlx);
-		free(data->win.mlx);
-	}
-	free(data);
-	exit(0);
-	return (0);
-}
 
 static int	press(int keysym, t_data *data)
 {

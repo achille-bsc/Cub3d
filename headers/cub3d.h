@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/28 18:08:06 by abosc            ###   ########.fr       */
+/*   Updated: 2025/08/30 16:37:27 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define FOV				90
 # define MV_SPEED			0.2
 # define ROT_SPEED
+# define TILE_SIZE			20
 
 # define KEYPRESS			2
 # define KEYRELEASE			3

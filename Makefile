@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abosc <abosc@student.42.fr>                +#+  +:+       +#+         #
+#    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/08/25 23:11:19 by abosc            ###   ########.fr        #
+#    Updated: 2025/08/29 06:07:17 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,9 @@ INCLUDES			:=	$(INC_DIR)/
 
 # SRC DIRS
 
-RC					:=	raycasting
+DP					:=	display
 EV					:=	events
+PS					:=	parsing
 
 # COLORS_DEFINITIONS
 
@@ -87,7 +88,11 @@ ERS_STR		=	\033[2K\r
 
 #	SRC FILES
 
-SRC		=	main.c $(EV)/events.c
+SRC		=	main.c utils.c exit.c												\
+			$(EV)/events.c														\
+			$(DP)/display.c $(DP)/minimap.c $(DP)/display_utils.c				\
+			$(PS)/parsing.c $(PS)/dispatch_data.c $(PS)/error_handling.c 		\
+			$(PS)/map_parsing.c $(PS)/utils.c
 
 #	OBJS CONVERSION
 
@@ -113,10 +118,6 @@ cleandep:
 fcleandep:
 	@$(MAKE) fclean -C $(LIBFT_PATH) --no-print-directory
 
-mkdep:
-	@cp $(LIBFT_H_PATH) $(INC_DIR)
-	@$(MAKE) -C $(LIBFT_PATH) --no-print-directory
-
 redep: fcleandep mkdep
 
 cleansrc:
@@ -140,6 +141,7 @@ libft:
 	@cp $(LIBFT_H_PATH) $(INC_DIR)
 	@cp $(FT_PRINTF_H_PATH) $(INC_DIR)
 	@cp $(GNL_H_PATH) $(INC_DIR)
+	@$(MAKE) -C $(LIBFT_PATH) --no-print-directory
 
 rmlibft:
 	@$(RMDIR) $(LIBFT_PATH)

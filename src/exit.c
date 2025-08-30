@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/25 23:04:50 by abosc            ###   ########.fr       */
+/*   Updated: 2025/08/29 06:58:12 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_pars_info(t_data *data)
+{
+	if (data->colors[CEILING])
+		free(data->colors[CEILING]);
+	if (data->colors[FLOOR])
+		free(data->colors[FLOOR]);
+	if (data->text[NO])
+		free(data->text[NO]);
+	if (data->text[SO])
+		free(data->text[SO]);
+	if (data->text[WE])
+		free(data->text[WE]);
+	if (data->text[EA])
+		free(data->text[EA]);
+}
 
 void	exit_w_code(int code, t_data *data)
 {
@@ -22,6 +38,13 @@ void	exit_w_code(int code, t_data *data)
 		mlx_destroy_display(data->win.mlx);
 		free(data->win.mlx);
 	}
-	ft_freeall("%m", data);
+	free_pars_info(data);
+	ft_freeall("%d%d%m", &data->map.map, &data->map.dummy, &data);
 	exit(code);
+}
+
+int	clean_quit(t_data *data)
+{
+	exit_w_code(0, data);
+	return (0);
 }

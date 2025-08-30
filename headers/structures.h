@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/30 15:17:00 by abosc            ###   ########.fr       */
+/*   Updated: 2025/08/30 16:38:17 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,41 @@ typedef struct s_camera
 	int	stepY;
 }	t_camera;
 
+enum e_img_orientation
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	NUL,
+}	;
+
+typedef enum e_parsing_errors
+{
+	ERR_CEILING,
+	ERR_FLOOR,
+	ERR_NORTH,
+	ERR_SOUTH,
+	ERR_WEST,
+	ERR_EAST,
+	DISPATCH_OK,
+}	t_parsing_errors;
+
+enum e_up_down
+{
+	FLOOR,
+	CEILING,
+	PLAYER,
+}	;
+
+enum e_colors
+{
+	RED,
+	GREEN,
+	BLUE,
+}	;
+
+
 typedef struct s_player
 {
 	double	pos[2];
@@ -61,6 +96,7 @@ typedef struct s_window
 typedef struct s_map
 {
 	char	**map;
+	char	**dummy;
 }			t_map;
 
 typedef struct s_movement
@@ -77,7 +113,11 @@ typedef struct s_movement
 
 typedef struct s_data
 {
+	char		*text[4];
 	void		*texture[4];
+	void		*mini_texture[4];
+	char		*colors[2];
+	int			rgb[3];
 	size_t		old_time;
 	size_t		time;
 	t_movement	move;
