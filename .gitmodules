@@ -1,0 +1,3 @@
+[submodule "Depedencies/Libft_Updated"]
+	path = Depedencies/Libft_Updated
+	url = https://github.com/Sellith/Libft_Updated.git

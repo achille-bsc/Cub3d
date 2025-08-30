@@ -1,4 +1,5 @@
 bin/
 build/
-.vscode
+.vscode/
 .json
+a.out
