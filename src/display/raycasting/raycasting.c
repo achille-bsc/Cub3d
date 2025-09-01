@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/01 15:50:27 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:07:43 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	rays_dir_setter(t_camera *cam, double pos[2])
 	}
 }
 
-int	rays_calculator(t_camera *cam)
+int	rays_calculator(t_camera *cam, t_data *data)
 {
 	bool	hit;
 	int		side;
@@ -114,7 +114,7 @@ int	rays_calculator(t_camera *cam)
 			cam->mapY += cam->stepY;
 			side = 1;
 		}
-		if (worldMap[cam->mapY][cam->mapX] > 0)
+		if (data->map.i_map[cam->mapY][cam->mapX] > 0)
 			hit = true;
 	}
 	return (side);
@@ -175,7 +175,7 @@ void	pixels_rendering(t_camera *cam, t_window win, double pos[2], int side,
 	// 	my_mlx_pixel_put(win, x, drawStart++, color);
 }
 
-void	draw_frame(t_window win, double pos[2], t_player *player)
+void	draw_frame(t_window win, double pos[2], t_player *player, t_data *data)
 {
 	int			x;
 	// int			drawStart;
@@ -187,12 +187,12 @@ void	draw_frame(t_window win, double pos[2], t_player *player)
 	{
 		cam = cam_val_setter(pos, player->dir, player->plane, cam, x);
 		rays_dir_setter(cam, pos);
-		pixels_rendering(cam, win, pos, rays_calculator(cam), x);
+		pixels_rendering(cam, win, pos, rays_calculator(cam, data), x);
 		x++;
 	}
 }
 
-void	image_drowing(t_window window, t_player *player)
+void	image_drowing(t_window window, t_player *player, t_data *data)
 {
 	// static double	dir[2] = {0.5, 0};
 	// static double	plane[2];
@@ -202,7 +202,7 @@ void	image_drowing(t_window window, t_player *player)
 	window.img = mlx_new_image(window.mlx, WIDTH, HEIGHT);
 	window.img_ptr = mlx_get_data_addr(window.img, &window.bit_by_pix,
 			&window.line_length, &window.endian);
-	draw_frame(window, pos, player);
+	draw_frame(window, pos, player, data);
 	mlx_put_image_to_window(window.mlx, window.window, window.img, 0, 0);
 	mlx_destroy_image(window.mlx, window.img);
 }
@@ -229,5 +229,5 @@ void	raycasting(t_data *datas)
 
 
 	calculate_plane(player);
-	image_drowing(datas->win, player);
+	image_drowing(datas->win, player, datas);
 }
