@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/30 16:38:17 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/01 15:49:08 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_player
 	double	pos[2];
 	double	dir[2];
 	double	plane[2];
+	int		**map;
 }	t_player;
 
 typedef struct s_window
@@ -96,6 +97,7 @@ typedef struct s_window
 typedef struct s_map
 {
 	char	**map;
+	int		**i_map;
 	char	**dummy;
 }			t_map;
 
@@ -122,7 +124,7 @@ typedef struct s_data
 	size_t		time;
 	t_movement	move;
 	t_map		map;
-	t_window	*win;
+	t_window	win;
 	t_player	*player;
 }				t_data;
 

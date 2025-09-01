@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
+#    By: abosc <abosc@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/08/29 06:07:17 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/01 15:19:09 by abosc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ INCLUDES			:=	$(INC_DIR)/
 # SRC DIRS
 
 DP					:=	display
+RC					:=  display/raycasting
 EV					:=	events
 PS					:=	parsing
 
@@ -91,6 +92,7 @@ ERS_STR		=	\033[2K\r
 SRC		=	main.c utils.c exit.c												\
 			$(EV)/events.c														\
 			$(DP)/display.c $(DP)/minimap.c $(DP)/display_utils.c				\
+			$(RC)/raycasting.c													\
 			$(PS)/parsing.c $(PS)/dispatch_data.c $(PS)/error_handling.c 		\
 			$(PS)/map_parsing.c $(PS)/utils.c
 

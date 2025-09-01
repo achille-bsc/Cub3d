@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 09:54:44 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:50:12 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void	player_put(t_data *data)
 	{
 		j = -2;
 		while (j < 2)
-			mlx_pixel_put(data->win.mlx, data->win.window, data->player.pos[X]
-				* TILE_SIZE + i, data->player.pos[Y]
+			mlx_pixel_put(data->win.mlx, data->win.window, data->player->pos[X]
+				* TILE_SIZE + i, data->player->pos[Y]
 				* TILE_SIZE + j++, data->rgb[PLAYER]);
 		i++;
 	}

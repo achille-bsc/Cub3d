@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/30 16:26:25 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/01 15:50:27 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,24 @@
 /*
 Map temporaire (on feras une vrai map plus tard)
 */
-int			worldMap[HEIGHT][WIDTH] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-				1, 1}};
+#define MAP_WIDTH 24
+#define MAP_HEIGHT 12
+
+int worldMap[MAP_HEIGHT][MAP_WIDTH] =
+{
+  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+};
 
 /*
 + On calcule le FOV
@@ -60,10 +63,11 @@ t_camera	*cam_val_setter(double pos[2], double dir[2], double plane[2],
 	cam->mapY = (int)pos[Y];
 	cam->deltaDistX = fabs(1 / cam->rayDirX);
 	cam->deltaDistY = fabs(1 / cam->rayDirY);
-	cam->sideDistX;
-	cam->sideDistY;
+	// cam->sideDistX;
+	// cam->sideDistY;
 	cam->stepX = 0;
 	cam->stepY = 0;
+	return (cam);
 }
 
 void	rays_dir_setter(t_camera *cam, double pos[2])
@@ -116,17 +120,16 @@ int	rays_calculator(t_camera *cam)
 	return (side);
 }
 
-void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
+void	my_mlx_pixel_put(t_window win, int x, int y, int color)
 {
 	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-		*(int *)(win->img_ptr + (y * win->line_length + x * (win->bit_by_pix
+		*(int *)(win.img_ptr + (y * win.line_length + x * (win.bit_by_pix
 						/ 8))) = color;
 }
 
-void	pixels_rendering(t_camera *cam, t_window *win, double pos[2], int side,
+void	pixels_rendering(t_camera *cam, t_window win, double pos[2], int side,
 		int x)
 {
-	int		y;
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
@@ -147,44 +150,61 @@ void	pixels_rendering(t_camera *cam, t_window *win, double pos[2], int side,
 	if (drawEnd >= HEIGHT)
 		drawEnd = HEIGHT - 1;
 	if (side == 1)
-		color = 0x00FF00;
+		color = 0xF03A3A;
 	else
-		color = 0x800000;
-	y = drawStart;
-	while (y < drawEnd)
-		my_mlx_pixel_put(win, x, y++, color);
+		color = 0xF0593A;
+
+		// --- COULEUR DU MUR ---
+	// if (side == 1)
+	// 	color = 0x00FF00; // vert
+	// else
+	// 	color = 0x800000; // rouge foncé
+
+	// --- DESSIN DU CIEL (au-dessus du mur) ---
+	for (int y = 0; y < drawStart; y++)
+		my_mlx_pixel_put(win, x, y, 0x87CEEB); // bleu ciel
+
+	// --- DESSIN DU MUR ---
+	for (int y = drawStart; y <= drawEnd; y++)
+		my_mlx_pixel_put(win, x, y, color);
+
+	// --- DESSIN DU SOL (en dessous du mur) ---
+	for (int y = drawEnd + 1; y < HEIGHT; y++)
+		my_mlx_pixel_put(win, x, y, 0x444444); // gris foncé
+	// while (drawStart < drawEnd)
+	// 	my_mlx_pixel_put(win, x, drawStart++, color);
 }
 
-void	draw_frame(t_window *win, double pos[2], double dir[2], double plane[2])
+void	draw_frame(t_window win, double pos[2], t_player *player)
 {
 	int			x;
-	int			drawStart;
-	int			drawEnd;
+	// int			drawStart;
+	// int			drawEnd;
 	t_camera	*cam;
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		cam = cam_val_setter(pos, dir, plane, cam, x);
+		cam = cam_val_setter(pos, player->dir, player->plane, cam, x);
 		rays_dir_setter(cam, pos);
 		pixels_rendering(cam, win, pos, rays_calculator(cam), x);
 		x++;
 	}
 }
 
-void	image_drowing(t_window *window)
+void	image_drowing(t_window window, t_player *player)
 {
-	static double	dir[2] = {0.5, 0};
-	static double	plane[2];
+	// static double	dir[2] = {0.5, 0};
+	// static double	plane[2];
 
 	static double pos[2] = {11, 6};
 		// Valeurs temp (avant d'avoir les mouvements)
-	window->img = mlx_new_image(window->mlx, WIDTH, HEIGHT);
-	window->img_ptr = mlx_get_data_addr(window->img, &window->bit_by_pix,
-			&window->line_length, &window->endian);
-	draw_frame(window, pos, dir, plane);
-	mlx_put_image_to_window(window->mlx, window->window, window->img_ptr, 0, 0);
-	mlx_destroy_image(window->mlx, window->img);
+	window.img = mlx_new_image(window.mlx, WIDTH, HEIGHT);
+	window.img_ptr = mlx_get_data_addr(window.img, &window.bit_by_pix,
+			&window.line_length, &window.endian);
+	draw_frame(window, pos, player);
+	mlx_put_image_to_window(window.mlx, window.window, window.img, 0, 0);
+	mlx_destroy_image(window.mlx, window.img);
 }
 
 void	raycasting(t_data *datas)
@@ -192,11 +212,22 @@ void	raycasting(t_data *datas)
 	t_player *player;
 
 	player = datas->player;
-	player->pos[X] = 11;
-	player->pos[Y] = 6;
-	player->dir[X] = 0.5;
+	// player->pos[X] = 11;
+	// player->pos[Y] = 6;
+	// player->dir[X] = 0.5;
+	// player->dir[Y] = 0;
+
+	player->pos[X] = 1;
+	player->pos[Y] = 1;
+
+	// vecteur direction unitaire
+	player->dir[X] = -1;  // regarde vers la gauche
 	player->dir[Y] = 0;
 
+	// calcule un plan perpendiculaire au vecteur dir
 	calculate_plane(player);
-	image_drowing(datas->win);
+
+
+	calculate_plane(player);
+	image_drowing(datas->win, player);
 }

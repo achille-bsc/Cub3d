@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   languages.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 07:32:31 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:41:50 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 /* ERRORS */
 
-# define _ARGS				"Fatal error: cub3d takes 2 args\n"
+# define _ARGS				"Fatal error: cub3d takes 1 args\n"
 # define _FILE_EXTENSION	"Fatal error: invalid file extention \
 (expected .cub)\n"
 # define _FILE				"Fatal error: failed to open \"%s\"\n"

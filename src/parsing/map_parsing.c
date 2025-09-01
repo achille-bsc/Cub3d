@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/08/29 10:21:47 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:00:01 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static bool	player_four_dirs(t_data *data)
 	int	posx;
 	int	posy;
 
-	posx = (int)data->player.pos[X];
-	posy = (int)data->player.pos[Y];
+	posx = (int)data->player->pos[X];
+	posy = (int)data->player->pos[Y];
 	if (posx > (int)ft_strlen(data->map.map[posy + 1])
 		|| posx > (int)ft_strlen(data->map.map[posy - 1]))
 		return (ft_printf(_OPEN_MAP, posx, posy), false);
@@ -46,16 +46,17 @@ static bool	flood_fill(t_data *data, int x, int y)
 
 static void	add_to_spawn(t_data *data, int i, int j, char c)
 {
-	data->player.pos[X] = j + 0.5;
-	data->player.pos[Y] = i + 0.5;
+	data->player = ft_calloc(sizeof(t_player));
+	data->player->pos[X] = j + 0.5;
+	data->player->pos[Y] = i + 0.5;
 	if (c == 'N')
-		data->player.dir[Y] = 1;
+		data->player->dir[Y] = 1;
 	else if (c == 'S')
-		data->player.dir[Y] = -1;
+		data->player->dir[Y] = -1;
 	else if (c == 'E')
-		data->player.dir[X] = 1;
+		data->player->dir[X] = 1;
 	else if (c == 'W')
-		data->player.dir[X] = -1;
+		data->player->dir[X] = -1;
 }
 
 static bool	check_chars(t_data *data, char **map)
@@ -95,7 +96,7 @@ bool	map_parsing(t_data *data, char **map)
 	if (!data->map.dummy)
 		return (false);
 	if (!player_four_dirs(data)
-		|| !flood_fill(data, data->player.pos[X], data->player.pos[Y]))
+		|| !flood_fill(data, data->player->pos[X], data->player->pos[Y]))
 		return (false);
 	return (true);
 }
