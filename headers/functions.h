@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 06:08:15 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:02:07 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	is_map(char c);
 /* DISPLAY */
 
 bool	display(t_data *data);
+void	raycasting(t_data *datas);
 
 /* GAMEPLAY */
 
