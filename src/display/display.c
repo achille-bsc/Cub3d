@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/01 16:04:29 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/02 16:46:06 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	display(t_data *data)
 {
+	raycasting(data); 
 	minimap_handling(data);
-	raycasting(data);
 	return (true);
 }
