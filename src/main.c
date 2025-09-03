@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 16:35:16 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/03 23:42:03 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	main(int argc, char **argv)
 	/* TODO: PASING */
 	if (!parser(data, argv[1]))
 		return (1);
-	load_texture(data);
 	if (!_mlx_init(data))
 		return (1);
+	load_texture(data);
 	// /* TODO: KEYMAP INIT */
 	events(data);
 	display(data);

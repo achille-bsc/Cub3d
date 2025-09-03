@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 19:39:39 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 00:22:09 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,16 @@ void	my_mlx_pixel_put(t_window win, int x, int y, int color)
 
 int	get_pixel_from_texture(t_texture *texture, double texX, double texY)
 {
-	char *pixel;
+	int pixel;
+	int val;
 
-	pixel = texture->addr + (int)(texY * texture->size_line + texX * (texture->bpp / 8));
-	return (*(unsigned int *)pixel);
+	val = (texY * texture->size_line + texX * (texture->bpp / 8));
+	
+	// ft_putendl_fd(ft_itoa(val), 1);
+	// ft_printf_putstr(texture->addr);
+	// write(1, "\n", 1);
+	pixel = texture->addr[val];
+	return (pixel);
 }
 
 void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], int side,
@@ -151,6 +157,7 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
+	(void)data;
 	// int		color;
 	double	perpWallDist;
 
@@ -175,39 +182,59 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 	{
 		if (cam->stepY >= 0)	// mur OUEST
 		{
-			double texX = (int)(wallX * TILE_SIZE);
-			double step = 1.0 * TILE_SIZE / lineHeight;
-			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+			// double texX = (int)(wallX * TILE_SIZE);
+			// double step = 1.0 * TILE_SIZE / lineHeight;
+			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
-				double texY = (int)texPos & (TILE_SIZE - 1);
-				my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
-				texPos += step;
+				// double texY = (int)texPos & (TILE_SIZE - 1);
+				// ft_printf_putstr(data->texture[WE]->addr);
+				// write(1, "\n", 1);
+				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0x333333);
+				// texPos += step;
 			}
 		}
 		else 				// mur EST
 		{
-		double texX = 0.0;
-		double texY = 0.0;	
-		for (int y = drawStart; y <= drawEnd; y++)
-			my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+			// double texX = (int)(wallX * TILE_SIZE);
+			// double step = 1.0 * TILE_SIZE / lineHeight;
+			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;	
+			for (int y = drawStart; y <= drawEnd; y++)
+			{
+				// double texY = (int)texPos & (TILE_SIZE - 1);
+				// ft_printf_putstr(data->texture[WE]->addr);
+				// write(1, "\n", 1);
+				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0x777777);	
+			}
 		}
 	}
 	else
 	{
 		if (cam->stepX >= 0)	// mur SUD
 		{
-			double texX = 0.0;
-			double texY = 0.0;	
+			// double texX = (int)(wallX * TILE_SIZE);
+			// double step = 1.0 * TILE_SIZE / lineHeight;
+			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
-				my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+			{
+				// double texY = (int)texPos & (TILE_SIZE - 1);
+				// ft_printf_putstr(data->texture[WE]->addr);
+				// write(1, "\n", 1);
+				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0xbbbbbb);
+			}
 		}
 		else				// mur NORD
 		{
-			double texX = 0.0;
-			double texY = 0.0;	
+			// double texX = (int)(wallX * TILE_SIZE);
+			// double step = 1.0 * TILE_SIZE / lineHeight;
+			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;	
 			for (int y = drawStart; y <= drawEnd; y++)
-				my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+			{
+				// double texY = (int)texPos & (TILE_SIZE - 1);
+				// ft_printf_putstr(data->texture[WE]->addr);
+				// write(1, "\n", 1);
+				my_mlx_pixel_put(win, x, y, /* get_pixel_from_texture(data->texture[WE], texX, texY)*/0xffffff);
+			}
 		}
 	}
 
@@ -269,10 +296,13 @@ void	raycasting(t_data *datas)
 	player = datas->player;
 	// player->pos[X] = 10;
 	// player->pos[Y] = 5;
-
+	double angle;
+	angle = -2;
 	// vecteur direction unitaire
-	player->dir[X] = -0.5;
-	player->dir[Y] = -1;
+	double oldDirX = player->dir[X];
+	player->dir[X] = player->dir[X] * cos(angle) - player->dir[Y] * sin(angle);
+	player->dir[Y] = oldDirX * sin(angle) + player->dir[Y] * cos(angle);
+
 
 	// calcule un plan perpendiculaire au vecteur dir
 	calculate_plane(player);
@@ -281,3 +311,5 @@ void	raycasting(t_data *datas)
 	// calculate_plane(player);
 	image_drowing(datas->win, player, datas);
 }
+
+

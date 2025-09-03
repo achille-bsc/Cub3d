@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 17:01:29 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/03 23:39:42 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_movement
 
 typedef	struct s_texture
 {
-	char	*texture;
+	void	*texture;
 	char	*addr;
 	int		bpp;
 	int		size_line;
