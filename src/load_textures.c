@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:21:30 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 23:57:15 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 00:52:44 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	load_texture(t_data *data)
 	while (i < 4)
 	{
 		ft_printf("%s\n", data->text[i]);
-		texture[i] = ft_calloc(sizeof(t_texture *));
+		texture[i] = ft_calloc(sizeof(t_texture));
 		texture[i]->texture = mlx_xpm_file_to_image(data->win.mlx,
 				data->text[i], &w, &h);
 		texture[i]->addr = mlx_get_data_addr(texture[i]->texture,

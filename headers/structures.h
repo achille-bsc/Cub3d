@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 23:39:42 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 00:49:47 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,17 @@ enum e_pos_axis
 
 typedef struct s_camera
 {
-	double cameraX;
-	double rayDirX;
-	double rayDirY;
-
-	int mapX;
-	int mapY;
-
-	double deltaDistX;
-	double deltaDistY;
-
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	deltaDistX;
+	double	deltaDistY;
 	double	sideDistX;
 	double	sideDistY;
-	
-	int	stepX;
-	int	stepY;
+	int		stepX;
+	int		stepY;
 }	t_camera;
 
 enum e_img_orientation
@@ -122,11 +118,10 @@ typedef	struct s_texture
 	int		endian;
 }	t_texture;
 
-
 typedef struct s_data
 {
 	char		*text[4];
-	t_texture	*texture[4];
+	void		*texture[4];
 	void		*mini_texture[4];
 	char		*colors[2];
 	int			rgb[3];

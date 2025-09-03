@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/02 16:46:06 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 01:17:08 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	display(t_data *data)
 {
-	raycasting(data); 
+	raycasting(data);
 	minimap_handling(data);
 	return (true);
 }

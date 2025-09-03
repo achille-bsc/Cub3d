@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 00:22:09 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 01:17:44 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char worldMap[MAP_HEIGHT][MAP_WIDTH] =
 	{"111111111111111111111111"}
 	};
 /*
-	
+
 + On calcule le FOV
 	/ 2 (angle entre la direction de la cam et le bor de l'ecran)
 + On passe des degres en radiant en multipliant par (PI / 180)
@@ -143,7 +143,7 @@ int	get_pixel_from_texture(t_texture *texture, double texX, double texY)
 	int val;
 
 	val = (texY * texture->size_line + texX * (texture->bpp / 8));
-	
+
 	// ft_putendl_fd(ft_itoa(val), 1);
 	// ft_printf_putstr(texture->addr);
 	// write(1, "\n", 1);
@@ -198,13 +198,13 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 		{
 			// double texX = (int)(wallX * TILE_SIZE);
 			// double step = 1.0 * TILE_SIZE / lineHeight;
-			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;	
+			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
 				// double texY = (int)texPos & (TILE_SIZE - 1);
 				// ft_printf_putstr(data->texture[WE]->addr);
 				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0x777777);	
+				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0x777777);
 			}
 		}
 	}
@@ -227,7 +227,7 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 		{
 			// double texX = (int)(wallX * TILE_SIZE);
 			// double step = 1.0 * TILE_SIZE / lineHeight;
-			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;	
+			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
 				// double texY = (int)texPos & (TILE_SIZE - 1);
@@ -248,7 +248,7 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 
 
 	// --- DESSIN DU MUR ---
-	
+
 
 	// --- DESSIN DU SOL (en dessous du mur) ---
 	for (int y = drawEnd + 1; y < HEIGHT; y++)
@@ -295,13 +295,13 @@ void	raycasting(t_data *datas)
 
 	player = datas->player;
 	// player->pos[X] = 10;
-	// player->pos[Y] = 5;
-	double angle;
-	angle = -2;
+	// // player->pos[Y] = 5;
+	// double angle;
+	// angle = -2;
 	// vecteur direction unitaire
-	double oldDirX = player->dir[X];
-	player->dir[X] = player->dir[X] * cos(angle) - player->dir[Y] * sin(angle);
-	player->dir[Y] = oldDirX * sin(angle) + player->dir[Y] * cos(angle);
+	// double oldDirX = player->dir[X];
+	// player->dir[X] = player->dir[X] * cos(angle) - player->dir[Y] * sin(angle);
+	// player->dir[Y] = oldDirX * sin(angle) + player->dir[Y] * cos(angle);
 
 
 	// calcule un plan perpendiculaire au vecteur dir
