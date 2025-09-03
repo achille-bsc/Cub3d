@@ -1,5 +1,8 @@
 {
 	"conventionalCommits.scopes": [
 		"raycasting"
-	]
+	],
+	"files.associations": {
+		"cmath": "c"
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/01 15:00:01 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 00:21:55 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	data->player->pos[X] = j + 0.5;
 	data->player->pos[Y] = i + 0.5;
 	if (c == 'N')
-		data->player->dir[Y] = 1;
+		data->player->dir[X] = 0;
 	else if (c == 'S')
-		data->player->dir[Y] = -1;
+		data->player->dir[X] = 0.5;
 	else if (c == 'E')
-		data->player->dir[X] = 1;
+		data->player->dir[X] = 0.75;
 	else if (c == 'W')
-		data->player->dir[X] = -1;
+		data->player->dir[X] = 0.25;
+	data->map.map[i][j] = '0';
 }
 
 static bool	check_chars(t_data *data, char **map)
