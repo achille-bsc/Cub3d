@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/02 18:17:37 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/03 19:39:39 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,21 @@ void	my_mlx_pixel_put(t_window win, int x, int y, int color)
 						/ 8))) = color;
 }
 
-void	pixels_rendering(t_camera *cam, t_window win, double pos[2], int side,
+int	get_pixel_from_texture(t_texture *texture, double texX, double texY)
+{
+	char *pixel;
+
+	pixel = texture->addr + (int)(texY * texture->size_line + texX * (texture->bpp / 8));
+	return (*(unsigned int *)pixel);
+}
+
+void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], int side,
 		int x)
 {
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
-	int		color;
+	// int		color;
 	double	perpWallDist;
 
 	if (side == 0)
@@ -159,19 +167,48 @@ void	pixels_rendering(t_camera *cam, t_window win, double pos[2], int side,
 	drawEnd = lineHeight / 2 + HEIGHT / 2;
 	if (drawEnd >= HEIGHT)
 		drawEnd = HEIGHT - 1;
+	double wallX = pos[X] + perpWallDist * cam->rayDirX;
+	wallX -= floor(wallX);
+	for (int y = 0; y < drawStart; y++)
+		my_mlx_pixel_put(win, x, y, 0x87CEEB); // bleu ciel
 	if (side == 1)
 	{
-		if (cam->stepX >= 0)	// mur OUEST
-			color = 0xDB1806;
+		if (cam->stepY >= 0)	// mur OUEST
+		{
+			double texX = (int)(wallX * TILE_SIZE);
+			double step = 1.0 * TILE_SIZE / lineHeight;
+			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+			for (int y = drawStart; y <= drawEnd; y++)
+			{
+				double texY = (int)texPos & (TILE_SIZE - 1);
+				my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+				texPos += step;
+			}
+		}
 		else 				// mur EST
-			color = 0x042EDC;
+		{
+		double texX = 0.0;
+		double texY = 0.0;	
+		for (int y = drawStart; y <= drawEnd; y++)
+			my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+		}
 	}
 	else
 	{
-		if (cam->stepY >= 0)	// mur SUD
-			color = 0x27DB08;
+		if (cam->stepX >= 0)	// mur SUD
+		{
+			double texX = 0.0;
+			double texY = 0.0;	
+			for (int y = drawStart; y <= drawEnd; y++)
+				my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+		}
 		else				// mur NORD
-			color = 0xDBB301;
+		{
+			double texX = 0.0;
+			double texY = 0.0;	
+			for (int y = drawStart; y <= drawEnd; y++)
+				my_mlx_pixel_put(win, x, y, get_pixel_from_texture(data->texture[WE], texX, texY));
+		}
 	}
 
 		// --- COULEUR DU MUR ---
@@ -181,12 +218,10 @@ void	pixels_rendering(t_camera *cam, t_window win, double pos[2], int side,
 	// 	color = 0x800000; // rouge foncé
 
 	// --- DESSIN DU CIEL (au-dessus du mur) ---
-	for (int y = 0; y < drawStart; y++)
-		my_mlx_pixel_put(win, x, y, 0x87CEEB); // bleu ciel
+
 
 	// --- DESSIN DU MUR ---
-	for (int y = drawStart; y <= drawEnd; y++)
-		my_mlx_pixel_put(win, x, y, color);
+	
 
 	// --- DESSIN DU SOL (en dessous du mur) ---
 	for (int y = drawEnd + 1; y < HEIGHT; y++)
@@ -207,7 +242,7 @@ void	draw_frame(t_window win, double pos[2], t_player *player, t_data *data)
 	{
 		cam = cam_val_setter(pos, player->dir, player->plane, cam, x);
 		rays_dir_setter(cam, pos);
-		pixels_rendering(cam, win, pos, rays_calculator(cam, data), x);
+		pixels_rendering(data, cam, win, pos, rays_calculator(cam, data), x);
 		x++;
 	}
 }
@@ -236,8 +271,8 @@ void	raycasting(t_data *datas)
 	// player->pos[Y] = 5;
 
 	// vecteur direction unitaire
-	// player->dir[X] = -0.5;
-	// player->dir[Y] = -1;
+	player->dir[X] = -0.5;
+	player->dir[Y] = -1;
 
 	// calcule un plan perpendiculaire au vecteur dir
 	calculate_plane(player);

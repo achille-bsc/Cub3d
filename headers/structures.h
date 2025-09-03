@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/02 17:03:47 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/03 17:01:29 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,20 @@ typedef struct s_movement
 	bool	dir_right;
 }			t_movement;
 
+typedef	struct s_texture
+{
+	char	*texture;
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_texture;
+
+
 typedef struct s_data
 {
 	char		*text[4];
-	void		*texture[4];
+	t_texture	*texture[4];
 	void		*mini_texture[4];
 	char		*colors[2];
 	int			rgb[3];
