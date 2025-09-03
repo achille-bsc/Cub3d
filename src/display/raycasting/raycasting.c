@@ -232,12 +232,12 @@ void	raycasting(t_data *datas)
 	t_player *player;
 
 	player = datas->player;
-	player->pos[X] = 10;
-	player->pos[Y] = 5;
+	// player->pos[X] = 10;
+	// player->pos[Y] = 5;
 
 	// vecteur direction unitaire
-	player->dir[X] = -0.5;
-	player->dir[Y] = -1;
+	// player->dir[X] = -0.5;
+	// player->dir[Y] = -1;
 
 	// calcule un plan perpendiculaire au vecteur dir
 	calculate_plane(player);
