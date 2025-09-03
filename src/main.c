@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 21:59:29 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/03 23:42:03 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!_mlx_init(data))
 		return (1);
+	load_texture(data);
 	events(data);
 	mlx_loop_hook(data->win.mlx, *game_loop, data);
 	mlx_loop(data->win.mlx);

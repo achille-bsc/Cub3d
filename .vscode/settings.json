@@ -3,6 +3,10 @@
 		"raycasting"
 	],
 	"files.associations": {
-		"cmath": "c"
+		"*.ejs": "html",
+		"*.page-template": "vue",
+		"*.layout-template": "vue",
+		"*.vue": "vue",
+		"cub3d.h": "c"
 	}
 }

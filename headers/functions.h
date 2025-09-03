@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 21:06:30 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:35:45 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ bool				map_parsing(t_data *data, char **map);
 void				minimap_handling(t_data *data);
 
 /* UTILS */
-
 char				*skipchar(char *src, int offset, char skiped);
 void				*xpm_img(void *mlx, char *path, int size);
 unsigned long long	get_time(void);
 bool				is_spawn(char c);
-bool				is_map(char c);
+bool				is_map(char c););
+void	load_texture(t_data *data);
 
 /* DISPLAY */
 
