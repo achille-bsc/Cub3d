@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abosc <abosc@student.42.fr>                +#+  +:+       +#+         #
+#    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
 #    Updated: 2025/09/03 16:39:23 by abosc            ###   ########.fr        #
@@ -89,12 +89,13 @@ ERS_STR		=	\033[2K\r
 
 #	SRC FILES
 
-SRC		=	main.c utils.c exit.c load_textures.c								\
-			$(EV)/events.c														\
+SRC		=	main.c utils.c exit.c load_textures.c						          \
+			$(EV)/events.c	$(EV)/movement.c									      \
 			$(DP)/display.c $(DP)/minimap.c $(DP)/display_utils.c				\
 			$(RC)/raycasting.c													\
 			$(PS)/parsing.c $(PS)/dispatch_data.c $(PS)/error_handling.c 		\
 			$(PS)/map_parsing.c $(PS)/utils.c
+
 
 #	OBJS CONVERSION
 
