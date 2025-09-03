@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/29 09:55:25 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/03 21:59:29 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ static bool	_mlx_init(t_data *data)
 	return (true);
 }
 
+static int	game_loop(t_data *data)
+{
+	size_t	ms_frame;
+
+	ms_frame = 1000 / FPS_MAX;
+	data->time = get_time();
+	if (ms_frame <= data->time - data->old_time)
+	{
+		data->old_time = data->time;
+		display(data);
+	}
+	movements_handling(data->map, data->player, data->move);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -32,14 +47,12 @@ int	main(int argc, char **argv)
 	data = ft_calloc(sizeof(t_data));
 	if (!data)
 		return (1);
-	/* TODO: PASING */
 	if (!parser(data, argv[1]))
 		return (1);
 	if (!_mlx_init(data))
 		return (1);
-	// /* TODO: KEYMAP INIT */
 	events(data);
-	display(data);
+	mlx_loop_hook(data->win.mlx, *game_loop, data);
 	mlx_loop(data->win.mlx);
 	return (0);
 }

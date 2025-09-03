@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/08/30 16:37:27 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/03 22:42:33 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 
 # include <X11/keysym.h>
 # include <fcntl.h>
-#include <math.h>
+# include <math.h>
 
 # include "mlx.h"
 # include "libft.h"
 # include "languages.h"
 # include "structures.h"
 # include "functions.h"
+# include "sys/time.h"
 
 # define HEIGHT				1080
 # define WIDTH				1920
 # define RENDER_DIST
 # define FPS_MAX			60
 # define FOV				90
-# define MV_SPEED			0.2
-# define ROT_SPEED
+# define MV_SPEED			0.05
+# define ROT_SPEED			0.03
 # define TILE_SIZE			20
 
 # define KEYPRESS			2

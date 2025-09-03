@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/01 14:49:23 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/03 17:10:09 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,9 @@ static int	release(int keysym, t_data *data)
 	return (0);
 }
 
-// static void	event_handling(t_data *data)
-// {
-
-// }
-
 void	events(t_data *data)
 {
 	mlx_hook(data->win.window, KEYPRESS, (1L << 0), *press, data);
 	mlx_hook(data->win.window, KEYRELEASE, (1L << 1), *release, data);
 	mlx_hook(data->win.window, ESCAPE, (1L << 17), *clean_quit, data);
-	// event_handling(data);
 }
