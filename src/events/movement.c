@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 15:24:19 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/04 02:22:14 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:13:50 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,61 +29,71 @@ static void	turning_cam(t_player *player, t_movement move)
 	printf("%f\n", player->dir);
 }
 
-void	movements_handling_2(t_map map, t_player *player, t_movement move)
+static void	move_forward(t_player *player, t_map map)
 {
-	double	mv[2];
+	double	new_x;
+	double	new_y;
 
+	new_x = player->pos[X] + player->vec[X] * MV_SPEED;
+	new_y = player->pos[Y] + player->vec[Y] * MV_SPEED;
+	if (map.map[(int)new_y][(int)new_x] != '1')
+	{
+		player->pos[X] = new_x;
+		player->pos[Y] = new_y;
+	}
+}
+
+static void	move_backward(t_player *player, t_map map)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = player->pos[X] - player->vec[X] * MV_SPEED;
+	new_y = player->pos[Y] - player->vec[Y] * MV_SPEED;
+	if (map.map[(int)new_y][(int)new_x] != '1')
+	{
+		player->pos[X] = new_x;
+		player->pos[Y] = new_y;
+	}
+}
+
+static void	move_left(t_player *player, t_map map)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = player->pos[X] + player->vec[Y] * MV_SPEED;
+	new_y = player->pos[Y] - player->vec[X] * MV_SPEED;
+	if (map.map[(int)new_y][(int)new_x] != '1')
+	{
+		player->pos[X] = new_x;
+		player->pos[Y] = new_y;
+	}
+}
+
+static void	move_right(t_player *player, t_map map)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = player->pos[X] - player->vec[Y] * MV_SPEED;
+	new_y = player->pos[Y] + player->vec[X] * MV_SPEED;
+	if (map.map[(int)new_y][(int)new_x] != '1')
+	{
+		player->pos[X] = new_x;
+		player->pos[Y] = new_y;
+	}
+}
+
+void	player_move(t_map map, t_player *player, t_movement move)
+{
+	if (move.forward)
+		move_forward(player, map);
+	if (move.backward)
+		move_backward(player, map);
 	if (move.left)
-	{
-		mv[X] = -sin(player->dir);
-		mv[Y] = cos(player->dir);
-		if (map.map[(int)(player->pos[Y] + (mv[Y] * MV_SPEED * 2))]
-			[(int)(player->pos[X] + (mv[X] * MV_SPEED))] != '1')
-		{
-			player->pos[X] += mv[X] * MV_SPEED;
-			player->pos[Y] += mv[Y] * MV_SPEED;
-		}
-	}
+		move_left(player, map);
 	if (move.right)
-	{
-		mv[X] = sin(player->dir);
-		mv[Y] = -cos(player->dir);
-		if (map.map[(int)(player->pos[Y] + (MV_SPEED * mv[Y] * 2))]
-		[(int)(player->pos[X] + (MV_SPEED * mv[X]))] != '1')
-		{
-			player->pos[X] += mv[X] * MV_SPEED;
-			player->pos[Y] += mv[Y] * MV_SPEED;
-		}
-	}
+		move_right(player, map);
 	turning_cam(player, move);
 }
-
-void	movements_handling(t_map map, t_player *player, t_movement move)
-{
-	double	mv[2];
-
-	if (move.forward)
-	{
-		mv[X] = cos(player->dir);
-		mv[Y] = sin(player->dir);
-		if (map.map[(int)(player->pos[Y] + mv[Y] * MV_SPEED)]
-				[(int)(player->pos[X] + (mv[X] * MV_SPEED * 2))] != '1')
-		{
-			player->pos[X] += mv[X] * MV_SPEED;
-			player->pos[Y] += mv[Y] * MV_SPEED;
-		}
-	}
-	if (move.backward)
-	{
-		mv[X] = cos(player->dir);
-		mv[Y] = sin(player->dir);
-		if (map.map[(int)(player->pos[Y] - (mv[Y] * MV_SPEED))]
-				[(int)(player->pos[X] - (mv[X] * MV_SPEED * 2))] != '1')
-		{
-			player->pos[X] -= mv[X] * MV_SPEED;
-			player->pos[Y] -= mv[Y] * MV_SPEED;
-		}
-	}
-	movements_handling_2(map, player, move);
-}
-

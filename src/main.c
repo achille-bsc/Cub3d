@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/03 23:42:03 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/04 18:06:12 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	game_loop(t_data *data)
 		data->old_time = data->time;
 		display(data);
 	}
-	movements_handling(data->map, data->player, data->move);
+	player_move(data->map, data->player, data->move);
 	return (0);
 }
 
