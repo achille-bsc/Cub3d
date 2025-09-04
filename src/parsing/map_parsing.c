@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/04 01:32:49 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/04 01:50:19 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	data->player->pos[X] = j + 0.5;
 	data->player->pos[Y] = i + 0.5;
 	if (c == 'N')
-		data->player->dir[X] = M_PI / 2;
+		data->player->dir = M_PI / 2;
 	else if (c == 'S')
-		data->player->dir[X] = 3 * M_PI / 2;
+		data->player->dir = 3 * M_PI / 2;
 	else if (c == 'E')
-		data->player->dir[X] = M_PI;
+		data->player->dir = M_PI;
 	else if (c == 'W')
-		data->player->dir[X] = 2 * M_PI;
+		data->player->dir = 2 * M_PI;
 	data->map.map[i][j] = '0';
 }
 

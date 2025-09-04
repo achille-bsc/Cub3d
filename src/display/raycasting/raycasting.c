@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 01:17:44 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/04 02:09:56 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char worldMap[MAP_HEIGHT][MAP_WIDTH] =
 	{"100000000000000000000001"},
 	{"111111111111111111111111"}
 	};
-/*
 
+/*
 + On calcule le FOV
 	/ 2 (angle entre la direction de la cam et le bor de l'ecran)
 + On passe des degres en radiant en multipliant par (PI / 180)
@@ -47,18 +47,18 @@ void	calculate_plane(t_player *player)
 {
 	double	fov_factor;
 
-	fov_factor = tan((FOV / 2) * M_PI / 180.0);
-	player->plane[X] = -player->dir[Y] * fov_factor;
-	player->plane[Y] = player->dir[X] * fov_factor;
+	fov_factor = tan((FOV * M_PI / 180.0) / 2);
+	player->plane[X] = player->vec[Y] * fov_factor;
+	player->plane[Y] = player->vec[X] * fov_factor;
 }
 
-t_camera	*cam_val_setter(double pos[2], double dir[2], double plane[2],
+t_camera	*cam_val_setter(double pos[2], double vec[2], double plane[2],
 		t_camera *cam, int x)
 {
 	cam = ft_calloc(sizeof(t_camera));
 	cam->cameraX = 2 * x / (double)WIDTH - 1;
-	cam->rayDirX = dir[X] + plane[X] * cam->cameraX;
-	cam->rayDirY = dir[Y] + plane[Y] * cam->cameraX;
+	cam->rayDirX = vec[X] + plane[X] * cam->cameraX;
+	cam->rayDirY = vec[Y] + plane[Y] * cam->cameraX;
 	cam->mapX = (int)pos[X];
 	cam->mapY = (int)pos[Y];
 	cam->deltaDistX = fabs(1 / cam->rayDirX);
@@ -267,7 +267,7 @@ void	draw_frame(t_window win, double pos[2], t_player *player, t_data *data)
 	x = 0;
 	while (x < WIDTH)
 	{
-		cam = cam_val_setter(pos, player->dir, player->plane, cam, x);
+		cam = cam_val_setter(pos, player->vec, player->plane, cam, x);
 		rays_dir_setter(cam, pos);
 		pixels_rendering(data, cam, win, pos, rays_calculator(cam, data), x);
 		x++;
@@ -299,9 +299,11 @@ void	raycasting(t_data *datas)
 	// double angle;
 	// angle = -2;
 	// vecteur direction unitaire
-	// double oldDirX = player->dir[X];
-	// player->dir[X] = player->dir[X] * cos(angle) - player->dir[Y] * sin(angle);
+	// double oldDirX = player->dir;
+	// player->dir = player->dir * cos(angle) - player->dir[Y] * sin(angle);
 	// player->dir[Y] = oldDirX * sin(angle) + player->dir[Y] * cos(angle);
+	player->vec[X] = cos(player->dir);
+	player->vec[Y] = sin(player->dir);
 
 
 	// calcule un plan perpendiculaire au vecteur dir

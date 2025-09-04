@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 00:49:47 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/04 01:46:32 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ enum e_colors
 	BLUE,
 }	;
 
-
 typedef struct s_player
 {
 	double	pos[2];
-	double	dir[2];
+	double	dir;
 	double	plane[2];
+	double	vec[2];
 	int		**map;
 }	t_player;
 
