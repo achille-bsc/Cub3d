@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 18:06:12 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 05:58:13 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,28 @@ static bool	_mlx_init(t_data *data)
 
 static int	game_loop(t_data *data)
 {
-	size_t	ms_frame;
+	static size_t	fps_counter = 0;
+	static double	fps_oldtime = 0;
+	double			ms_frame;
+	double			fps_newtime;
 
 	ms_frame = 1000 / FPS_MAX;
 	data->time = get_time();
+	fps_newtime = data->time;
 	if (ms_frame <= data->time - data->old_time)
 	{
+		fps_counter++;
 		data->old_time = data->time;
+		player_move(data->map, data->player, data->move);
 		display(data);
 	}
-	player_move(data->map, data->player, data->move);
+	if (ONE_SEC <= fps_newtime - fps_oldtime)
+	{
+		fps_oldtime = fps_newtime;
+		data->fps_counter = fps_counter;
+		fps_counter = 0;
+	}
+	usleep(200);
 	return (0);
 }
 

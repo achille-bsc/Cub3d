@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_putchar.c                                :+:      :+:    :+:   */
+/*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 22:49:07 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/05 03:43:58 by lvan-bre         ###   ########.fr       */
+/*   Created: 2025/09/04 22:42:00 by lvan-bre          #+#    #+#             */
+/*   Updated: 2025/09/05 00:22:16 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "cub3d.h"
 
-int	ft_printf_putchar(char c)
+void	turning_cam(t_player *player, t_movement move)
 {
-	return (write(1, &c, 1));
-}
-
-int	ft_printf_putchar_fd( int fd, char c)
-{
-	return (write(fd, &c, 1));
-}
-
-char	*ft_ctoa(char c)
-{
-	char	str[2];
-
-	str[0] = c;
-	str[1] = '\0';
-	return (ft_strdup(str));
+	if (move.dir_left)
+	{
+		player->dir -= ROT_SPEED;
+		if (player->dir < 0)
+			player->dir += 2 * M_PI;
+	}
+	if (move.dir_right)
+	{
+		player->dir += ROT_SPEED;
+		if (player->dir > 2 * M_PI)
+			player->dir -= 2 * M_PI;
+	}
 }

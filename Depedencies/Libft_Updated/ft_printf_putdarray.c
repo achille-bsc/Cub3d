@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:35:45 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/05/20 20:59:11 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 05:10:31 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,27 @@ int	ft_printf_putdarray_fd(int fd, char **darray)
 		write(fd, "\n", 1);
 	}
 	return (i);
+}
+
+char	*ft_strmerge(char **darray)
+{
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = NULL;
+	while (darray[i])
+	{
+		res = ft_strjoining(res, darray[i]);
+		if (!res)
+			return (NULL);
+		if (darray[i + 1])
+		{
+			res = ft_strjoining(res, "\n");
+			if (!res)
+				return (NULL);
+		}
+		i++;
+	}
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 17:34:20 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 06:01:07 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,55 @@ static double	to_deg(double dir)
 	return (dir * 180 / M_PI);
 }
 
-void	put_score(t_data *data)
+static char	get_orientation(double dir)
 {
-	char	txt[50];
+	double	deg_dir;
 
-	sprintf(txt, "l'angle de visuel est : %f", to_deg(data->player->dir));
+	deg_dir = to_deg(dir);
+	if (deg_dir >= 45 && deg_dir < 135)
+		return ('S');
+	else if (deg_dir >= 135 && deg_dir < 225)
+		return ('W');
+	else if (deg_dir >= 225 && deg_dir < 315)
+		return ('N');
+	else
+		return ('E');
+}
+
+static void	put_debug_info(t_data *data)
+{
+	char	*txt;
+
+	txt = NULL;
+	ft_smprintf(&txt, "pos {X;Y} : {%f;%f}", data->player->pos[X],
+		data->player->pos[Y]);
+	mlx_string_put(data->win.mlx, data->win.window, 1300, 20, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "fps : %u", data->fps_counter);
+	mlx_string_put(data->win.mlx, data->win.window, 1300, 40, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "orientation : %c", get_orientation(data->player->dir));
+	mlx_string_put(data->win.mlx, data->win.window, 1300, 60, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "angle (deg) : %f", to_deg(data->player->dir));
 	mlx_string_put(data->win.mlx, data->win.window, 1500, 20, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "angle (rad) : %f", data->player->dir);
+	mlx_string_put(data->win.mlx, data->win.window, 1500, 40, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "vecteur X : %f", data->player->vec[X]);
+	mlx_string_put(data->win.mlx, data->win.window, 1500, 60, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "vecteur Y : %f", data->player->vec[Y]);
+	mlx_string_put(data->win.mlx, data->win.window, 1500, 80, 0000000000, txt);
+	ft_str_reset(&txt);
 }
 
 bool	display(t_data *data)
 {
 	raycasting(data);
 	minimap_handling(data);
-	put_score(data);
+	if (data->move.debug)
+		put_debug_info(data);
 	return (true);
 }

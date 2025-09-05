@@ -3,3 +3,4 @@ build/
 *.json
 a.out
 .vscode/
+src/display/raycasting/clean_raycast.c

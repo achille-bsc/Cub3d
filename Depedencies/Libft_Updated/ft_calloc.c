@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 03:24:40 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/06/06 03:04:55 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:27:43 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t size)
 
 	ptr = malloc(size);
 	if (!ptr)
-		return (ft_printf("%s", ERR_MALLOC), NULL);
+		return (ft_dprintf(STDERR_FILENO, "%s", ERR_MALLOC), NULL);
 	ft_bzero(ptr, size);
 	return (ptr);
 }

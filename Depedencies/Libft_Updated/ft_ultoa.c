@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:01:13 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/06/06 03:08:35 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 04:14:09 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,25 @@ static int	ft_numblen(unsigned long enby)
 	Returns NULL on allocation failure.
 */
 char	*ft_ultoa(unsigned long n)
+{
+	char		*buffer;
+	int			i;
+
+	i = ft_numblen(n);
+	buffer = ft_calloc((i + 1));
+	if (!buffer)
+		return (NULL);
+	buffer[i--] = '\0';
+	while (n > 9)
+	{
+		buffer[i--] = n % 10 + '0';
+		n /= 10;
+	}
+	buffer[i] = n + '0';
+	return (buffer);
+}
+
+char	*ft_utoa(unsigned int n)
 {
 	char		*buffer;
 	int			i;

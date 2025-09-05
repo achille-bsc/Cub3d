@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 01:46:32 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 00:49:43 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_player
 	double	plane[2];
 	double	vec[2];
 	int		**map;
+	int		sprint;
 }	t_player;
 
 typedef struct s_window
@@ -107,9 +108,11 @@ typedef struct s_movement
 	bool	dir_down;
 	bool	dir_left;
 	bool	dir_right;
+	bool	sprint;
+	bool	debug;
 }			t_movement;
 
-typedef	struct s_texture
+typedef struct s_texture
 {
 	void	*texture;
 	char	*addr;
@@ -125,6 +128,7 @@ typedef struct s_data
 	void		*mini_texture[4];
 	char		*colors[2];
 	int			rgb[3];
+	size_t		fps_counter;
 	size_t		old_time;
 	size_t		time;
 	t_movement	move;

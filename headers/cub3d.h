@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 17:25:53 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 00:48:09 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define MV_SPEED			0.05
 # define ROT_SPEED			0.05
 # define TILE_SIZE			20
+# define ONE_SEC			1000
 
 # define KEYPRESS			2
 # define KEYRELEASE			3

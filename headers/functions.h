@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/04 18:06:25 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/04 23:09:34 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void				raycasting(t_data *datas);
 
 void				events(t_data *data);
 void				player_move(t_map map, t_player *player, t_movement move);
+void				turning_cam(t_player *player, t_movement move);
 
 /* EXIT */
 
