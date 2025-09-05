@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/05 06:01:07 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/05 06:26:07 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,33 @@ static void	put_debug_info(t_data *data)
 	ft_str_reset(&txt);
 }
 
+static void	put_debug_info_2(t_data *data)
+{
+	char	*txt;
+
+	txt = NULL;
+	txt = ft_strjoin("North texture : ", data->text[NO]);
+	mlx_string_put(data->win.mlx, data->win.window, 1000, 20, 0000000000, txt);
+	ft_str_reset(&txt);
+	txt = ft_strjoin("South texture : ", data->text[SO]);
+	mlx_string_put(data->win.mlx, data->win.window, 1000, 40, 0000000000, txt);
+	ft_str_reset(&txt);
+	txt = ft_strjoin("West texture  : ", data->text[WE]);
+	mlx_string_put(data->win.mlx, data->win.window, 1000, 60, 0000000000, txt);
+	ft_str_reset(&txt);
+	txt = ft_strjoin("East texture  : ", data->text[EA]);
+	mlx_string_put(data->win.mlx, data->win.window, 1000, 80, 0000000000, txt);
+	ft_str_reset(&txt);
+}
+
 bool	display(t_data *data)
 {
 	raycasting(data);
 	minimap_handling(data);
 	if (data->move.debug)
+	{
 		put_debug_info(data);
+		put_debug_info_2(data);
+	}
 	return (true);
 }
