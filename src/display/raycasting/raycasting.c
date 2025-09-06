@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 18:57:27 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:32:50 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,16 @@ void	draw_frame(t_player *player, t_data *data)
 	t_camera	*cam;
 
 	x = 0;
+	cam = ft_calloc(sizeof(t_camera));
+	if (!cam)
+		exit_w_code(1, data);
 	while (x < WIDTH)
 	{
-		cam = ft_calloc(sizeof(t_camera));
-		if (!cam)
-			exit_w_code(1, data);
 		cam_val_setter(player, cam, x);
 		rays_dir_setter(cam, player->pos);
 		pixels_rendering(data, cam, rays_calculator(cam, data), x);
+		ft_bzero(cam, sizeof(t_camera));
 		x++;
 	}
+	free(cam);
 }
