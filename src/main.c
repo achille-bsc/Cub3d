@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 05:48:37 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 19:06:02 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	moving(t_data *data, t_movement move, t_player *player)
 
 static bool	_mlx_init(t_data *data)
 {
-	data->win.mlx = mlx_init();
-	if (!data->win.mlx)
+	data->win->mlx = mlx_init();
+	if (!data->win->mlx)
 		return (printf(_MLXINIT), false);
-	data->win.window = mlx_new_window(data->win.mlx, WIDTH, HEIGHT, NAME);
-	if (!data->win.window)
+	data->win->window = mlx_new_window(data->win->mlx, WIDTH, HEIGHT, NAME);
+	if (!data->win->window)
 		return (printf(_WININIT), false);
 	get_wall_texture(data);
 	get_minimap_texture(data);
@@ -60,6 +60,7 @@ static int	game_loop(t_data *data)
 		data->fps_counter = fps_counter;
 		fps_counter = 0;
 	}
+	usleep(200);
 	return (0);
 }
 
@@ -77,7 +78,7 @@ int	main(int argc, char **argv)
 	if (!_mlx_init(data))
 		return (1);
 	events(data);
-	mlx_loop_hook(data->win.mlx, *game_loop, data);
-	mlx_loop(data->win.mlx);
+	mlx_loop_hook(data->win->mlx, *game_loop, data);
+	mlx_loop(data->win->mlx);
 	return (0);
 }

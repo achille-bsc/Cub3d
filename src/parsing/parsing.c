@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 06:03:03 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:49:35 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ bool	parser(t_data *data, char *map_path)
 	fullfile = file_opening(map_path);
 	if (!fullfile)
 		return (free(data), false);
-	data->win.fov_factor = tan((FOV * M_PI / 180.0) / 2);
+	data->win = ft_calloc(sizeof(t_window));
+	if (!data->win)
+		exit_w_code(1, data);
+	data->win->fov_factor = tan((FOV * M_PI / 180.0) / 2);
 	if (!dispatch_data(data, fullfile) || !colors_verification(data)
 		|| !map_parsing(data, data->map.map))
 		return (free_pars_info(data), ft_freeall("%d%d%d%m", &fullfile,

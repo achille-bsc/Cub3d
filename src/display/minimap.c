@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 14:23:12 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:35:03 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_tile(t_texture *text, t_window win, int x, int y)
+void	put_tile(t_texture *text, t_window *win, int x, int y)
 {
 	int	xx;
 	int	yy;
@@ -31,7 +31,7 @@ void	put_tile(t_texture *text, t_window win, int x, int y)
 	}
 }
 
-void	minimap_handling(t_data *data, t_window win)
+void	minimap_handling(t_data *data, t_window *win)
 {
 	int	diff[2];
 

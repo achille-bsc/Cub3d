@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:08:23 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 03:51:49 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:52:59 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,42 @@
 
 void	cam_val_setter(t_player *player, t_camera *cam, int x)
 {
-	cam->cameraX = 2 * (x + 0.5) / (double)(WIDTH - 1) - 1;
-	cam->rayDirX = player->vec[X] + player->plane[X] * cam->cameraX;
-	cam->rayDirY = player->vec[Y] + player->plane[Y] * cam->cameraX;
-	cam->mapX = (int)player->pos[X];
-	cam->mapY = (int)player->pos[Y];
-	if (cam->rayDirX != 0)
-		cam->deltaDistX = fabs(1 / cam->rayDirX);
+	cam->camera_x = 2 * (x + 0.5) / (double)(WIDTH - 1) - 1;
+	cam->ray_dir_x = player->vec[X] + player->plane[X] * cam->camera_x;
+	cam->ray_dir_y = player->vec[Y] + player->plane[Y] * cam->camera_x;
+	cam->map_x = (int)player->pos[X];
+	cam->map_y = (int)player->pos[Y];
+	if (cam->ray_dir_x != 0)
+		cam->delta_dist_x = fabs(1 / cam->ray_dir_x);
 	else
-		cam->deltaDistX = DBL_MAX;
-	if (cam->rayDirY != 0)
-		cam->deltaDistY = fabs(1 / cam->rayDirY);
+		cam->delta_dist_x = DBL_MAX;
+	if (cam->ray_dir_y != 0)
+		cam->delta_dist_y = fabs(1 / cam->ray_dir_y);
 	else
-		cam->deltaDistY = DBL_MAX;
-	// cam->sideDistX;
-	// cam->sideDistY;
+		cam->delta_dist_y = DBL_MAX;
 }
 
 void	rays_dir_setter(t_camera *cam, double pos[2])
 {
-	if (cam->rayDirX < 0)
+	if (cam->ray_dir_x < 0)
 	{
-		cam->stepX = -1;
-		cam->sideDistX = (pos[X] - cam->mapX) * cam->deltaDistX;
+		cam->step_x = -1;
+		cam->side_dist_x = (pos[X] - cam->map_x) * cam->delta_dist_x;
 	}
 	else
 	{
-		cam->stepX = 1;
-		cam->sideDistX = (cam->mapX + 1.0 - pos[X]) * cam->deltaDistX;
+		cam->step_x = 1;
+		cam->side_dist_x = (cam->map_x + 1.0 - pos[X]) * cam->delta_dist_x;
 	}
-	if (cam->rayDirY < 0)
+	if (cam->ray_dir_y < 0)
 	{
-		cam->stepY = -1;
-		cam->sideDistY = (pos[Y] - cam->mapY) * cam->deltaDistY;
+		cam->step_y = -1;
+		cam->side_dist_y = (pos[Y] - cam->map_y) * cam->delta_dist_y;
 	}
 	else
 	{
-		cam->stepY = 1;
-		cam->sideDistY = (cam->mapY + 1.0 - pos[Y]) * cam->deltaDistY;
+		cam->step_y = 1;
+		cam->side_dist_y = (cam->map_y + 1.0 - pos[Y]) * cam->delta_dist_y;
 	}
 }
 
@@ -63,19 +61,19 @@ int	rays_calculator(t_camera *cam, t_data *data)
 	hit = false;
 	while (!hit)
 	{
-		if (cam->sideDistX < cam->sideDistY)
+		if (cam->side_dist_x < cam->side_dist_y)
 		{
-			cam->sideDistX += cam->deltaDistX;
-			cam->mapX += cam->stepX;
+			cam->side_dist_x += cam->delta_dist_x;
+			cam->map_x += cam->step_x;
 			side = 0;
 		}
 		else
 		{
-			cam->sideDistY += cam->deltaDistY;
-			cam->mapY += cam->stepY;
+			cam->side_dist_y += cam->delta_dist_y;
+			cam->map_y += cam->step_y;
 			side = 1;
 		}
-		if (data->map.map[cam->mapY][cam->mapX] != '0')
+		if (data->map.map[cam->map_y][cam->map_x] != '0')
 			hit = true;
 	}
 	return (side);

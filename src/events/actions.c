@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:09:43 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 15:17:44 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:38:47 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	re_center_cam(t_data *data)
 	data->player->dirz = data->player->spawn[DIRZ];
 	data->player->vec[Y] = sin(data->player->dir);
 	data->player->vec[X] = cos(data->player->dir);
-	data->player->plane[X] = -data->player->vec[Y] * data->win.fov_factor;
-	data->player->plane[Y] = data->player->vec[X] * data->win.fov_factor;
+	data->player->plane[X] = -data->player->vec[Y] * data->win->fov_factor;
+	data->player->plane[Y] = data->player->vec[X] * data->win->fov_factor;
 	return (0);
 }
 

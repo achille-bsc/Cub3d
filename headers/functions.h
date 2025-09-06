@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 15:15:42 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 18:06:13 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ bool				map_parsing(t_data *data, char **map);
 
 /* MINIMAP */
 
-void				minimap_handling(t_data *data, t_window win);
+void				minimap_handling(t_data *data, t_window *win);
 void				get_minimap_texture(t_data *data);
-void				my_minimap_pixel_put(t_window win, int x, int y, int color);
-void				put_tile(t_texture *text, t_window win, int x, int y);
-void				put_first_layer(t_data *data, t_window win);
-void				minimap_put_borders(t_window win);
-void				put_centered_player(t_window win, int color);
-void				put_moving_player(t_data *data, t_window win, int start[2]);
-void				dp_centered(t_data *data, t_window win, int diff[2]);
-void				dp_full_offset(t_data *data, t_window win);
+void				my_minimap_pixel_put(t_window *win, int x, int y,
+						int color);
+void				put_tile(t_texture *text, t_window *win, int x, int y);
+void				put_first_layer(t_data *data, t_window *win);
+void				minimap_put_borders(t_window *win);
+void				put_centered_player(t_window *win, int color);
+void				put_moving_player(t_data *data, t_window *win,
+						int start[2]);
+void				dp_centered(t_data *data, t_window *win, int diff[2]);
+void				dp_full_offset(t_data *data, t_window *win);
 
 /* UTILS */
 
@@ -59,10 +61,13 @@ bool				display(t_data *data);
 void				cam_val_setter(t_player *player, t_camera *cam, int x);
 void				rays_dir_setter(t_camera *cam, double pos[2]);
 int					rays_calculator(t_camera *cam, t_data *data);
-void				draw_frame(t_window win, double pos[2], t_player *player,
-						t_data *data);
-void				my_mlx_pixel_put(t_window win, int x, int y, int color);
+void				draw_frame(t_player *player, t_data *data);
+void				my_mlx_pixel_put(t_window *win, int x, int y, int color);
 int					get_color_from_texture(t_texture *texture, int x, int y);
+void				truc(t_data *data, int values[3], int x,
+						t_img_orientation orientations);
+void				truc2(t_data *data, int values[3], int x,
+						t_img_orientation orientations);
 
 /* GAMEPLAY */
 

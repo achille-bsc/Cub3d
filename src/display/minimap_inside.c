@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_inside.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:02:09 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 13:54:28 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:35:24 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_moving_player(t_data *data, t_window win, int start[2])
+void	put_moving_player(t_data *data, t_window *win, int start[2])
 {
 	int	x;
 	int	y;
@@ -32,7 +32,7 @@ void	put_moving_player(t_data *data, t_window win, int start[2])
 	}
 }
 
-void	put_first_layer(t_data *data, t_window win)
+void	put_first_layer(t_data *data, t_window *win)
 {
 	int	xstart;
 	int	x;
@@ -55,7 +55,7 @@ void	put_first_layer(t_data *data, t_window win)
 	}
 }
 
-void	put_centered_player(t_window win, int color)
+void	put_centered_player(t_window *win, int color)
 {
 	int	xcenter;
 	int	x;
@@ -74,7 +74,7 @@ void	put_centered_player(t_window win, int color)
 	}
 }
 
-void	minimap_put_borders(t_window win)
+void	minimap_put_borders(t_window *win)
 {
 	int	x;
 	int	y;

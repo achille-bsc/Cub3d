@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 09:43:58 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:41:46 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	image_drawing(t_data *data, t_window window, t_player *player)
+static void	image_drawing(t_data *data, t_window *win, t_player *player)
 {
-	window.img = mlx_new_image(window.mlx, WIDTH, HEIGHT);
-	if (!window.img)
+	win->img = mlx_new_image(win->mlx, WIDTH, HEIGHT);
+	if (!win->img)
 		return (ft_printf(_IMGINIT), exit_w_code(1, data));
-	window.img_ptr = mlx_get_data_addr(window.img, &window.bpp,
-			&window.line_length, &window.endian);
-	draw_frame(window, player->pos, player, data);
+	win->img_ptr = mlx_get_data_addr(win->img, &win->bpp,
+			&win->line_length, &win->endian);
+	draw_frame(player, data);
 	if (data->move.display_minimap)
-		minimap_handling(data, window);
-	mlx_put_image_to_window(window.mlx, window.window, window.img, 0, 0);
-	mlx_destroy_image(window.mlx, window.img);
+		minimap_handling(data, win);
+	mlx_put_image_to_window(win->mlx, win->window, win->img, 0, 0);
+	mlx_destroy_image(win->mlx, win->img);
 }
 
 bool	display(t_data *data)

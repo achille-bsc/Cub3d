@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 05:41:00 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 05:55:12 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:40:15 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ double	to_rad(double deg)
 
 void	calculate_plane(t_data *data, t_player *player)
 {
-	player->plane[X] = -player->vec[Y] * data->win.fov_factor;
-	player->plane[Y] = player->vec[X] * data->win.fov_factor;
+	player->plane[X] = -player->vec[Y] * data->win->fov_factor;
+	player->plane[Y] = player->vec[X] * data->win->fov_factor;
 }

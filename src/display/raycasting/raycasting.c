@@ -3,140 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 15:42:07 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 18:57:27 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_pixel_from_texture(t_texture *texture, double texX, double texY)
+static void	init_rendering(t_data *data, t_camera *cam, int side)
 {
-	int	pixel;
-	int	val;
-
-	val = (texY * texture->size_line + texX * (texture->bpp / 8));
-	pixel = texture->addr[val];
-	return (pixel);
+	if (side == 0)
+		data->rendering.perpWallDist = (cam->map_x - data->player->pos[X] + (1
+					- cam->step_x) / 2) / cam->ray_dir_x;
+	else
+		data->rendering.perpWallDist = (cam->map_y - data->player->pos[Y] + (1
+					- cam->step_y) / 2) / cam->ray_dir_y;
+	if (side == 0)
+		data->rendering.perpWallDist = cam->side_dist_x - cam->delta_dist_x;
+	else
+		data->rendering.perpWallDist = cam->side_dist_y - cam->delta_dist_y;
 }
 
-void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], int side,
-		int x)
+static int	*truc_machin(t_data *data, int *line_height, int x)
 {
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int	*draw;
+	int	y;
 
-	// int		color;
-	double	perpWallDist;
+	draw = ft_calloc(sizeof(int) * 2);
+	*line_height = (int)(HEIGHT / data->rendering.perpWallDist);
+	draw[0] = -*line_height / 2 + HEIGHT / 2;
+	if (draw[0] < 0)
+		draw[0] = 0;
+	draw[1] = *line_height / 2 + HEIGHT / 2;
+	if (draw[1] >= HEIGHT)
+		draw[1] = HEIGHT - 1;
+	y = 0;
+	while (y < draw[0])
+		my_mlx_pixel_put(data->win, x, y++, 0x87CEEB);
+	return (draw);
+}
 
+static void	init_pixel_art(t_data *data, t_camera *cam, int side)
+{
 	if (side == 0)
-		perpWallDist = (cam->mapX - pos[X] + (1 - cam->stepX) / 2)
-			/ cam->rayDirX;
+		data->rendering.wallX = data->player->pos[Y]
+			+ data->rendering.perpWallDist * cam->ray_dir_y;
 	else
-		perpWallDist = (cam->mapY - pos[Y] + (1 - cam->stepY) / 2)
-			/ cam->rayDirY;
-	if (side == 0)
-		perpWallDist = cam->sideDistX - cam->deltaDistX;
-	else
-		perpWallDist = cam->sideDistY - cam->deltaDistY;
-	lineHeight = (int)(HEIGHT / perpWallDist);
-	drawStart = -lineHeight / 2 + HEIGHT / 2;
-	if (drawStart < 0)
-		drawStart = 0;
-	drawEnd = lineHeight / 2 + HEIGHT / 2;
-	if (drawEnd >= HEIGHT)
-		drawEnd = HEIGHT - 1;
-	double wallX = pos[X] + perpWallDist * cam->rayDirX;
-	wallX -= floor(wallX);
-	for (int y = 0; y < drawStart; y++)
-		my_mlx_pixel_put(win, x, y, 0x87CEEB); // bleu ciel
+		data->rendering.wallX = data->player->pos[X]
+			+ data->rendering.perpWallDist * cam->ray_dir_x;
+	data->rendering.wallX -= floor(data->rendering.wallX);
+}
+
+void	pixels_rendering(t_data *data, t_camera *cam, int side, int x)
+{
+	int	line_height;
+	int	*draw;
+
+	init_rendering(data, cam, side);
+	draw = truc_machin(data, &line_height, x);
+	init_pixel_art(data, cam, side);
 	if (side == 1)
 	{
-		if (cam->stepY >= 0)	// mur OUEST
-		{
-			double texX = (int)(wallX * TILE_SIZE);
-			double step = 1.0 * TILE_SIZE / lineHeight;
-			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
-			for (int y = drawStart; y <= drawEnd; y++)
-			{
-				double texY = (int)texPos & (TILE_SIZE - 1);
-				// ft_printf_putstr(data->texture[WE]->addr);
-				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
-				texPos += step;
-			}
-		}
-		else 				// mur EST
-		{
-			double texX = (int)(wallX * TILE_SIZE);
-			double step = 1.0 * TILE_SIZE / lineHeight;
-			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
-			for (int y = drawStart; y <= drawEnd; y++)
-			{
-				double texY = (int)texPos & (TILE_SIZE - 1);
-				// ft_printf_putstr(data->texture[WE]->addr);
-				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
-			}
-		}
+		if (cam->step_y >= 0)
+			truc(data, (int [3]){line_height, draw[0], draw[1]}, x, SO);
+		else
+			truc2(data, (int [3]){line_height, draw[0], draw[1]}, x, NO);
 	}
 	else
 	{
-		if (cam->stepX >= 0)	// mur SUD
-		{
-			double texX = (int)(wallX * TILE_SIZE);
-			double step = 1.0 * TILE_SIZE / lineHeight;
-			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
-			for (int y = drawStart; y <= drawEnd; y++)
-			{
-				double texY = (int)texPos & (TILE_SIZE - 1);
-				// ft_printf_putstr(data->texture[WE]->addr);
-				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
-			}
-		}
-		else				// mur NORD
-		{
-			double texX = (int)(wallX * TILE_SIZE);
-			double step = 1.0 * TILE_SIZE / lineHeight;
-			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
-			for (int y = drawStart; y <= drawEnd; y++)
-			{
-				double texY = (int)texPos & (TILE_SIZE - 1);
-				// ft_printf_putstr(data->texture[WE]->addr);
-				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
-			}
-		}
+		if (cam->step_x >= 0)
+			truc2(data, (int [3]){line_height, draw[0], draw[1]}, x, EA);
+		else
+			truc(data, (int [3]){line_height, draw[0], draw[1]}, x, WE);
 	}
-
-		// --- COULEUR DU MUR ---
-	// if (side == 1)
-	// 	color = 0x00FF00; // vert
-	// else
-	// 	color = 0x800000; // rouge foncé
-
-	// --- DESSIN DU CIEL (au-dessus du mur) ---
-
-
-	// --- DESSIN DU MUR ---
-
-
-	// --- DESSIN DU SOL (en dessous du mur) ---
-	for (int y = drawEnd + 1; y < HEIGHT; y++)
-		my_mlx_pixel_put(win, x, y, 0x444444); // gris foncé
-	// while (drawStart < drawEnd)
-	// 	my_mlx_pixel_put(win, x, drawStart++, color);
+	line_height = draw[1] + 1;
+	while (line_height < HEIGHT)
+		my_mlx_pixel_put(data->win, x, line_height++, 0x444444);
+	ft_mem_reset((void *)&draw);
 }
 
-void	draw_frame(t_window win, double pos[2], t_player *player, t_data *data)
+void	draw_frame(t_player *player, t_data *data)
 {
 	int			x;
-	// int			drawStart;
-	// int			drawEnd;
 	t_camera	*cam;
 
 	x = 0;
@@ -146,8 +96,8 @@ void	draw_frame(t_window win, double pos[2], t_player *player, t_data *data)
 		if (!cam)
 			exit_w_code(1, data);
 		cam_val_setter(player, cam, x);
-		rays_dir_setter(cam, pos);
-		pixels_rendering(data, cam, win, pos, rays_calculator(cam, data), x);
+		rays_dir_setter(cam, player->pos);
+		pixels_rendering(data, cam, rays_calculator(cam, data), x);
 		x++;
 	}
 }

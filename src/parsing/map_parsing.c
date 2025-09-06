@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 15:16:20 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:39:41 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	data->player->spawn[X] = data->player->pos[X];
 	data->player->spawn[Y] = data->player->pos[Y];
 	if (c == 'N')
-		data->player->dir = M_PI / 2;
-	else if (c == 'S')
 		data->player->dir = 3 * M_PI / 2;
+	else if (c == 'S')
+		data->player->dir = M_PI / 2;
 	else if (c == 'W')
 		data->player->dir = M_PI;
 	else if (c == 'E')
@@ -66,8 +66,8 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	data->map.map[i][j] = '0';
 	data->player->vec[Y] = sin(data->player->dir);
 	data->player->vec[X] = cos(data->player->dir);
-	data->player->plane[X] = -data->player->vec[Y] * data->win.fov_factor;
-	data->player->plane[Y] = data->player->vec[X] * data->win.fov_factor;
+	data->player->plane[X] = -data->player->vec[Y] * data->win->fov_factor;
+	data->player->plane[Y] = data->player->vec[X] * data->win->fov_factor;
 }
 
 static bool	check_chars(t_data *data, char **map)

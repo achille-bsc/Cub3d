@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 13:55:30 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 14:26:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:35:35 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	put_minimap_tiles(t_data *data, t_window win, int start[2])
+static void	put_minimap_tiles(t_data *data, t_window *win, int start[2])
 {
 	int	x;
 	int	y;
@@ -35,7 +35,7 @@ static void	put_minimap_tiles(t_data *data, t_window win, int start[2])
 	}
 }
 
-void	dp_full_offset(t_data *data, t_window win)
+void	dp_full_offset(t_data *data, t_window *win)
 {
 	int	start[2];
 
@@ -46,7 +46,7 @@ void	dp_full_offset(t_data *data, t_window win)
 	put_centered_player(win, data->rgb[PLAYER]);
 }
 
-void	dp_centered(t_data *data, t_window win, int diff[2])
+void	dp_centered(t_data *data, t_window *win, int diff[2])
 {
 	int	start[2];
 
