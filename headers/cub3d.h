@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/05 00:48:09 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 03:05:33 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -27,17 +28,19 @@
 # define HEIGHT				1080
 # define WIDTH				1920
 # define RENDER_DIST
-# define FPS_MAX			60
-# define FOV				90
+# define FPS_MAX			200
+# define FOV				66
 # define MV_SPEED			0.05
 # define ROT_SPEED			0.05
+
 # define TILE_SIZE			20
-# define ONE_SEC			1000
+# define TEXTURE_SIZE		64
 
 # define KEYPRESS			2
 # define KEYRELEASE			3
 # define ESCAPE				17
 
+# define ONE_SEC			1000
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846f
 # endif

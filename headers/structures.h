@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/05 00:49:43 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 04:34:53 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ enum e_pos_axis
 {
 	X,
 	Y,
+}	;
+
+enum e_mini_text
+{
+	M_FLOOR,
+	M_WALL,
+	M_OUT,
 }	;
 
 typedef struct s_camera
@@ -89,6 +96,7 @@ typedef struct s_window
 	int			bit_by_pix;
 	int			line_length;
 	int			endian;
+	double		fov_factor;
 }				t_window;
 
 typedef struct s_map
@@ -124,8 +132,8 @@ typedef struct s_texture
 typedef struct s_data
 {
 	char		*text[4];
-	void		*texture[4];
-	void		*mini_texture[4];
+	t_texture	*texture[4];
+	t_texture	*mini_texture[4];
 	char		*colors[2];
 	int			rgb[3];
 	size_t		fps_counter;

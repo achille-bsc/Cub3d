@@ -6,16 +6,11 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/05 06:26:07 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 04:34:30 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static double	to_deg(double dir)
-{
-	return (dir * 180 / M_PI);
-}
 
 static char	get_orientation(double dir)
 {
@@ -78,12 +73,18 @@ static void	put_debug_info_2(t_data *data)
 	txt = ft_strjoin("East texture  : ", data->text[EA]);
 	mlx_string_put(data->win.mlx, data->win.window, 1000, 80, 0000000000, txt);
 	ft_str_reset(&txt);
+	ft_smprintf(&txt, "PlaneX : %f", data->player->plane[X]);
+	mlx_string_put(data->win.mlx, data->win.window, 1500, 100, 0000000000, txt);
+	ft_str_reset(&txt);
+	ft_smprintf(&txt, "PlaneY : %f", data->player->plane[Y]);
+	mlx_string_put(data->win.mlx, data->win.window, 1500, 120, 0000000000, txt);
+	ft_str_reset(&txt);
 }
 
 bool	display(t_data *data)
 {
 	raycasting(data);
-	minimap_handling(data);
+	// minimap_handling(data);
 	if (data->move.debug)
 	{
 		put_debug_info(data);

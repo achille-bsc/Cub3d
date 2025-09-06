@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   languages.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/01 14:41:50 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/06 04:17:54 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 /* GAME INFOS */
 
 # define NAME				"My Little Adventure ! Second Coming !"
+
+/* MINIMAP TEXTURE */
+
+# define FLOOR_TEXTURE		"assets/black.xpm"
+# define OUT_TEXTURE		"assets/Lava.xpm"
+# define WALL_TEXTURE		"assets/cobble.xpm"
 
 /* ERRORS */
 
@@ -43,7 +49,9 @@ cub3d\n"
 # define _OPEN_MAP			"Fatal error: open map : (%i,%i)\n"
 
 # define _MLXINIT			"Fatal error: failed to init mlx\n"
+# define _WININIT			"Fatal error: failed to init window\n"
 # define _IMGINIT			"Fatal error: failed to init image\n"
-# define _ASSET_INIT		"Fatal error: failed to init asset n°%i\n"
+# define _ASSET_INIT		"Fatal error: failed to init texture\n"
+# define _GET_ADDR			"Fatal error: failed to get address from image\n"
 
 #endif

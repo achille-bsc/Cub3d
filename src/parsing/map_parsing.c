@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/05 01:56:35 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 00:15:30 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	else if (c == 'E')
 		data->player->dir = 2 * M_PI;
 	data->map.map[i][j] = '0';
+	data->player->vec[Y] = sin(data->player->dir);
+	data->player->vec[X] = cos(data->player->dir);
+	data->win.fov_factor = tan((FOV * M_PI / 180.0) / 2);
 }
 
 static bool	check_chars(t_data *data, char **map)

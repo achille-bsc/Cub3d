@@ -6,11 +6,21 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/05 05:58:13 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 04:29:29 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	moving(t_movement move, t_player *player)
+{
+	if (move.backward || move.forward || move.left || move.right
+		|| move.dir_up || move.dir_down || move.dir_left || move.dir_right)
+	{
+		player->vec[X] = cos(player->dir);
+		player->vec[Y] = sin(player->dir);
+	}
+}
 
 static bool	_mlx_init(t_data *data)
 {
@@ -19,7 +29,9 @@ static bool	_mlx_init(t_data *data)
 		return (printf(_MLXINIT), false);
 	data->win.window = mlx_new_window(data->win.mlx, WIDTH, HEIGHT, NAME);
 	if (!data->win.window)
-		return (printf(_IMGINIT), false);
+		return (printf(_WININIT), false);
+	get_wall_texture(data);
+	get_minimap_texture(data);
 	return (true);
 }
 
@@ -37,6 +49,7 @@ static int	game_loop(t_data *data)
 	{
 		fps_counter++;
 		data->old_time = data->time;
+		moving(data->move, data->player);
 		player_move(data->map, data->player, data->move);
 		display(data);
 	}
@@ -46,7 +59,6 @@ static int	game_loop(t_data *data)
 		data->fps_counter = fps_counter;
 		fps_counter = 0;
 	}
-	usleep(200);
 	return (0);
 }
 
@@ -63,7 +75,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!_mlx_init(data))
 		return (1);
-	load_texture(data);
 	events(data);
 	mlx_loop_hook(data->win.mlx, *game_loop, data);
 	mlx_loop(data->win.mlx);
