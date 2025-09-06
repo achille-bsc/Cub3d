@@ -6,11 +6,20 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/05 23:19:02 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 06:05:55 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	minimap_display(t_data *data)
+{
+	if (data->move.display_minimap)
+		data->move.display_minimap = false;
+	else
+		data->move.display_minimap = true;
+	return (0);
+}
 
 static int	debug_info(t_data *data)
 {
@@ -68,6 +77,8 @@ static int	release(int keysym, t_data *data)
 		data->move.sprint = false;
 	if (keysym == XK_e || keysym == XK_E)
 		debug_info(data);
+	if (keysym == XK_m || keysym == XK_M)
+		minimap_display(data);
 	return (0);
 }
 

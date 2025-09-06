@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 03:26:53 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 05:55:24 by lvan-bre         ###   ########.fr       */
+/*   Created: 2025/09/06 05:41:00 by lvan-bre          #+#    #+#             */
+/*   Updated: 2025/09/06 05:55:12 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned long long	get_time(void)
+double	to_deg(double rad)
 {
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	return (rad * 180 / M_PI);
 }
 
-char	*skipchar(char *src, int offset, char skiped)
+double	to_rad(double deg)
 {
-	char	*buffer;
-	int		i;
+	return (deg * M_PI / 180);
+}
 
-	i = offset;
-	while (src[i] == skiped)
-		i++;
-	buffer = ft_strdup(src + i);
-	return (buffer);
+void	calculate_plane(t_data *data, t_player *player)
+{
+	player->plane[X] = -player->vec[Y] * data->win.fov_factor;
+	player->plane[Y] = player->vec[X] * data->win.fov_factor;
 }

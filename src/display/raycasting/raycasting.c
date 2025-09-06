@@ -6,18 +6,11 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 04:35:28 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 07:59:02 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	my_mlx_pixel_put(t_window win, int x, int y, int color)
-{
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-		*(int *)(win.img_ptr + (y * win.line_length + x * (win.bit_by_pix
-						/ 8))) = color;
-}
 
 int	get_pixel_from_texture(t_texture *texture, double texX, double texY)
 {
@@ -162,50 +155,3 @@ void	draw_frame(t_window win, double pos[2], t_player *player, t_data *data)
 		x++;
 	}
 }
-
-static void	image_drawing(t_window window, t_player *player, t_data *data)
-{
-	// static double	dir[2] = {0.5, 0};
-	// static double	plane[2];
-
-	// static double pos[2] = {11, 6};
-		// Valeurs temp (avant d'avoir les mouvements)
-	window.img = mlx_new_image(window.mlx, WIDTH, HEIGHT);
-	if (!window.img)
-		return (ft_printf(_IMGINIT), exit_w_code(1, data));
-	window.img_ptr = mlx_get_data_addr(window.img, &window.bit_by_pix,
-			&window.line_length, &window.endian);
-	draw_frame(window, player->pos, player, data);
-	mlx_put_image_to_window(window.mlx, window.window, window.img, 0, 0);
-	mlx_destroy_image(window.mlx, window.img);
-}
-
-static void	calculate_plane(t_data *data, t_player *player)
-{
-	player->plane[X] = -player->vec[Y] * data->win.fov_factor;
-	player->plane[Y] = player->vec[X] * data->win.fov_factor;
-}
-
-void	raycasting(t_data *data)
-{
-	t_player *player;
-
-	player = data->player;
-	// player->pos[X] = 10;
-	// // player->pos[Y] = 5;
-	// double angle;
-	// angle = -2;
-	// vecteur direction unitaire
-	// double oldDirX = player->dir;
-	// player->dir = player->dir * cos(angle) - player->dir[Y] * sin(angle);
-	// player->dir[Y] = oldDirX * sin(angle) + player->dir[Y] * cos(angle);
-
-
-	// calcule un plan perpendiculaire au vecteur dir
-	calculate_plane(data, player);
-
-	image_drawing(data->win, player, data);
-
-}
-
-

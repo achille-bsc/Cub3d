@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 00:15:56 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 06:03:03 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ bool	parser(t_data *data, char *map_path)
 	fullfile = file_opening(map_path);
 	if (!fullfile)
 		return (free(data), false);
+	data->win.fov_factor = tan((FOV * M_PI / 180.0) / 2);
 	if (!dispatch_data(data, fullfile) || !colors_verification(data)
 		|| !map_parsing(data, data->map.map))
 		return (free_pars_info(data), ft_freeall("%d%d%d%m", &fullfile,
 				&data->map.map, &data->map.dummy, &data), false);
-	data->win.fov_factor = tan((FOV * M_PI / 180.0) / 2);
 	return (ft_freedarray(fullfile), true);
 }

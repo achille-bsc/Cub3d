@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 04:34:53 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:17:42 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,24 @@
 
 # include "cub3d.h"
 
+enum e_extremes
+{
+	BEGIN,
+	END,
+}	;
+
 enum e_pos_axis
 {
 	X,
 	Y,
 }	;
 
-enum e_mini_text
+typedef enum e_mini_text
 {
 	M_FLOOR,
 	M_WALL,
 	M_OUT,
-}	;
+}	t_mini_text;
 
 typedef struct s_camera
 {
@@ -93,7 +99,7 @@ typedef struct s_window
 	void		*window;
 	void		*img;
 	char		*img_ptr;
-	int			bit_by_pix;
+	int			bpp;
 	int			line_length;
 	int			endian;
 	double		fov_factor;
@@ -104,6 +110,10 @@ typedef struct s_map
 	char	**map;
 	int		**i_map;
 	char	**dummy;
+	int		size_x;
+	int		size_y;
+	int		extremities_x[2];
+	int		extremities_y[2];
 }			t_map;
 
 typedef struct s_movement
@@ -118,6 +128,7 @@ typedef struct s_movement
 	bool	dir_right;
 	bool	sprint;
 	bool	debug;
+	bool	display_minimap;
 }			t_movement;
 
 typedef struct s_texture

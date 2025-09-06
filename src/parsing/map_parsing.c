@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 00:15:30 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:48:35 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static bool	flood_fill(t_data *data, int x, int y)
 		return (ft_printf(_OPEN_MAP, x, y), false);
 	else if (data->map.dummy[y][x] == '1' || data->map.dummy[y][x] == 'd')
 		return (true);
+	if (data->map.dummy[y][x] == ' ')
+		data->map.map[y][x] = '0';
 	if (data->map.dummy[y][x] == '0' || data->map.dummy[y][x] == ' ')
 		data->map.dummy[y][x] = 'd';
 	if (!flood_fill(data, x + 1, y))
@@ -60,7 +62,8 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	data->map.map[i][j] = '0';
 	data->player->vec[Y] = sin(data->player->dir);
 	data->player->vec[X] = cos(data->player->dir);
-	data->win.fov_factor = tan((FOV * M_PI / 180.0) / 2);
+	data->player->plane[X] = -data->player->vec[Y] * data->win.fov_factor;
+	data->player->plane[Y] = data->player->vec[X] * data->win.fov_factor;
 }
 
 static bool	check_chars(t_data *data, char **map)
@@ -102,5 +105,7 @@ bool	map_parsing(t_data *data, char **map)
 	if (!player_four_dirs(data)
 		|| !flood_fill(data, data->player->pos[X], data->player->pos[Y]))
 		return (false);
+	land_height(data, data->map.map);
+	get_longer_str(data, data->map.map);
 	return (true);
 }

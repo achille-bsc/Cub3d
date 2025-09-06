@@ -6,19 +6,20 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 04:29:29 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 05:48:37 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	moving(t_movement move, t_player *player)
+void	moving(t_data *data, t_movement move, t_player *player)
 {
 	if (move.backward || move.forward || move.left || move.right
 		|| move.dir_up || move.dir_down || move.dir_left || move.dir_right)
 	{
 		player->vec[X] = cos(player->dir);
 		player->vec[Y] = sin(player->dir);
+		calculate_plane(data, player);
 	}
 }
 
@@ -49,7 +50,7 @@ static int	game_loop(t_data *data)
 	{
 		fps_counter++;
 		data->old_time = data->time;
-		moving(data->move, data->player);
+		moving(data, data->move, data->player);
 		player_move(data->map, data->player, data->move);
 		display(data);
 	}

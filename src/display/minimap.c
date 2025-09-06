@@ -6,56 +6,79 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 04:35:18 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:36:00 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ifs(t_data *data, t_window win, char tile, int x, int y)
+void	put_tile(t_texture *text, t_window win, int x, int y)
 {
-	if (tile == '0')
-		mlx_put_image_to_window(win.mlx, win.window, data->mini_texture[0]->texture,
-			x * TILE_SIZE, y * TILE_SIZE);
-	else if (tile == '1')
-		mlx_put_image_to_window(win.mlx, win.window, data->mini_texture[1]->texture,
-			x * TILE_SIZE, y * TILE_SIZE);
-	else if (tile == ' ')
-		mlx_put_image_to_window(win.mlx, win.window, data->mini_texture[2]->texture,
-			x * TILE_SIZE, y * TILE_SIZE);
-}
+	int	xx;
+	int	yy;
 
-static void	player_put(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = -2;
-	while (i < 2)
+	yy = 0;
+	while (yy < TILE_SIZE)
 	{
-		j = -2;
-		while (j < 2)
-			mlx_pixel_put(data->win.mlx, data->win.window, data->player->pos[X]
-				* TILE_SIZE + i, data->player->pos[Y]
-				* TILE_SIZE + j++, data->rgb[PLAYER]);
-		i++;
+		xx = 0;
+		while (xx < TILE_SIZE)
+		{
+			my_minimap_pixel_put(win, xx + x, yy + y,
+				get_color_from_texture(text, xx, yy));
+			xx++;
+		}
+		yy++;
 	}
 }
 
-void	minimap_handling(t_data *data)
+static void	dp_full_offset(t_data *data, t_window win)
 {
-	int	y;
+	put_centered_player(win, data->rgb[PLAYER]);
+}
+
+static void	dp_centered(t_data *data, t_window win, int start[2])
+{
 	int	x;
+	int	y;
 
-	y = -1;
-	while (data->map.map[++y])
+	y = 0;
+	while (data->map.map[y])
 	{
-		x = -1;
-		while (data->map.map[y][++x])
-			ifs(data, data->win, data->map.map[y][x], x, y);
+		x = 0;
+		while (data->map.map[y][x])
+		{
+			if (data->map.map[y][x] == '0')
+				put_tile(data->mini_texture[M_FLOOR], win,
+					start[X] + x * TILE_SIZE, start[Y] + y * TILE_SIZE);
+			else if (data->map.map[y][x] == '1')
+				put_tile(data->mini_texture[M_WALL], win,
+					start[X] + x * TILE_SIZE, start[Y] + y * TILE_SIZE);
+			x++;
+		}
+		y++;
 	}
-	x = 0;
-	while (data->mini_texture[x])
-		mlx_destroy_image(data->win.mlx, data->mini_texture[x++]);
-	player_put(data);
+	put_moving_player(data, win, start);
+}
+
+void	put_minimap(t_data *data, t_window win)
+{
+	int	diff[2];
+	int	start[2];
+
+	diff[X] = MINIMAP_SIZE_X - (data->map.size_x * TILE_SIZE);
+	start[X] = (WIDTH - MINIMAP_SIZE_X) + ((diff[X] / 2)
+			- data->map.extremities_x[BEGIN] * TILE_SIZE - 10);
+	diff[Y] = MINIMAP_SIZE_Y - data->map.size_y * TILE_SIZE;
+	start[Y] = diff[Y] / 2 - data->map.extremities_y[BEGIN] * TILE_SIZE - 10;
+	if (diff[X] < 0 || diff[Y] < 0)
+		dp_full_offset(data, win);
+	else
+		dp_centered(data, win, start);
+}
+
+void	minimap_handling(t_data *data, t_window win)
+{
+	put_first_layer(data, win);
+	put_minimap(data, win);
+	minimap_put_borders(win);
 }
