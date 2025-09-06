@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:02:09 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 09:58:34 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:54:28 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,6 @@ void	put_first_layer(t_data *data, t_window win)
 		x++;
 	}
 }
-
-// static void	player_put(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -2;
-// 	while (i < 2)
-// 	{
-// 		j = -2;
-// 		while (j < 2)
-// 			mlx_pixel_put(data->win.mlx, data->win.window, data->player->pos[X]
-// 				* TILE_SIZE + i, data->player->pos[Y]
-// 				* TILE_SIZE + j++, data->rgb[PLAYER]);
-// 		i++;
-// 	}
-// }
 
 void	put_centered_player(t_window win, int color)
 {

@@ -4,3 +4,4 @@ build/
 a.out
 .vscode/
 src/display/raycasting/clean_raycast.c
+src/display/raycasting/raycasting_test.c
