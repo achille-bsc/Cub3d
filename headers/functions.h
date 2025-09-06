@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 13:33:18 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 14:11:38 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void				put_first_layer(t_data *data, t_window win);
 void				minimap_put_borders(t_window win);
 void				put_centered_player(t_window win, int color);
 void				put_moving_player(t_data *data, t_window win, int start[2]);
+void				dp_centered(t_data *data, t_window win, int diff[2]);
+void				dp_full_offset(t_data *data, t_window win);
 
 /* UTILS */
 
