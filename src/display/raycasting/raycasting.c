@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 07:59:02 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:42:07 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 int	get_pixel_from_texture(t_texture *texture, double texX, double texY)
 {
-	int pixel;
-	int val;
+	int	pixel;
+	int	val;
 
 	val = (texY * texture->size_line + texX * (texture->bpp / 8));
-
-	// ft_putendl_fd(ft_itoa(val), 1);
-	// ft_printf_putstr(texture->addr);
-	// write(1, "\n", 1);
 	pixel = texture->addr[val];
 	return (pixel);
 }
@@ -32,7 +28,7 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
-	(void)data;
+
 	// int		color;
 	double	perpWallDist;
 
@@ -61,29 +57,29 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 	{
 		if (cam->stepY >= 0)	// mur OUEST
 		{
-			// double texX = (int)(wallX * TILE_SIZE);
-			// double step = 1.0 * TILE_SIZE / lineHeight;
-			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+			double texX = (int)(wallX * TILE_SIZE);
+			double step = 1.0 * TILE_SIZE / lineHeight;
+			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
-				// double texY = (int)texPos & (TILE_SIZE - 1);
+				double texY = (int)texPos & (TILE_SIZE - 1);
 				// ft_printf_putstr(data->texture[WE]->addr);
 				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0x333333);
-				// texPos += step;
+				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
+				texPos += step;
 			}
 		}
 		else 				// mur EST
 		{
-			// double texX = (int)(wallX * TILE_SIZE);
-			// double step = 1.0 * TILE_SIZE / lineHeight;
-			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+			double texX = (int)(wallX * TILE_SIZE);
+			double step = 1.0 * TILE_SIZE / lineHeight;
+			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
-				// double texY = (int)texPos & (TILE_SIZE - 1);
+				double texY = (int)texPos & (TILE_SIZE - 1);
 				// ft_printf_putstr(data->texture[WE]->addr);
 				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0x777777);
+				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
 			}
 		}
 	}
@@ -91,28 +87,28 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_window win, double pos[2], 
 	{
 		if (cam->stepX >= 0)	// mur SUD
 		{
-			// double texX = (int)(wallX * TILE_SIZE);
-			// double step = 1.0 * TILE_SIZE / lineHeight;
-			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+			double texX = (int)(wallX * TILE_SIZE);
+			double step = 1.0 * TILE_SIZE / lineHeight;
+			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
-				// double texY = (int)texPos & (TILE_SIZE - 1);
+				double texY = (int)texPos & (TILE_SIZE - 1);
 				// ft_printf_putstr(data->texture[WE]->addr);
 				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, /*get_pixel_from_texture(data->texture[WE], texX, texY)*/0xbbbbbb);
+				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
 			}
 		}
 		else				// mur NORD
 		{
-			// double texX = (int)(wallX * TILE_SIZE);
-			// double step = 1.0 * TILE_SIZE / lineHeight;
-			// double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+			double texX = (int)(wallX * TILE_SIZE);
+			double step = 1.0 * TILE_SIZE / lineHeight;
+			double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 			for (int y = drawStart; y <= drawEnd; y++)
 			{
-				// double texY = (int)texPos & (TILE_SIZE - 1);
+				double texY = (int)texPos & (TILE_SIZE - 1);
 				// ft_printf_putstr(data->texture[WE]->addr);
 				// write(1, "\n", 1);
-				my_mlx_pixel_put(win, x, y, /* get_pixel_from_texture(data->texture[WE], texX, texY)*/0xffffff);
+				my_mlx_pixel_put(win, x, y, get_color_from_texture(data->texture[WE], texX, texY));
 			}
 		}
 	}

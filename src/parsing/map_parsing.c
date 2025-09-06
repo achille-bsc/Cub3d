@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 13:48:35 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:16:20 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 	data->player = ft_calloc(sizeof(t_player));
 	data->player->pos[X] = j + 0.5;
 	data->player->pos[Y] = i + 0.5;
+	data->player->spawn[X] = data->player->pos[X];
+	data->player->spawn[Y] = data->player->pos[Y];
 	if (c == 'N')
 		data->player->dir = M_PI / 2;
 	else if (c == 'S')
@@ -59,6 +61,8 @@ static void	add_to_spawn(t_data *data, int i, int j, char c)
 		data->player->dir = M_PI;
 	else if (c == 'E')
 		data->player->dir = 2 * M_PI;
+	data->player->spawn[DIRX] = data->player->dir;
+	data->player->spawn[DIRZ] = data->player->dirz;
 	data->map.map[i][j] = '0';
 	data->player->vec[Y] = sin(data->player->dir);
 	data->player->vec[X] = cos(data->player->dir);

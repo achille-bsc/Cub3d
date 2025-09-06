@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 14:11:38 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:15:42 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void				events(t_data *data);
 void				player_move(t_map map, t_player *player, t_movement move);
 void				turning_cam(t_player *player, t_movement move);
 void				moving(t_data *data, t_movement move, t_player *player);
+int					minimap_display(t_data *data);
+int					debug_info(t_data *data);
+int					re_center_cam(t_data *data);
+int					respawn(t_data *data);
 
 /* EXIT */
 

@@ -6,29 +6,11 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 06:05:55 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:12:31 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	minimap_display(t_data *data)
-{
-	if (data->move.display_minimap)
-		data->move.display_minimap = false;
-	else
-		data->move.display_minimap = true;
-	return (0);
-}
-
-static int	debug_info(t_data *data)
-{
-	if (data->move.debug)
-		data->move.debug = false;
-	else
-		data->move.debug = true;
-	return (0);
-}
 
 static int	press(int keysym, t_data *data)
 {
@@ -52,6 +34,10 @@ static int	press(int keysym, t_data *data)
 		data->move.sprint = true;
 	if (keysym == XK_Escape)
 		clean_quit(data);
+	if (keysym == XK_z || keysym == XK_Z)
+		respawn(data);
+	if (keysym == XK_c || keysym == XK_C)
+		re_center_cam(data);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 13:17:42 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:12:14 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ enum e_pos_axis
 {
 	X,
 	Y,
+	DIRX,
+	DIRZ,
 }	;
 
 typedef enum e_mini_text
@@ -87,8 +89,10 @@ typedef struct s_player
 {
 	double	pos[2];
 	double	dir;
+	double	dirz;
 	double	plane[2];
 	double	vec[2];
+	double	spawn[4];
 	int		**map;
 	int		sprint;
 }	t_player;
