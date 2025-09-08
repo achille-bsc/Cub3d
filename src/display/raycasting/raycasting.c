@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 19:32:50 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 13:56:53 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static void	init_rendering(t_data *data, t_camera *cam, int side)
 {
 	if (side == 0)
-		data->rendering.perpWallDist = (cam->map_x - data->player->pos[X] + (1
+		data->rendering.perp_wall_dist = (cam->map_x - data->player->pos[X] + (1
 					- cam->step_x) / 2) / cam->ray_dir_x;
 	else
-		data->rendering.perpWallDist = (cam->map_y - data->player->pos[Y] + (1
+		data->rendering.perp_wall_dist = (cam->map_y - data->player->pos[Y] + (1
 					- cam->step_y) / 2) / cam->ray_dir_y;
 	if (side == 0)
-		data->rendering.perpWallDist = cam->side_dist_x - cam->delta_dist_x;
+		data->rendering.perp_wall_dist = cam->side_dist_x - cam->delta_dist_x;
 	else
-		data->rendering.perpWallDist = cam->side_dist_y - cam->delta_dist_y;
+		data->rendering.perp_wall_dist = cam->side_dist_y - cam->delta_dist_y;
 }
 
 static int	*truc_machin(t_data *data, int *line_height, int x)
@@ -32,7 +32,7 @@ static int	*truc_machin(t_data *data, int *line_height, int x)
 	int	y;
 
 	draw = ft_calloc(sizeof(int) * 2);
-	*line_height = (int)(HEIGHT / data->rendering.perpWallDist);
+	*line_height = (int)(HEIGHT / data->rendering.perp_wall_dist);
 	draw[0] = -*line_height / 2 + HEIGHT / 2;
 	if (draw[0] < 0)
 		draw[0] = 0;
@@ -48,12 +48,12 @@ static int	*truc_machin(t_data *data, int *line_height, int x)
 static void	init_pixel_art(t_data *data, t_camera *cam, int side)
 {
 	if (side == 0)
-		data->rendering.wallX = data->player->pos[Y]
-			+ data->rendering.perpWallDist * cam->ray_dir_y;
+		data->rendering.wall_x = data->player->pos[Y]
+			+ data->rendering.perp_wall_dist * cam->ray_dir_y;
 	else
-		data->rendering.wallX = data->player->pos[X]
-			+ data->rendering.perpWallDist * cam->ray_dir_x;
-	data->rendering.wallX -= floor(data->rendering.wallX);
+		data->rendering.wall_x = data->player->pos[X]
+			+ data->rendering.perp_wall_dist * cam->ray_dir_x;
+	data->rendering.wall_x -= floor(data->rendering.wall_x);
 }
 
 void	pixels_rendering(t_data *data, t_camera *cam, int side, int x)

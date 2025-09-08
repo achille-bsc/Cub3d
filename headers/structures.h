@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 18:08:55 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 14:00:55 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +146,12 @@ typedef struct s_texture
 
 typedef struct s_pixel_rendering
 {
-	double				perpWallDist;
-	double				wallX;
-	double				texX;
+	double				perp_wall_dist;
+	double				wall_x;
+	double				tex_x;
 	double				step;
-	double				texPos;
-	double				texY;
+	double				tex_pos;
+	double				tex_y;
 }						t_pixel_rendering;
 
 typedef struct s_data
@@ -170,6 +170,5 @@ typedef struct s_data
 	t_player			*player;
 	t_pixel_rendering	rendering;
 }						t_data;
-
 
 #endif
