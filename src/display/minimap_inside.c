@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_inside.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:02:09 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:35:24 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 22:37:27 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ void	put_first_layer(t_data *data, t_window *win)
 	int	ystart;
 	int	y;
 
-	xstart = WIDTH - MINIMAP_SIZE_X;
-	ystart = 0;
+	xstart = WIDTH - MINIMAP_SIZE_X - MINIMAP_START_X;
+	ystart = MINIMAP_START_Y;
 	x = 0;
-	while (xstart + (x * TILE_SIZE) <= WIDTH - 20)
+	while (xstart + (x * TILE_SIZE) <= WIDTH - MINIMAP_START_X - 20)
 	{
 		y = 0;
-		while (ystart + (y * TILE_SIZE) <= MINIMAP_SIZE_Y - 20)
+		while (ystart + (y * TILE_SIZE) <= MINIMAP_SIZE_Y + MINIMAP_START_Y
+			- 20)
 		{
 			put_tile(data->mini_texture[M_OUT], win, xstart + (x * TILE_SIZE),
 				ystart + (y * TILE_SIZE));
@@ -62,9 +63,9 @@ void	put_centered_player(t_window *win, int color)
 	int	ycenter;
 	int	y;
 
-	xcenter = WIDTH - (MINIMAP_SIZE_X / 2);
+	xcenter = WIDTH - (MINIMAP_SIZE_X / 2) - MINIMAP_START_X;
 	x = xcenter - 2;
-	ycenter = MINIMAP_SIZE_Y / 2 - 2;
+	ycenter = MINIMAP_SIZE_Y / 2 - 2 + MINIMAP_START_Y;
 	while (x < xcenter + 2)
 	{
 		y = ycenter - 2;
@@ -74,31 +75,46 @@ void	put_centered_player(t_window *win, int color)
 	}
 }
 
-void	minimap_put_borders(t_window *win)
+void	minimap_put_borders_y(t_window *win)
 {
 	int	x;
 	int	y;
 
-	y = -1;
-	x = WIDTH - MINIMAP_SIZE_X - MINIMAP_BORDER_SIZE;
-	while (++y <= MINIMAP_SIZE_Y && x <= WIDTH - MINIMAP_SIZE_X)
+	x = WIDTH - MINIMAP_START_X - MINIMAP_BORDER_SIZE - MINIMAP_SIZE_X;
+	y = MINIMAP_START_Y - MINIMAP_BORDER_SIZE;
+	while (x <= WIDTH - MINIMAP_START_X + MINIMAP_BORDER_SIZE
+		&& y <= MINIMAP_START_Y)
 	{
-		if (y == MINIMAP_SIZE_Y)
+		my_mlx_pixel_put(win, x, y, 0x000000);
+		my_mlx_pixel_put(win, x, y + MINIMAP_SIZE_Y + MINIMAP_BORDER_SIZE,
+			0x000000);
+		x++;
+		if (x == WIDTH - MINIMAP_START_X + MINIMAP_BORDER_SIZE)
 		{
-			y = 0;
+			x = WIDTH - MINIMAP_SIZE_X - MINIMAP_START_X - MINIMAP_BORDER_SIZE;
+			y++;
+		}
+	}
+}
+
+void	minimap_put_borders_x(t_window *win)
+{
+	int	x;
+	int	y;
+
+	x = WIDTH - MINIMAP_START_X;
+	y = MINIMAP_START_Y - MINIMAP_BORDER_SIZE;
+	while (y <= MINIMAP_SIZE_Y + MINIMAP_START_Y + MINIMAP_BORDER_SIZE
+		&& x <= WIDTH - MINIMAP_START_X + MINIMAP_BORDER_SIZE)
+	{
+		my_mlx_pixel_put(win, x, y, 0x000000);
+		my_mlx_pixel_put(win, x - MINIMAP_SIZE_X - MINIMAP_BORDER_SIZE,
+			y, 0x000000);
+		y++;
+		if (y == MINIMAP_SIZE_Y + MINIMAP_START_Y + MINIMAP_BORDER_SIZE)
+		{
+			y = MINIMAP_START_Y - MINIMAP_BORDER_SIZE;
 			x++;
 		}
-		my_mlx_pixel_put(win, x, y, 0x000000);
-	}
-	y = MINIMAP_SIZE_Y - 1;
-	while (x <= WIDTH && y >= MINIMAP_SIZE_Y - MINIMAP_BORDER_SIZE)
-	{
-		if (x == WIDTH)
-		{
-			x = WIDTH - MINIMAP_SIZE_X;
-			y--;
-		}
-		my_mlx_pixel_put(win, x, y, 0x000000);
-		x++;
 	}
 }

@@ -6,11 +6,24 @@
 /*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 13:29:30 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/08 18:12:18 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	player_four_dirs(t_data *data)
+{
+	int	posx;
+	int	posy;
+
+	posx = (int)data->player->pos[X];
+	posy = (int)data->player->pos[Y];
+	if (posx > (int)ft_strlen(data->map.map[posy + 1])
+		|| posx > (int)ft_strlen(data->map.map[posy - 1]))
+		return (ft_printf(_OPEN_MAP, posx, posy), false);
+	return (true);
+}
 
 static bool	is_rgb_value(int color)
 {
@@ -82,7 +95,8 @@ bool	parser(t_data *data, char *map_path)
 	data->win->fov_factor = tan((FOV * M_PI / 180.0) / 2);
 	if (!dispatch_data(data, fullfile) || !colors_verification(data)
 		|| !map_parsing(data, data->map.map))
-		return (free_pars_info(data), ft_freeall("%d%d%d%m%m", &fullfile,
-				&data->map.map, &data->map.dummy, &data->win, &data), false);
+		return (free_pars_info(data), ft_freeall("%d%d%d%m%m%m", &fullfile,
+				&data->map.map, &data->map.dummy, &data->player,
+				&data->win, &data), false);
 	return (ft_freedarray(fullfile), true);
 }

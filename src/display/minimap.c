@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 17:35:03 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 22:08:00 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	minimap_handling(t_data *data, t_window *win)
 		dp_full_offset(data, win);
 	else
 		dp_centered(data, win, diff);
-	minimap_put_borders(win);
+	minimap_put_borders_x(win);
+	minimap_put_borders_y(win);
 }

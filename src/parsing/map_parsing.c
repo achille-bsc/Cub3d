@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:39:41 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 21:24:23 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	player_four_dirs(t_data *data)
+static bool	check_ff_both_x(char **dummy, int x, int y)
 {
-	int	posx;
-	int	posy;
+	int	size_up;
+	int	size_down;
 
-	posx = (int)data->player->pos[X];
-	posy = (int)data->player->pos[Y];
-	if (posx > (int)ft_strlen(data->map.map[posy + 1])
-		|| posx > (int)ft_strlen(data->map.map[posy - 1]))
-		return (ft_printf(_OPEN_MAP, posx, posy), false);
+	if (y >= 1 && dummy[y - 1])
+		size_up = ft_strlen(dummy[y - 1]);
+	if (dummy[y + 1])
+		size_down = ft_strlen(dummy[y + 1]);
+	if (x + 1 > size_up || x + 1 > size_down)
+		return (false);
 	return (true);
 }
 
@@ -31,6 +32,8 @@ static bool	flood_fill(t_data *data, int x, int y)
 		return (ft_printf(_OPEN_MAP, x, y), false);
 	else if (data->map.dummy[y][x] == '1' || data->map.dummy[y][x] == 'd')
 		return (true);
+	if (!check_ff_both_x(data->map.dummy, x, y))
+		return (ft_printf(_OPEN_MAP, x, y), false);
 	if (data->map.dummy[y][x] == ' ')
 		data->map.map[y][x] = '0';
 	if (data->map.dummy[y][x] == '0' || data->map.dummy[y][x] == ' ')
@@ -48,7 +51,8 @@ static bool	flood_fill(t_data *data, int x, int y)
 
 static void	add_to_spawn(t_data *data, int i, int j, char c)
 {
-	data->player = ft_calloc(sizeof(t_player));
+	if (!data->player)
+		data->player = ft_calloc(sizeof(t_player));
 	data->player->pos[X] = j + 0.5;
 	data->player->pos[Y] = i + 0.5;
 	data->player->spawn[X] = data->player->pos[X];

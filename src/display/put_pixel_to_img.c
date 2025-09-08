@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_pixel_to_img.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:44:10 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:34:30 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 21:45:08 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	my_minimap_pixel_put(t_window *win, int x, int y, int color)
 {
-	if ((x >= WIDTH - MINIMAP_SIZE_X && x < WIDTH)
-		&& (y >= 0 && y < MINIMAP_SIZE_Y))
+	if ((x >= WIDTH - MINIMAP_SIZE_X - MINIMAP_START_X && x < WIDTH
+			- MINIMAP_START_X)
+		&& (y >= MINIMAP_START_Y && y < MINIMAP_SIZE_Y + MINIMAP_START_Y))
 		*(int *)(win->img_ptr + (y * win->line_length + x * (win->bpp
 						/ 8))) = color;
 }

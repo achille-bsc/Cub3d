@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 13:55:30 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:35:35 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 22:36:56 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void	dp_full_offset(t_data *data, t_window *win)
 	int	start[2];
 
 	start[X] = WIDTH - MINIMAP_SIZE_X + (MINIMAP_SIZE_X / 2)
-		- data->player->pos[X] * TILE_SIZE;
-	start[Y] = MINIMAP_SIZE_Y / 2 - data->player->pos[Y] * TILE_SIZE;
+		- data->player->pos[X] * TILE_SIZE - MINIMAP_START_X;
+	start[Y] = MINIMAP_SIZE_Y / 2 - data->player->pos[Y] * TILE_SIZE
+		+ MINIMAP_START_Y;
 	put_minimap_tiles(data, win, start);
 	put_centered_player(win, data->rgb[PLAYER]);
 }
@@ -50,9 +51,11 @@ void	dp_centered(t_data *data, t_window *win, int diff[2])
 {
 	int	start[2];
 
-	start[X] = (WIDTH - MINIMAP_SIZE_X) + ((diff[X] / 2)
-			- data->map.extremities_x[BEGIN] * TILE_SIZE - 10);
-	start[Y] = diff[Y] / 2 - data->map.extremities_y[BEGIN] * TILE_SIZE - 10;
+	start[X] = (WIDTH - MINIMAP_SIZE_X) + (diff[X] / 2)
+		- data->map.extremities_x[BEGIN] * TILE_SIZE - 10
+		- MINIMAP_START_X;
+	start[Y] = diff[Y] / 2 - data->map.extremities_y[BEGIN] * TILE_SIZE - 10
+		+ MINIMAP_START_Y;
 	put_minimap_tiles(data, win, start);
 	put_moving_player(data, win, start);
 }

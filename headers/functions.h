@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 18:06:13 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 22:07:10 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ bool				parser(t_data *data, char *map_path);
 bool				dispatch_data(t_data *data, char **file);
 void				dispatch_error_handling(t_parsing_errors err);
 bool				map_parsing(t_data *data, char **map);
+bool				player_four_dirs(t_data *data);
 
 /* MINIMAP */
 
@@ -30,7 +31,8 @@ void				my_minimap_pixel_put(t_window *win, int x, int y,
 						int color);
 void				put_tile(t_texture *text, t_window *win, int x, int y);
 void				put_first_layer(t_data *data, t_window *win);
-void				minimap_put_borders(t_window *win);
+void				minimap_put_borders_x(t_window *win);
+void				minimap_put_borders_y(t_window *win);
 void				put_centered_player(t_window *win, int color);
 void				put_moving_player(t_data *data, t_window *win,
 						int start[2]);

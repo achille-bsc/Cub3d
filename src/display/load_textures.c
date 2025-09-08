@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:21:30 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 17:35:50 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/08 18:11:20 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static t_texture	*load_texture(t_data *data, char *asset_file, int size)
 		exit_w_code(1, data);
 	texture->texture = xpm_img(data->win->mlx, asset_file, size);
 	if (!texture->texture)
-		return (ft_printf(_ASSET_INIT), exit_w_code(1, data), NULL);
+		return (free(texture), ft_printf(_ASSET_INIT), exit_w_code(1, data)
+			, NULL);
 	texture->addr = mlx_get_data_addr(texture->texture,
 			&(texture->bpp), &(texture->size_line),
 			&(texture->endian));
