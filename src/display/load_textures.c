@@ -6,7 +6,7 @@
 /*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:21:30 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/08 18:11:20 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/09 01:00:57 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,7 @@ void	get_wall_texture(t_data *data)
 	data->texture[SO] = load_texture(data, data->text[SO], TEXTURE_SIZE);
 	data->texture[WE] = load_texture(data, data->text[WE], TEXTURE_SIZE);
 	data->texture[EA] = load_texture(data, data->text[EA], TEXTURE_SIZE);
+	data->door_textures[CLOSED] = load_texture(data, DOOR_CLOSED,
+			TEXTURE_SIZE);
+	data->door_textures[OPEN] = load_texture(data, DOOR_OPEN, TEXTURE_SIZE);
 }

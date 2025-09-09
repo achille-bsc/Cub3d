@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   languages.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 15:54:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/09 11:05:33 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define FLOOR_TEXTURE		"assets/black.xpm"
 # define OUT_TEXTURE		"assets/Lava.xpm"
 # define WALL_TEXTURE		"assets/cobble.xpm"
+
+# define DOOR_OPEN          "assets/Door-6.xpm"
+# define DOOR_CLOSED         "assets/Door-1.xpm"
 
 /* ERRORS */
 
@@ -47,6 +50,7 @@
 cub3d\n"
 # define _NO_SPAWN			"Fatal error: no spawn found\n"
 # define _OPEN_MAP			"Fatal error: open map : (%i,%i)\n"
+# define _DOOR_NEXT_TO_VOID "Fatal error: door is next to void : (%i,%i)\n"
 
 # define _MLXINIT			"Fatal error: failed to init mlx\n"
 # define _WININIT			"Fatal error: failed to init window\n"

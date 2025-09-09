@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 19:06:02 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/09 16:48:45 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	main(int argc, char **argv)
 	data = ft_calloc(sizeof(t_data));
 	if (!data)
 		return (1);
+	data->vars = ft_calloc(sizeof(t_vars));
+	if (!data->vars)
+		return (free(data), 1);
 	if (!parser(data, argv[1]))
 		return (1);
 	if (!_mlx_init(data))

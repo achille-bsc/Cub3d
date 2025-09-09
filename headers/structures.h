@@ -6,7 +6,7 @@
 /*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/08 14:00:55 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/09 16:44:01 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define STRUCTURES_H
 
 # include "cub3d.h"
+
+enum					e_door_status
+{
+	CLOSED,
+	OPEN,
+};
 
 enum					e_extremes
 {
@@ -154,11 +160,20 @@ typedef struct s_pixel_rendering
 	double				tex_y;
 }						t_pixel_rendering;
 
+typedef struct s_vars
+{
+	int					draw[2];
+	int					line_height;
+	int					side;
+	int					x;
+}						t_vars;
+
 typedef struct s_data
 {
 	char				*text[4];
 	t_texture			*texture[4];
 	t_texture			*mini_texture[4];
+	t_texture			*door_textures[2];
 	char				*colors[2];
 	int					rgb[3];
 	size_t				fps_counter;
@@ -168,7 +183,11 @@ typedef struct s_data
 	t_map				map;
 	t_window			*win;
 	t_player			*player;
-	t_pixel_rendering	rendering;
+	t_pixel_rendering	*w_rendering;
+	t_pixel_rendering	*d_rendering;
+	t_camera			*door;
+	t_camera			*cam;
+	t_vars				*vars;
 }						t_data;
 
 #endif

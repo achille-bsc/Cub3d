@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 17:39:02 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/09 00:15:22 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static int	release(int keysym, t_data *data)
 		debug_info(data);
 	if (keysym == XK_m || keysym == XK_M)
 		minimap_display(data);
+	if (keysym == XK_f || keysym == XK_F)
+		door_action(data->player->pos, data->map.map);
 	return (0);
 }
 

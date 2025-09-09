@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:08:23 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:52:59 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/09 14:12:38 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ int	rays_calculator(t_camera *cam, t_data *data)
 			cam->map_y += cam->step_y;
 			side = 1;
 		}
-		if (data->map.map[cam->map_y][cam->map_x] != '0')
+		if (data->map.map[cam->map_y][cam->map_x] == 'O')
+			data->door = ft_memcpy(data->door, data->cam, sizeof(t_camera));
+		if (data->map.map[cam->map_y][cam->map_x] != '0'
+			&& data->map.map[cam->map_y][cam->map_x] != 'O')
 			hit = true;
 	}
 	return (side);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 19:30:31 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/09 16:49:16 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ static void	free_m_map(t_data *data)
 		mlx_destroy_image(data->win->mlx, data->mini_texture[M_OUT]->texture);
 		ft_freeall("%m", &data->mini_texture[M_OUT]);
 	}
+	if (data->door_textures[CLOSED])
+	{
+		mlx_destroy_image(data->win->mlx, data->door_textures[CLOSED]->texture);
+		ft_freeall("%m", &data->door_textures[CLOSED]);
+	}
+	if (data->door_textures[OPEN])
+	{
+		mlx_destroy_image(data->win->mlx, data->door_textures[OPEN]->texture);
+		ft_freeall("%m", &data->door_textures[OPEN]);
+	}
 }
 
 void	exit_w_code(int code, t_data *data)
@@ -85,7 +95,7 @@ void	exit_w_code(int code, t_data *data)
 		mlx_destroy_display(data->win->mlx);
 		free(data->win->mlx);
 	}
-	ft_freeall("%m%m", &data->win, &data);
+	ft_freeall("%m%m%m", &data->vars, &data->win, &data);
 	exit(code);
 }
 

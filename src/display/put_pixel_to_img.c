@@ -6,7 +6,7 @@
 /*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:44:10 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 21:45:08 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/09 13:20:09 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	my_minimap_pixel_put(t_window *win, int x, int y, int color)
 
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {
+	if (color == 0)
+		return ;
 	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		*(int *)(win->img_ptr + (y * win->line_length + x * (win->bpp
 						/ 8))) = color;

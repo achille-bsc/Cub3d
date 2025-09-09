@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:09:43 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:38:47 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/09 00:54:16 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,26 @@ int	respawn(t_data *data)
 	data->player->pos[X] = data->player->spawn[X];
 	data->player->pos[Y] = data->player->spawn[Y];
 	re_center_cam(data);
+	return (0);
+}
+
+int	door_action(double pos[2], char **map)
+{
+	if (map[(int)pos[Y]][(int)(pos[X] + 0.40)] == 'C')
+		map[(int)pos[Y]][(int)(pos[X] + 0.40)] = 'O';
+	else if (map[(int)pos[Y]][(int)(pos[X] + 0.40)] == 'O')
+		map[(int)pos[Y]][(int)(pos[X] + 0.40)] = 'C';
+	if (map[(int)pos[Y]][(int)(pos[X] - 0.40)] == 'C')
+		map[(int)pos[Y]][(int)(pos[X] - 0.40)] = 'O';
+	else if (map[(int)pos[Y]][(int)(pos[X] - 0.40)] == 'O')
+		map[(int)pos[Y]][(int)(pos[X] - 0.40)] = 'C';
+	if (map[(int)(pos[Y] + 0.40)][(int)(pos[X])] == 'C')
+		map[(int)(pos[Y] + 0.40)][(int)(pos[X])] = 'O';
+	else if (map[(int)(pos[Y] + 0.40)][(int)(pos[X])] == 'O')
+		map[(int)(pos[Y] + 0.40)][(int)(pos[X])] = 'C';
+	if (map[(int)(pos[Y] - 0.40)][(int)(pos[X])] == 'C')
+		map[(int)(pos[Y] - 0.40)][(int)(pos[X])] = 'O';
+	else if (map[(int)(pos[Y] - 0.40)][(int)(pos[X])] == 'O')
+		map[(int)(pos[Y] - 0.40)][(int)(pos[X])] = 'C';
 	return (0);
 }
