@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abosc <abosc@student.42.fr>                +#+  +:+       +#+         #
+#    By: leane <leane@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/06 18:10:37 by abosc            ###   ########.fr        #
+#    Updated: 2025/09/10 21:50:01 by leane            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,8 @@ SRC		=	main.c utils.c exit.c math.c										\
 			$(DP)/display.c		$(DP)/minimap.c			$(DP)/display_utils.c	\
 			$(DP)/load_textures.c $(DP)/debug_infos.c	$(DP)/minimap_inside.c	\
 			$(DP)/put_pixel_to_img.c $(DP)/minimap_display.c					\
-			$(RC)/raycasting.c	$(RC)/dda.c	 $(RC)/raycaster_put_image.c									\
+			$(RC)/raycasting.c	$(RC)/dda.c	 		$(RC)/raycaster_put_image.c	\
+			$(RC)/utils.c														\
 			$(PS)/parsing.c		$(PS)/dispatch_data.c	$(PS)/error_handling.c	\
 			$(PS)/map_parsing.c	$(PS)/utils.c
 

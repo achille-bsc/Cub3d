@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/09 16:44:47 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/10 23:49:44 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,18 @@ void				calculate_plane(t_data *data, t_player *player);
 /* DISPLAY */
 
 bool				display(t_data *data);
+void			    init_cam_structs(t_data *data);
 void				cam_val_setter(t_player *player, t_camera *cam, int x);
 void				rays_dir_setter(t_camera *cam, double pos[2]);
-int					rays_calculator(t_camera *cam, t_data *data);
+void				rays_dist_calculator(t_data *data, t_camera *cam, 
+						t_camera *door);
 void				draw_frame(t_player *player, t_data *data);
 void				my_mlx_pixel_put(t_window *win, int x, int y, int color);
 int					get_color_from_texture(t_texture *texture, int x, int y);
-void				select_texture(t_data *data, t_camera *cam, t_vars *vars);
+void				select_texture(t_data *data, t_camera *cam, 
+						t_pixel_rendering *rendering);
+
+// void				select_d_texture(t_data *data, t_camera *door, t_vars *vars);
 
 /* GAMEPLAY */
 

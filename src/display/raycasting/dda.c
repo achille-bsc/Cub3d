@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:08:23 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/09 14:12:38 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/10 23:47:30 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,29 @@ void	rays_dir_setter(t_camera *cam, double pos[2])
 	}
 }
 
-int	rays_calculator(t_camera *cam, t_data *data)
+void	rays_dist_calculator(t_data *data, t_camera *cam, t_camera *door)
 {
-	bool	hit;
-	int		side;
-
-	hit = false;
-	while (!hit)
+	while (!cam->hit)
 	{
 		if (cam->side_dist_x < cam->side_dist_y)
 		{
 			cam->side_dist_x += cam->delta_dist_x;
 			cam->map_x += cam->step_x;
-			side = 0;
+			data->cam->side = 0;
 		}
 		else
 		{
 			cam->side_dist_y += cam->delta_dist_y;
 			cam->map_y += cam->step_y;
-			side = 1;
+			data->cam->side = 1;
 		}
-		if (data->map.map[cam->map_y][cam->map_x] == 'O')
-			data->door = ft_memcpy(data->door, data->cam, sizeof(t_camera));
 		if (data->map.map[cam->map_y][cam->map_x] != '0'
 			&& data->map.map[cam->map_y][cam->map_x] != 'O')
-			hit = true;
+			cam->hit = true;
+		if (data->map.map[cam->map_y][cam->map_x] == 'O' && !door->hit)
+		{
+			ft_memcpy(door, cam, sizeof(t_camera));
+			door->hit = true;
+		}
 	}
-	return (side);
 }

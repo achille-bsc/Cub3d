@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 23:48:56 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/10 23:41:22 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static bool	colors_verification(t_data *data)
 		if (!is_rgb_value(rgb[RED]) || !is_rgb_value(rgb[GREEN])
 			|| !is_rgb_value(rgb[BLUE]))
 			return (false);
-		data->rgb[i] = (rgb[RED] << 16) + (rgb[GREEN] << 8) + rgb[BLUE];
+		data->rgb[i] = (255 << 24) + (rgb[RED] << 16) + (rgb[GREEN] << 8) + rgb[BLUE];
 		i++;
 	}
 	data->rgb[PLAYER] = (255 << 16);
