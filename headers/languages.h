@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   languages.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/09 11:05:33 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/11 00:53:42 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define FLOOR_TEXTURE		"assets/black.xpm"
 # define OUT_TEXTURE		"assets/Lava.xpm"
 # define WALL_TEXTURE		"assets/cobble.xpm"
+# define CLOSED_TEXTURE     "assets/red_wool.xpm"
+# define OPEN_TEXTURE     "assets/green_wool.xpm"
 
 # define DOOR_OPEN          "assets/Door-6.xpm"
 # define DOOR_CLOSED         "assets/Door-1.xpm"

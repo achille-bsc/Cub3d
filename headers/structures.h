@@ -6,7 +6,7 @@
 /*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 00:14:31 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/11 00:52:46 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef enum e_mini_text
 	M_FLOOR,
 	M_WALL,
 	M_OUT,
+	M_CLOSED,
+	M_OPEN,
 }						t_mini_text;
 
 typedef enum e_img_orientation
@@ -177,7 +179,7 @@ typedef struct s_data
 	bool				door_hit;
 	char				*text[4];
 	t_texture			*texture[4];
-	t_texture			*mini_texture[4];
+	t_texture			*mini_texture[5];
 	t_texture			*door_textures[2];
 	char				*colors[2];
 	int					rgb[3];

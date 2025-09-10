@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:21:30 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/09 01:00:57 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/11 00:54:14 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	get_minimap_texture(t_data *data)
 	data->mini_texture[M_FLOOR] = load_texture(data, FLOOR_TEXTURE, TILE_SIZE);
 	data->mini_texture[M_WALL] = load_texture(data, WALL_TEXTURE, TILE_SIZE);
 	data->mini_texture[M_OUT] = load_texture(data, OUT_TEXTURE, TILE_SIZE);
+	data->mini_texture[M_CLOSED] = load_texture(data, CLOSED_TEXTURE,
+		TILE_SIZE);
+	data->mini_texture[M_OPEN] = load_texture(data, OPEN_TEXTURE,
+		TILE_SIZE);
 }
 
 void	get_wall_texture(t_data *data)

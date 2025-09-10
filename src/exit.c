@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/09 16:49:16 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/11 01:00:05 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ void	free_pars_info(t_data *data)
 		free(data->text[WE]);
 	if (data->text[EA])
 		free(data->text[EA]);
+}
+
+static void	free_textures_2(t_data *data)
+{
+	if (data->door_textures[CLOSED])
+	{
+		mlx_destroy_image(data->win->mlx, data->door_textures[CLOSED]->texture);
+		ft_freeall("%m", &data->door_textures[CLOSED]);
+	}
+	if (data->door_textures[OPEN])
+	{
+		mlx_destroy_image(data->win->mlx, data->door_textures[OPEN]->texture);
+		ft_freeall("%m", &data->door_textures[OPEN]);
+	}
 }
 
 static void	free_textures(t_data *data)
@@ -50,6 +64,7 @@ static void	free_textures(t_data *data)
 		mlx_destroy_image(data->win->mlx, data->texture[WE]->texture);
 		ft_freeall("%m", &data->texture[WE]);
 	}
+	free_textures_2(data);
 }
 
 static void	free_m_map(t_data *data)
@@ -69,15 +84,15 @@ static void	free_m_map(t_data *data)
 		mlx_destroy_image(data->win->mlx, data->mini_texture[M_OUT]->texture);
 		ft_freeall("%m", &data->mini_texture[M_OUT]);
 	}
-	if (data->door_textures[CLOSED])
+	if (data->mini_texture[M_CLOSED])
 	{
-		mlx_destroy_image(data->win->mlx, data->door_textures[CLOSED]->texture);
-		ft_freeall("%m", &data->door_textures[CLOSED]);
+		mlx_destroy_image(data->win->mlx, data->mini_texture[M_CLOSED]->texture);
+		ft_freeall("%m", &data->mini_texture[M_CLOSED]);
 	}
-	if (data->door_textures[OPEN])
+	if (data->mini_texture[M_OPEN])
 	{
-		mlx_destroy_image(data->win->mlx, data->door_textures[OPEN]->texture);
-		ft_freeall("%m", &data->door_textures[OPEN]);
+		mlx_destroy_image(data->win->mlx, data->mini_texture[M_OPEN]->texture);
+		ft_freeall("%m", &data->mini_texture[M_OPEN]);
 	}
 }
 

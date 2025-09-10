@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 23:57:03 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/11 01:13:36 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	flood_fill(t_data *data, int x, int y, char **dummy)
 	if (!check_ff_both_x(dummy, x, y))
 		return (ft_printf(_OPEN_MAP, x, y), false);
 	if (dummy[y][x] == '0' || dummy[y][x] == ' '
-		|| dummy[y][x] == 'C' || dummy[y][x] == 'C')
+		|| dummy[y][x] == 'C' || dummy[y][x] == 'O')
 		dummy[y][x] = 'd';
 	if (!flood_fill(data, x + 1, y, dummy))
 		return (false);
