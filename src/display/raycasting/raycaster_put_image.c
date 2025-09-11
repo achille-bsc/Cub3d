@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_put_image.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:55:34 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 00:18:03 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/11 23:56:21 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	put_image_1(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 	y = rendering->draw[0];
 	rendering->tex_x = (int)(rendering->wall_x * TEXTURE_SIZE);
 	rendering->step = 1.0 * TEXTURE_SIZE / rendering->line_height;
-	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2 + 
-		rendering->line_height / 2) * rendering->step;
+	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2
+			+ rendering->line_height / 2) * rendering->step;
 	texture = get_texture(data, orientation, cam);
 	while (y <= rendering->draw[1])
 	{
@@ -64,8 +64,8 @@ void	put_image_2(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 	y = rendering->draw[0];
 	rendering->tex_x = (int)(rendering->wall_x * TEXTURE_SIZE);
 	rendering->step = 1.0 * TEXTURE_SIZE / rendering->line_height;
-	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2 + 
-		rendering->line_height / 2) * rendering->step;
+	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2
+			+ rendering->line_height / 2) * rendering->step;
 	texture = get_texture(data, orientation, cam);
 	while (y <= rendering->draw[1])
 	{
@@ -81,7 +81,8 @@ void	put_image_2(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 	}
 }
 
-void	select_texture(t_data *data, t_camera *cam, t_pixel_rendering *rendering)
+void	select_texture(t_data *data, t_camera *cam,
+	t_pixel_rendering *rendering)
 {
 	if (cam->side == 1)
 	{

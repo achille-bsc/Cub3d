@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 00:52:46 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/11 23:54:12 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef enum e_mini_text
 	M_FLOOR,
 	M_WALL,
 	M_OUT,
-	M_CLOSED,
+	M_CLOSE,
 	M_OPEN,
 }						t_mini_text;
 

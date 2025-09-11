@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/10 22:21:54 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/12 00:01:31 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
-# include <float.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -45,6 +44,8 @@
 # define MINIMAP_SIZE_X			500
 # define MINIMAP_SIZE_Y			300
 # define MINIMAP_BORDER_SIZE	5
+
+# define DBL_MAX				4294967295
 
 # define ONE_SEC				1000
 # ifndef M_PI

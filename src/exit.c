@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 01:00:05 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/12 00:03:37 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ static void	free_m_map(t_data *data)
 		mlx_destroy_image(data->win->mlx, data->mini_texture[M_OUT]->texture);
 		ft_freeall("%m", &data->mini_texture[M_OUT]);
 	}
-	if (data->mini_texture[M_CLOSED])
+	if (data->mini_texture[M_CLOSE])
 	{
-		mlx_destroy_image(data->win->mlx, data->mini_texture[M_CLOSED]->texture);
-		ft_freeall("%m", &data->mini_texture[M_CLOSED]);
+		mlx_destroy_image(data->win->mlx, data->mini_texture[M_CLOSE]->texture);
+		ft_freeall("%m", &data->mini_texture[M_CLOSE]);
 	}
 	if (data->mini_texture[M_OPEN])
 	{
@@ -112,10 +112,4 @@ void	exit_w_code(int code, t_data *data)
 	}
 	ft_freeall("%m%m%m", &data->vars, &data->win, &data);
 	exit(code);
-}
-
-int	clean_quit(t_data *data)
-{
-	exit_w_code(0, data);
-	return (0);
 }

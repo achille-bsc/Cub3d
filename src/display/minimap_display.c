@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 13:55:30 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/11 00:56:03 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/11 23:55:02 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void	put_minimap_tiles(t_data *data, t_window *win, int start[2])
 			else if (data->map.map[y][x] == '1')
 				put_tile(data->mini_texture[M_WALL], win,
 					start[X] + x * TILE_SIZE, start[Y] + y * TILE_SIZE);
-				else if (data->map.map[y][x] == 'O')
+			else if (data->map.map[y][x] == 'O')
 				put_tile(data->mini_texture[M_OPEN], win,
 					start[X] + x * TILE_SIZE, start[Y] + y * TILE_SIZE);
 			else if (data->map.map[y][x] == 'C')
-				put_tile(data->mini_texture[M_CLOSED], win,
+				put_tile(data->mini_texture[M_CLOSE], win,
 					start[X] + x * TILE_SIZE, start[Y] + y * TILE_SIZE);
 			x++;
 		}

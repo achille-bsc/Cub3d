@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 00:24:21 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/11 23:56:43 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_rendering(t_camera *cam, t_pixel_rendering *rendering,
 		rendering->perp_wall_dist = cam->side_dist_y - cam->delta_dist_y;
 }
 
-static void	draw_background(t_data *data, t_pixel_rendering* render, int x)
+static void	draw_background(t_data *data, t_pixel_rendering *render, int x)
 {
 	int	y;
 	int	floor_line_height;
@@ -62,14 +62,13 @@ void	pixels_rendering(t_data *data, t_camera *cam, t_camera *door, int x)
 	if (door->hit)
 		draw_background(data, data->d_rendering, x);
 	init_pixel_art(data, cam, data->w_rendering, cam->side);
-		data->vars->x = x;
+	data->vars->x = x;
 	select_texture(data, cam, data->w_rendering);
 	if (door->hit)
 	{
 		init_pixel_art(data, door, data->d_rendering, door->side);
 		select_texture(data, door, data->d_rendering);
 	}
-
 }
 
 void	draw_frame(t_player *player, t_data *data)

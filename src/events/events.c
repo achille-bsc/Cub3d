@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/09 00:15:22 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/12 00:03:20 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	clean_quit(t_data *data)
+{
+	exit_w_code(0, data);
+	return (0);
+}
 
 static int	press(int keysym, t_data *data)
 {
@@ -33,7 +39,7 @@ static int	press(int keysym, t_data *data)
 	if (keysym == XK_Shift_L)
 		data->move.sprint = true;
 	if (keysym == XK_Escape)
-		clean_quit(data);
+		exit_w_code(0, data);
 	if (keysym == XK_z || keysym == XK_Z)
 		respawn(data);
 	if (keysym == XK_c || keysym == XK_C)
