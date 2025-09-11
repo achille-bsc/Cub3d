@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abosc <abosc@student.42.fr>                +#+  +:+       +#+         #
+#    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/06 18:10:37 by abosc            ###   ########.fr        #
+#    Updated: 2025/09/12 00:17:59 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFT_GIT			:=	https://github.com/Sellith/Libft_Updated.git
 
 MLX_TARGET			:=	libmlx.a
 MLX_H_FILE			:=	mlx.h
-MLX_DIR				:=	minilibx-linux
+MLX_DIR				:=	mlx
 MLX_PATH			:=	$(DEP)/$(MLX_DIR)
 MLX_H_PATH			:=	$(MLX_PATH)/$(MLX_H_FILE)
 MLX_TARGET_PATH		:=	$(MLX_PATH)/$(MLX_TARGET)
@@ -176,10 +176,10 @@ $(NAME):	$(OBJS)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tSource files:\t$(CLR_GRN)Compilation succeded !$(CLR_RESET)\n"
 	@mkdir -p $(@D)
 	@$(MAKE) -C $(LIBFT_PATH) --no-print-directory
-	@$(MAKE) -C $(MLX_PATH) --no-print-directory > /dev/null 2>&1
-	@mkdir -p $(ARCH)
-	@cp $(MLX_TARGET_PATH) $(ARCH)
 	@cp $(MLX_H_PATH) $(INC_DIR)
+	@$(MAKE) -C $(MLX_PATH) --no-print-directory > /dev/null 2>&1
+	@cp $(MLX_TARGET_PATH) $(ARCH)
+	@mkdir -p $(ARCH)
 	@$(CC) $(OBJS) -I$(INC_DIR) $(ARCHIVES) -o $@ $(MLXFLAGS)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tDone Building:\t$(CLR_LPPL)\"%s\"$(CLR_GRN) in $(CLR_LPPL)\"%s/\"$(CLR_GRN)!$(CLR_RESET)\n" $(TARGET) $(BIN)
 
