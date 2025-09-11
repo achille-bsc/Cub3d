@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/12 00:07:12 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/12 00:20:38 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFT_GIT			:=	https://github.com/Sellith/Libft_Updated.git
 
 MLX_TARGET			:=	libmlx.a
 MLX_H_FILE			:=	mlx.h
-MLX_DIR				:=	minilibx-linux
+MLX_DIR				:=	mlx
 MLX_PATH			:=	$(DEP)/$(MLX_DIR)
 MLX_H_PATH			:=	$(MLX_PATH)/$(MLX_H_FILE)
 MLX_TARGET_PATH		:=	$(MLX_PATH)/$(MLX_TARGET)
