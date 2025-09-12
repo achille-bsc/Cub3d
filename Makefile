@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/12 05:55:05 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/12 21:07:11 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -177,10 +177,10 @@ $(NAME):	$(OBJS)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tSource files:\t$(CLR_GRN)Compilation succeded !$(CLR_RESET)\n"
 	@mkdir -p $(@D)
 	@$(MAKE) -C $(LIBFT_PATH) --no-print-directory
-	@cp $(MLX_TARGET_PATH) $(ARCH)
-	@cp $(MLX_H_PATH) $(INC_DIR)
 	@$(MAKE) -C $(MLX_PATH) --no-print-directory > /dev/null 2>&1
 	@mkdir -p $(ARCH)
+	@cp $(MLX_H_PATH) $(INC_DIR)
+	@cp $(MLX_TARGET_PATH) $(ARCH)
 	@$(CC) $(OBJS) -I$(INC_DIR) $(ARCHIVES) -o $@ $(MLXFLAGS)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tDone Building:\t$(CLR_LPPL)\"%s\"$(CLR_GRN) in $(CLR_LPPL)\"%s/\"$(CLR_GRN)!$(CLR_RESET)\n" $(TARGET) $(BIN)
 
