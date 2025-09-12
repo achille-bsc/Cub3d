@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/09 16:48:45 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/12 05:50:40 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	game_loop(t_data *data)
 	fps_newtime = data->time;
 	if (ms_frame <= data->time - data->old_time)
 	{
-		fps_counter++;
+		if (++fps_counter % 2)
+			change_door_status(&data->map);
 		data->old_time = data->time;
 		moving(data, data->move, data->player);
 		player_move(data->map, data->player, data->move);

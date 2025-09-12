@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 23:54:12 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 06:21:10 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 
 enum					e_door_status
 {
-	CLOSED,
-	OPEN,
+	D_OPEN,
+	D_2,
+	D_3,
+	D_4,
+	D_5,
+	D_CLOSED,
 };
 
 enum					e_extremes
@@ -42,6 +46,7 @@ typedef enum e_mini_text
 	M_OUT,
 	M_CLOSE,
 	M_OPEN,
+	M_CHANGE,
 }						t_mini_text;
 
 typedef enum e_img_orientation
@@ -147,7 +152,7 @@ typedef struct s_pixel_rendering
 	double				tex_y;
 	int					draw[2];
 	int					line_height;
-}						t_pixel_rendering;
+}						t_rendering;
 
 typedef struct s_vars
 {
@@ -155,6 +160,7 @@ typedef struct s_vars
 	int					line_height;
 	int					side;
 	int					x;
+	int					i;
 }						t_vars;
 
 typedef struct s_camera
@@ -170,19 +176,18 @@ typedef struct s_camera
 	double				side_dist_y;
 	int					step_x;
 	int					step_y;
-	bool				hit;
 	int					side;
+	bool				hit;
 }						t_camera;
 
 typedef struct s_data
 {
-	bool				door_hit;
 	char				*text[4];
 	t_texture			*texture[4];
-	t_texture			*mini_texture[5];
-	t_texture			*door_textures[2];
+	t_texture			*mini_texture[6];
+	t_texture			*door_textures[6];
 	char				*colors[2];
-	int					rgb[3];
+	unsigned int		rgb[3];
 	size_t				fps_counter;
 	size_t				old_time;
 	size_t				time;
@@ -190,10 +195,11 @@ typedef struct s_data
 	t_map				map;
 	t_window			*win;
 	t_player			*player;
-	t_pixel_rendering	*w_rendering;
+	t_rendering			*w_rendering;
 	t_camera			*cam;
-	t_pixel_rendering	*d_rendering;
-	t_camera			*door;
+	t_rendering			**d_rendering;
+	t_camera			**door;
+	int					nmb_of_doors;
 	t_vars				*vars;
 }						t_data;
 

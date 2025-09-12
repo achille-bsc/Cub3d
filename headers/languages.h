@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   languages.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 00:53:42 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/12 06:07:22 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@
 # define FLOOR_TEXTURE		"assets/black.xpm"
 # define OUT_TEXTURE		"assets/Lava.xpm"
 # define WALL_TEXTURE		"assets/cobble.xpm"
-# define CLOSED_TEXTURE     "assets/red_wool.xpm"
-# define OPEN_TEXTURE     "assets/green_wool.xpm"
+# define CLOSED_TEXTURE		"assets/red_wool.xpm"
+# define OPEN_TEXTURE		"assets/green_wool.xpm"
+# define CHANGING_TEXTURE	"assets/light_blue_wool.xpm"
 
-# define DOOR_OPEN          "assets/Door-6.xpm"
-# define DOOR_CLOSED         "assets/Door-1.xpm"
+# define DOOR_OPEN			"assets/Door-6.xpm"
+# define DOOR_CLOSED		"assets/Door-1.xpm"
+# define DOOR_2				"assets/Door-2.xpm"
+# define DOOR_3				"assets/Door-3.xpm"
+# define DOOR_4				"assets/Door-4.xpm"
+# define DOOR_5				"assets/Door-5.xpm"
 
 /* ERRORS */
 

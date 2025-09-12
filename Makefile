@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/12 00:20:38 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/12 05:55:05 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,9 +89,9 @@ ERS_STR		=	\033[2K\r
 
 #	SRC FILES
 
-SRC		=	main.c utils.c exit.c math.c										\
+SRC		=	main.c utils.c exit.c math.c exit_2.c								\
 			$(EV)/events.c		$(EV)/movement.c		$(EV)/direction.c		\
-			$(EV)/actions.c														\
+			$(EV)/actions.c		$(EV)/door_status.c						\
 			$(DP)/display.c		$(DP)/minimap.c			$(DP)/display_utils.c	\
 			$(DP)/load_textures.c $(DP)/debug_infos.c	$(DP)/minimap_inside.c	\
 			$(DP)/put_pixel_to_img.c $(DP)/minimap_display.c					\

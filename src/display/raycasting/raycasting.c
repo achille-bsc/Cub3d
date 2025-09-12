@@ -6,13 +6,13 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 23:56:43 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 05:29:14 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_rendering(t_camera *cam, t_pixel_rendering *rendering,
+static void	init_rendering(t_camera *cam, t_rendering *rendering,
 	int side)
 {
 	if (side == 0)
@@ -21,7 +21,7 @@ static void	init_rendering(t_camera *cam, t_pixel_rendering *rendering,
 		rendering->perp_wall_dist = cam->side_dist_y - cam->delta_dist_y;
 }
 
-static void	draw_background(t_data *data, t_pixel_rendering *render, int x)
+static void	draw_background(t_data *data, t_rendering *render, int x)
 {
 	int	y;
 	int	floor_line_height;
@@ -42,7 +42,7 @@ static void	draw_background(t_data *data, t_pixel_rendering *render, int x)
 }
 
 static void	init_pixel_art(t_data *data, t_camera *cam,
-	t_pixel_rendering *rendering, int side)
+	t_rendering *rendering, int side)
 {
 	if (side == 0)
 		rendering->wall_x = data->player->pos[Y]
@@ -53,27 +53,38 @@ static void	init_pixel_art(t_data *data, t_camera *cam,
 	rendering->wall_x -= floor(rendering->wall_x);
 }
 
-void	pixels_rendering(t_data *data, t_camera *cam, t_camera *door, int x)
+void	pixels_rendering(t_data *data, t_camera *cam, t_camera **door, int x)
 {
+	data->vars->i = -1;
 	init_rendering(cam, data->w_rendering, cam->side);
-	if (door->hit)
-		init_rendering(door, data->d_rendering, door->side);
+	if (data->nmb_of_doors > 0)
+		while (++data->vars->i < data->nmb_of_doors)
+			init_rendering(door[data->vars->i],
+				data->d_rendering[data->vars->i], door[data->vars->i]->side);
 	draw_background(data, data->w_rendering, x);
-	if (door->hit)
-		draw_background(data, data->d_rendering, x);
+	data->vars->i = -1;
+	if (data->nmb_of_doors > 0)
+		while (++data->vars->i < data->nmb_of_doors)
+			draw_background(data, data->d_rendering[data->vars->i], x);
 	init_pixel_art(data, cam, data->w_rendering, cam->side);
 	data->vars->x = x;
 	select_texture(data, cam, data->w_rendering);
-	if (door->hit)
+	data->vars->i = -1;
+	if (data->nmb_of_doors > 0)
 	{
-		init_pixel_art(data, door, data->d_rendering, door->side);
-		select_texture(data, door, data->d_rendering);
+		while (++data->vars->i < data->nmb_of_doors)
+		{
+			init_pixel_art(data, door[data->vars->i],
+				data->d_rendering[data->vars->i], door[data->vars->i]->side);
+			select_texture(data, door[data->vars->i],
+				data->d_rendering[data->vars->i]);
+		}
 	}
 }
 
 void	draw_frame(t_player *player, t_data *data)
 {
-	int			x;
+	int	x;
 
 	init_cam_structs(data);
 	x = -1;
@@ -81,11 +92,21 @@ void	draw_frame(t_player *player, t_data *data)
 	{
 		cam_val_setter(player, data->cam, x);
 		rays_dir_setter(data->cam, player->pos);
-		rays_dist_calculator(data, data->cam, data->door);
+		data->nmb_of_doors = get_nmb_of_doors(data->cam, data->map.map);
+		data->door = ft_calloc(sizeof(t_camera *) * (data->nmb_of_doors + 1));
+		if (!data->door)
+			return (ft_freeall("%m%m%m", &data->cam, &data->w_rendering,
+					&data->d_rendering), exit_w_code(1, data));
+		data->d_rendering = ft_calloc(sizeof(t_rendering *)
+				* (data->nmb_of_doors + 1));
+		if (!data->d_rendering)
+			return (ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering,
+					&data->d_rendering, &data->door), exit_w_code(1, data));
+		rays_dist_calculator(data, data->cam, data->door, data->map.map);
 		pixels_rendering(data, data->cam, data->door, x);
 		ft_bzero(data->cam, sizeof(t_camera));
-		ft_bzero(data->door, sizeof(t_camera));
+		ft_freecam((void **)data->door);
+		ft_freecam((void **)data->d_rendering);
 	}
-	ft_freeall("%m%m%m%m", &data->cam, &data->door, &data->w_rendering,
-		&data->d_rendering);
+	ft_freeall("%m%m", &data->cam, &data->w_rendering);
 }

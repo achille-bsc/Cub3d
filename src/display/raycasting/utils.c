@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 21:42:38 by leane             #+#    #+#             */
-/*   Updated: 2025/09/11 23:57:12 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 06:18:37 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void	init_cam_structs(t_data *data)
 	data->cam = ft_calloc(sizeof(t_camera));
 	if (!data->cam)
 		exit_w_code(1, data);
-	data->door = ft_calloc(sizeof(t_camera));
-	if (!data->door)
-		(free(data->cam), exit_w_code(1, data));
 	data->w_rendering = ft_calloc(sizeof(t_camera));
 	if (!data->w_rendering)
-		(free(data->cam), free(data->door), exit_w_code(1, data));
-	data->d_rendering = ft_calloc(sizeof(t_camera));
-	if (!data->d_rendering)
-		(ft_freeall("%m%m%m", &data->cam, &data->door, &data->w_rendering),
-			exit_w_code(1, data));
+		(free(data->cam), exit_w_code(1, data));
+}
+
+bool	is_voided_door(char c)
+{
+	if (c == 'q' || c == 'w' || c == 'e' || c == 'r' || c == 'Q' || c == 'W'
+		|| c == 'E' || c == 'R' || c == 'O')
+		return (true);
+	return (false);
 }

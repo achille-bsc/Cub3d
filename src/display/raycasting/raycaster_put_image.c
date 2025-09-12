@@ -6,30 +6,41 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:55:34 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/11 23:56:21 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 05:09:57 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static t_texture	*get_texture(t_data *data, t_img_orientation orientation,
-	t_camera *cam)
+	t_camera *cam, char **map)
 {
-	if (data->map.map[cam->map_y][cam->map_x] == '1' && orientation == NO)
+	if (map[cam->map_y][cam->map_x] == '1' && orientation == NO)
 		return (data->texture[NO]);
-	else if (data->map.map[cam->map_y][cam->map_x] == '1' && orientation == SO)
+	else if (map[cam->map_y][cam->map_x] == '1' && orientation == SO)
 		return (data->texture[SO]);
-	else if (data->map.map[cam->map_y][cam->map_x] == '1' && orientation == EA)
+	else if (map[cam->map_y][cam->map_x] == '1' && orientation == EA)
 		return (data->texture[EA]);
-	else if (data->map.map[cam->map_y][cam->map_x] == '1' && orientation == WE)
+	else if (map[cam->map_y][cam->map_x] == '1' && orientation == WE)
 		return (data->texture[WE]);
-	else if (data->map.map[cam->map_y][cam->map_x] == 'C')
-		return (data->door_textures[CLOSED]);
+	else if (map[cam->map_y][cam->map_x] == 'C')
+		return (data->door_textures[D_CLOSED]);
+	else if (map[cam->map_y][cam->map_x] == 'O')
+		return (data->door_textures[D_OPEN]);
+	else if (map[cam->map_y][cam->map_x] == 'Q'
+		|| map[cam->map_y][cam->map_x] == 'r')
+		return (data->door_textures[D_5]);
+	else if (map[cam->map_y][cam->map_x] == 'W'
+		|| map[cam->map_y][cam->map_x] == 'e')
+		return (data->door_textures[D_4]);
+	else if (map[cam->map_y][cam->map_x] == 'E'
+		|| map[cam->map_y][cam->map_x] == 'w')
+		return (data->door_textures[D_3]);
 	else
-		return (data->door_textures[OPEN]);
+		return (data->door_textures[D_2]);
 }
 
-void	put_image_1(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
+void	put_image_1(t_data *data, t_rendering *rendering, t_camera *cam,
 	t_img_orientation orientation)
 {
 	t_texture	*texture;
@@ -40,13 +51,13 @@ void	put_image_1(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 	rendering->step = 1.0 * TEXTURE_SIZE / rendering->line_height;
 	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2
 			+ rendering->line_height / 2) * rendering->step;
-	texture = get_texture(data, orientation, cam);
+	texture = get_texture(data, orientation, cam, data->map.map);
 	while (y <= rendering->draw[1])
 	{
 		rendering->tex_y = (int)rendering->tex_pos
 			& (TEXTURE_SIZE - 1);
 		if (!texture || !texture->addr)
-			exit_w_code(1, data);
+			(ft_printf("couldn't get texure\n"), exit_w_code(1, data));
 		my_mlx_pixel_put(data->win, data->vars->x, y,
 			get_color_from_texture(texture, rendering->tex_x,
 				rendering->tex_y));
@@ -55,7 +66,7 @@ void	put_image_1(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 	}
 }
 
-void	put_image_2(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
+void	put_image_2(t_data *data, t_rendering *rendering, t_camera *cam,
 	t_img_orientation orientation)
 {
 	t_texture	*texture;
@@ -66,13 +77,13 @@ void	put_image_2(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 	rendering->step = 1.0 * TEXTURE_SIZE / rendering->line_height;
 	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2
 			+ rendering->line_height / 2) * rendering->step;
-	texture = get_texture(data, orientation, cam);
+	texture = get_texture(data, orientation, cam, data->map.map);
 	while (y <= rendering->draw[1])
 	{
 		rendering->tex_y = (int)rendering->tex_pos
 			& (TEXTURE_SIZE - 1);
 		if (!texture || !texture->addr)
-			exit_w_code(1, data);
+			(ft_printf("couldn't get texure\n"), exit_w_code(1, data));
 		my_mlx_pixel_put(data->win, data->vars->x, y,
 			get_color_from_texture(texture,
 				rendering->tex_x, rendering->tex_y));
@@ -82,7 +93,7 @@ void	put_image_2(t_data *data, t_pixel_rendering *rendering, t_camera *cam,
 }
 
 void	select_texture(t_data *data, t_camera *cam,
-	t_pixel_rendering *rendering)
+	t_rendering *rendering)
 {
 	if (cam->side == 1)
 	{

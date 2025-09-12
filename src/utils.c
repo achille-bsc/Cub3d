@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 03:26:53 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 05:55:24 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 03:18:20 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,17 @@ char	*skipchar(char *src, int offset, char skiped)
 		i++;
 	buffer = ft_strdup(src + i);
 	return (buffer);
+}
+
+void	ft_freecam(void **cam)
+{
+	int	i;
+
+	i = 0;
+	while (cam[i])
+	{
+		free(cam[i]);
+		i++;
+	}
+	free(cam);
 }
