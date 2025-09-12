@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:55:34 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 05:09:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:58:20 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	put_image_1(t_data *data, t_rendering *rendering, t_camera *cam,
 		rendering->tex_y = (int)rendering->tex_pos
 			& (TEXTURE_SIZE - 1);
 		if (!texture || !texture->addr)
-			(ft_printf("couldn't get texure\n"), exit_w_code(1, data));
+			(ft_printf(_TEXT_ADDR), exit_w_code(1, data));
 		my_mlx_pixel_put(data->win, data->vars->x, y,
 			get_color_from_texture(texture, rendering->tex_x,
 				rendering->tex_y));
@@ -83,7 +83,7 @@ void	put_image_2(t_data *data, t_rendering *rendering, t_camera *cam,
 		rendering->tex_y = (int)rendering->tex_pos
 			& (TEXTURE_SIZE - 1);
 		if (!texture || !texture->addr)
-			(ft_printf("couldn't get texure\n"), exit_w_code(1, data));
+			(ft_printf(_TEXT_ADDR), exit_w_code(1, data));
 		my_mlx_pixel_put(data->win, data->vars->x, y,
 			get_color_from_texture(texture,
 				rendering->tex_x, rendering->tex_y));

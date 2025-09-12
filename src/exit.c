@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 05:56:15 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:58:39 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,5 @@ void	exit_w_code(int code, t_data *data)
 		free(data->win->mlx);
 	}
 	ft_freeall("%m%m%m", &data->vars, &data->win, &data);
-	ft_printf("exited with code : %i\n", code);
 	exit(code);
 }

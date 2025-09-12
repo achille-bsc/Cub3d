@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 06:07:22 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:58:56 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ cub3d\n"
 # define _WININIT			"Fatal error: failed to init window\n"
 # define _IMGINIT			"Fatal error: failed to init image\n"
 # define _ASSET_INIT		"Fatal error: failed to init texture\n"
-# define _GET_ADDR			"Fatal error: failed to get address from image\n"
+# define _GET_ADDR			"Fatal error: failed to get image address\n"
+# define _TEXT_ADDR			"Fatal error: failed to get texture address\n"
 
 #endif
