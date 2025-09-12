@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 18:12:18 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/11 23:58:09 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static bool	colors_verification(t_data *data)
 		if (!is_rgb_value(rgb[RED]) || !is_rgb_value(rgb[GREEN])
 			|| !is_rgb_value(rgb[BLUE]))
 			return (false);
-		data->rgb[i] = (rgb[RED] << 16) + (rgb[GREEN] << 8) + rgb[BLUE];
+		data->rgb[i] = (255 << 24) + (rgb[RED] << 16) + (rgb[GREEN] << 8)
+			+ rgb[BLUE];
 		i++;
 	}
 	data->rgb[PLAYER] = (255 << 16);
@@ -95,8 +96,7 @@ bool	parser(t_data *data, char *map_path)
 	data->win->fov_factor = tan((FOV * M_PI / 180.0) / 2);
 	if (!dispatch_data(data, fullfile) || !colors_verification(data)
 		|| !map_parsing(data, data->map.map))
-		return (free_pars_info(data), ft_freeall("%d%d%d%m%m%m", &fullfile,
-				&data->map.map, &data->map.dummy, &data->player,
-				&data->win, &data), false);
+		return (free_pars_info(data), ft_freeall("%d%d%m%m%m", &fullfile,
+				&data->map.map, &data->player, &data->win, &data), false);
 	return (ft_freedarray(fullfile), true);
 }

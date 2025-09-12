@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/12 00:17:59 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/12 05:55:05 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,13 +89,14 @@ ERS_STR		=	\033[2K\r
 
 #	SRC FILES
 
-SRC		=	main.c utils.c exit.c math.c										\
+SRC		=	main.c utils.c exit.c math.c exit_2.c								\
 			$(EV)/events.c		$(EV)/movement.c		$(EV)/direction.c		\
-			$(EV)/actions.c														\
+			$(EV)/actions.c		$(EV)/door_status.c						\
 			$(DP)/display.c		$(DP)/minimap.c			$(DP)/display_utils.c	\
 			$(DP)/load_textures.c $(DP)/debug_infos.c	$(DP)/minimap_inside.c	\
 			$(DP)/put_pixel_to_img.c $(DP)/minimap_display.c					\
-			$(RC)/raycasting.c	$(RC)/dda.c	 $(RC)/raycaster_put_image.c									\
+			$(RC)/raycasting.c	$(RC)/dda.c	 		$(RC)/raycaster_put_image.c	\
+			$(RC)/utils.c														\
 			$(PS)/parsing.c		$(PS)/dispatch_data.c	$(PS)/error_handling.c	\
 			$(PS)/map_parsing.c	$(PS)/utils.c
 
@@ -176,9 +177,9 @@ $(NAME):	$(OBJS)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tSource files:\t$(CLR_GRN)Compilation succeded !$(CLR_RESET)\n"
 	@mkdir -p $(@D)
 	@$(MAKE) -C $(LIBFT_PATH) --no-print-directory
+	@cp $(MLX_TARGET_PATH) $(ARCH)
 	@cp $(MLX_H_PATH) $(INC_DIR)
 	@$(MAKE) -C $(MLX_PATH) --no-print-directory > /dev/null 2>&1
-	@cp $(MLX_TARGET_PATH) $(ARCH)
 	@mkdir -p $(ARCH)
 	@$(CC) $(OBJS) -I$(INC_DIR) $(ARCHIVES) -o $@ $(MLXFLAGS)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tDone Building:\t$(CLR_LPPL)\"%s\"$(CLR_GRN) in $(CLR_LPPL)\"%s/\"$(CLR_GRN)!$(CLR_RESET)\n" $(TARGET) $(BIN)

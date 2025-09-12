@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 21:24:23 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/11 01:13:36 by leane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,26 @@ static bool	check_ff_both_x(char **dummy, int x, int y)
 	return (true);
 }
 
-static bool	flood_fill(t_data *data, int x, int y)
+static bool	flood_fill(t_data *data, int x, int y, char **dummy)
 {
-	if (x < 0 || y < 0 || !data->map.dummy[y] || !data->map.dummy[y][x])
+	if (x < 0 || y < 0 || !dummy[y] || !dummy[y][x])
 		return (ft_printf(_OPEN_MAP, x, y), false);
-	else if (data->map.dummy[y][x] == '1' || data->map.dummy[y][x] == 'd')
+	else if (dummy[y][x] == '1' || dummy[y][x] == 'd')
 		return (true);
-	if (!check_ff_both_x(data->map.dummy, x, y))
-		return (ft_printf(_OPEN_MAP, x, y), false);
-	if (data->map.dummy[y][x] == ' ')
+	if (dummy[y][x] == ' ')
 		data->map.map[y][x] = '0';
-	if (data->map.dummy[y][x] == '0' || data->map.dummy[y][x] == ' ')
-		data->map.dummy[y][x] = 'd';
-	if (!flood_fill(data, x + 1, y))
+	if (!check_ff_both_x(dummy, x, y))
+		return (ft_printf(_OPEN_MAP, x, y), false);
+	if (dummy[y][x] == '0' || dummy[y][x] == ' '
+		|| dummy[y][x] == 'C' || dummy[y][x] == 'O')
+		dummy[y][x] = 'd';
+	if (!flood_fill(data, x + 1, y, dummy))
 		return (false);
-	if (!flood_fill(data, x, y + 1))
+	if (!flood_fill(data, x, y + 1, dummy))
 		return (false);
-	if (!flood_fill(data, x - 1, y))
+	if (!flood_fill(data, x - 1, y, dummy))
 		return (false);
-	if (!flood_fill(data, x, y - 1))
+	if (!flood_fill(data, x, y - 1, dummy))
 		return (false);
 	return (true);
 }
@@ -105,15 +106,17 @@ static bool	check_chars(t_data *data, char **map)
 
 bool	map_parsing(t_data *data, char **map)
 {
+	char	**dummy;
+
 	if (!check_chars(data, map))
 		return (false);
-	data->map.dummy = ft_arraydup(map);
-	if (!data->map.dummy)
+	dummy = ft_arraydup(map);
+	if (!dummy)
 		return (false);
 	if (!player_four_dirs(data)
-		|| !flood_fill(data, data->player->pos[X], data->player->pos[Y]))
-		return (false);
+		|| !flood_fill(data, data->player->pos[X], data->player->pos[Y], dummy))
+		return (ft_freedarray(dummy), false);
 	land_height(data, data->map.map);
 	get_longer_str(data, data->map.map);
-	return (true);
+	return (ft_freedarray(dummy), true);
 }

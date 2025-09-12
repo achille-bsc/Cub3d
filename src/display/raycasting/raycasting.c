@@ -3,103 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/08 13:56:53 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/12 05:29:14 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_rendering(t_data *data, t_camera *cam, int side)
+static void	init_rendering(t_camera *cam, t_rendering *rendering,
+	int side)
 {
 	if (side == 0)
-		data->rendering.perp_wall_dist = (cam->map_x - data->player->pos[X] + (1
-					- cam->step_x) / 2) / cam->ray_dir_x;
+		rendering->perp_wall_dist = cam->side_dist_x - cam->delta_dist_x;
 	else
-		data->rendering.perp_wall_dist = (cam->map_y - data->player->pos[Y] + (1
-					- cam->step_y) / 2) / cam->ray_dir_y;
-	if (side == 0)
-		data->rendering.perp_wall_dist = cam->side_dist_x - cam->delta_dist_x;
-	else
-		data->rendering.perp_wall_dist = cam->side_dist_y - cam->delta_dist_y;
+		rendering->perp_wall_dist = cam->side_dist_y - cam->delta_dist_y;
 }
 
-static int	*truc_machin(t_data *data, int *line_height, int x)
+static void	draw_background(t_data *data, t_rendering *render, int x)
 {
-	int	*draw;
 	int	y;
+	int	floor_line_height;
 
-	draw = ft_calloc(sizeof(int) * 2);
-	*line_height = (int)(HEIGHT / data->rendering.perp_wall_dist);
-	draw[0] = -*line_height / 2 + HEIGHT / 2;
-	if (draw[0] < 0)
-		draw[0] = 0;
-	draw[1] = *line_height / 2 + HEIGHT / 2;
-	if (draw[1] >= HEIGHT)
-		draw[1] = HEIGHT - 1;
+	render->line_height = (int)(HEIGHT / render->perp_wall_dist);
+	render->draw[0] = -render->line_height / 2 + HEIGHT / 2;
+	if (render->draw[0] < 0)
+		render->draw[0] = 0;
+	render->draw[1] = render->line_height / 2 + HEIGHT / 2;
+	if (render->draw[1] >= HEIGHT)
+		render->draw[1] = HEIGHT - 1;
 	y = 0;
-	while (y < draw[0])
-		my_mlx_pixel_put(data->win, x, y++, 0x87CEEB);
-	return (draw);
+	while (y < render->draw[0])
+		my_mlx_pixel_put(data->win, x, y++, data->rgb[CEILING]);
+	floor_line_height = render->draw[1] + 1;
+	while (floor_line_height < HEIGHT)
+		my_mlx_pixel_put(data->win, x, floor_line_height++, data->rgb[FLOOR]);
 }
 
-static void	init_pixel_art(t_data *data, t_camera *cam, int side)
+static void	init_pixel_art(t_data *data, t_camera *cam,
+	t_rendering *rendering, int side)
 {
 	if (side == 0)
-		data->rendering.wall_x = data->player->pos[Y]
-			+ data->rendering.perp_wall_dist * cam->ray_dir_y;
+		rendering->wall_x = data->player->pos[Y]
+			+ rendering->perp_wall_dist * cam->ray_dir_y;
 	else
-		data->rendering.wall_x = data->player->pos[X]
-			+ data->rendering.perp_wall_dist * cam->ray_dir_x;
-	data->rendering.wall_x -= floor(data->rendering.wall_x);
+		rendering->wall_x = data->player->pos[X]
+			+ rendering->perp_wall_dist * cam->ray_dir_x;
+	rendering->wall_x -= floor(rendering->wall_x);
 }
 
-void	pixels_rendering(t_data *data, t_camera *cam, int side, int x)
+void	pixels_rendering(t_data *data, t_camera *cam, t_camera **door, int x)
 {
-	int	line_height;
-	int	*draw;
-
-	init_rendering(data, cam, side);
-	draw = truc_machin(data, &line_height, x);
-	init_pixel_art(data, cam, side);
-	if (side == 1)
+	data->vars->i = -1;
+	init_rendering(cam, data->w_rendering, cam->side);
+	if (data->nmb_of_doors > 0)
+		while (++data->vars->i < data->nmb_of_doors)
+			init_rendering(door[data->vars->i],
+				data->d_rendering[data->vars->i], door[data->vars->i]->side);
+	draw_background(data, data->w_rendering, x);
+	data->vars->i = -1;
+	if (data->nmb_of_doors > 0)
+		while (++data->vars->i < data->nmb_of_doors)
+			draw_background(data, data->d_rendering[data->vars->i], x);
+	init_pixel_art(data, cam, data->w_rendering, cam->side);
+	data->vars->x = x;
+	select_texture(data, cam, data->w_rendering);
+	data->vars->i = -1;
+	if (data->nmb_of_doors > 0)
 	{
-		if (cam->step_y >= 0)
-			truc(data, (int [3]){line_height, draw[0], draw[1]}, x, SO);
-		else
-			truc2(data, (int [3]){line_height, draw[0], draw[1]}, x, NO);
+		while (++data->vars->i < data->nmb_of_doors)
+		{
+			init_pixel_art(data, door[data->vars->i],
+				data->d_rendering[data->vars->i], door[data->vars->i]->side);
+			select_texture(data, door[data->vars->i],
+				data->d_rendering[data->vars->i]);
+		}
 	}
-	else
-	{
-		if (cam->step_x >= 0)
-			truc2(data, (int [3]){line_height, draw[0], draw[1]}, x, EA);
-		else
-			truc(data, (int [3]){line_height, draw[0], draw[1]}, x, WE);
-	}
-	line_height = draw[1] + 1;
-	while (line_height < HEIGHT)
-		my_mlx_pixel_put(data->win, x, line_height++, 0x444444);
-	ft_mem_reset((void *)&draw);
 }
 
 void	draw_frame(t_player *player, t_data *data)
 {
-	int			x;
-	t_camera	*cam;
+	int	x;
 
-	x = 0;
-	cam = ft_calloc(sizeof(t_camera));
-	if (!cam)
-		exit_w_code(1, data);
-	while (x < WIDTH)
+	init_cam_structs(data);
+	x = -1;
+	while (++x < WIDTH)
 	{
-		cam_val_setter(player, cam, x);
-		rays_dir_setter(cam, player->pos);
-		pixels_rendering(data, cam, rays_calculator(cam, data), x);
-		ft_bzero(cam, sizeof(t_camera));
-		x++;
+		cam_val_setter(player, data->cam, x);
+		rays_dir_setter(data->cam, player->pos);
+		data->nmb_of_doors = get_nmb_of_doors(data->cam, data->map.map);
+		data->door = ft_calloc(sizeof(t_camera *) * (data->nmb_of_doors + 1));
+		if (!data->door)
+			return (ft_freeall("%m%m%m", &data->cam, &data->w_rendering,
+					&data->d_rendering), exit_w_code(1, data));
+		data->d_rendering = ft_calloc(sizeof(t_rendering *)
+				* (data->nmb_of_doors + 1));
+		if (!data->d_rendering)
+			return (ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering,
+					&data->d_rendering, &data->door), exit_w_code(1, data));
+		rays_dist_calculator(data, data->cam, data->door, data->map.map);
+		pixels_rendering(data, data->cam, data->door, x);
+		ft_bzero(data->cam, sizeof(t_camera));
+		ft_freecam((void **)data->door);
+		ft_freecam((void **)data->d_rendering);
 	}
-	free(cam);
+	ft_freeall("%m%m", &data->cam, &data->w_rendering);
 }

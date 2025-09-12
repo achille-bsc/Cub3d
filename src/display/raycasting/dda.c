@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:08:23 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/06 17:52:59 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/12 06:19:10 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,78 @@ void	rays_dir_setter(t_camera *cam, double pos[2])
 	}
 }
 
-int	rays_calculator(t_camera *cam, t_data *data)
+void	copy_cam(t_data *data, t_camera *cam, t_camera **door, int i)
 {
-	bool	hit;
-	int		side;
+	door[i] = ft_calloc(sizeof(t_camera));
+	if (!door[i])
+	{
+		ft_freecam((void **)door);
+		ft_freecam((void **)data->d_rendering);
+		(ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering),
+			exit_w_code(1, data));
+	}
+	data->d_rendering[i] = ft_calloc(sizeof(t_rendering));
+	if (!data->d_rendering[i])
+	{
+		ft_freecam((void **)door);
+		ft_freecam((void **)data->d_rendering);
+		(ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering),
+			exit_w_code(1, data));
+	}
+	ft_memcpy(door[i], cam, sizeof(t_camera));
+}
 
-	hit = false;
-	while (!hit)
+void	rays_dist_calculator(t_data *data, t_camera *cam, t_camera **door,
+	char **map)
+{
+	int	i;
+
+	i = data->nmb_of_doors - 1;
+	while (!cam->hit)
 	{
 		if (cam->side_dist_x < cam->side_dist_y)
 		{
 			cam->side_dist_x += cam->delta_dist_x;
 			cam->map_x += cam->step_x;
-			side = 0;
+			cam->side = 0;
 		}
 		else
 		{
 			cam->side_dist_y += cam->delta_dist_y;
 			cam->map_y += cam->step_y;
-			side = 1;
+			cam->side = 1;
 		}
-		if (data->map.map[cam->map_y][cam->map_x] != '0')
-			hit = true;
+		if (map[cam->map_y][cam->map_x] != '0'
+			&& !is_voided_door(map[cam->map_y][cam->map_x]))
+			cam->hit = true;
+		if (is_voided_door(map[cam->map_y][cam->map_x]))
+			copy_cam(data, cam, door, i--);
 	}
-	return (side);
+}
+
+int	get_nmb_of_doors(t_camera *cam, char **map)
+{
+	t_camera	dummy;
+	int			doors;
+
+	ft_memcpy(&dummy, cam, sizeof(t_camera));
+	doors = 0;
+	while (1)
+	{
+		if (dummy.side_dist_x < dummy.side_dist_y)
+		{
+			dummy.side_dist_x += dummy.delta_dist_x;
+			dummy.map_x += dummy.step_x;
+		}
+		else
+		{
+			dummy.side_dist_y += dummy.delta_dist_y;
+			dummy.map_y += dummy.step_y;
+		}
+		if (map[dummy.map_y][dummy.map_x] != '0'
+			&& !is_voided_door(map[dummy.map_y][dummy.map_x]))
+			return (doors);
+		if (is_voided_door(map[dummy.map_y][dummy.map_x]))
+			doors++;
+	}
 }

@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvan-bre <lvan-bre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 02:37:44 by lvan-bre          #+#    #+#             */
-/*   Updated: 2024/11/04 14:12:06 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/09 13:59:44 by sellith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+/*
+	ft_memcpy - Copies exactly size bytes from src to dest.
+	Returns dest, or NULL if src/dest are invalid and size > 0.
+	Undefined behavior if memory regions overlap.
+*/
+void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
 	size_t				i;
 	unsigned char		*dst;
 	const unsigned char	*source;
 
+	if (size == 0)
+		return (dest);
 	dst = (unsigned char *)dest;
 	source = (const unsigned char *)src;
 	i = 0;
-	if (dst == 0 && source == 0)
-		return (NULL);
-	while (i < n)
+	while (i < size)
 	{
 		dst[i] = source[i];
 		i++;
 	}
-	return (dst);
+	return ((void *)dst);
 }
 
 // int main(void)

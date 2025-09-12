@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/08 22:07:10 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/12 05:53:53 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void				get_wall_texture(t_data *data);
 void				print_debug_infos(t_data *data);
 void				get_longer_str(t_data *data, char **map);
 void				land_height(t_data *data, char **map);
+int					get_nmb_of_doors(t_camera *cam, char **map);
+void				ft_freecam(void **matrix);
+bool				is_voided_door(char c);
 
 /* MATHS */
 
@@ -60,16 +63,16 @@ void				calculate_plane(t_data *data, t_player *player);
 /* DISPLAY */
 
 bool				display(t_data *data);
+void				init_cam_structs(t_data *data);
 void				cam_val_setter(t_player *player, t_camera *cam, int x);
 void				rays_dir_setter(t_camera *cam, double pos[2]);
-int					rays_calculator(t_camera *cam, t_data *data);
+void				rays_dist_calculator(t_data *data, t_camera *cam,
+						t_camera **door, char **map);
 void				draw_frame(t_player *player, t_data *data);
 void				my_mlx_pixel_put(t_window *win, int x, int y, int color);
 int					get_color_from_texture(t_texture *texture, int x, int y);
-void				truc(t_data *data, int values[3], int x,
-						t_img_orientation orientations);
-void				truc2(t_data *data, int values[3], int x,
-						t_img_orientation orientations);
+void				select_texture(t_data *data, t_camera *cam,
+						t_rendering *rendering);
 
 /* GAMEPLAY */
 
@@ -81,11 +84,13 @@ int					minimap_display(t_data *data);
 int					debug_info(t_data *data);
 int					re_center_cam(t_data *data);
 int					respawn(t_data *data);
+int					door_action(double pos[2], char **map);
+void				change_door_status(t_map *map);
 
 /* EXIT */
 
-int					clean_quit(t_data *data);
 void				exit_w_code(int code, t_data *data);
 void				free_pars_info(t_data *data);
+void				free_textures_3(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:21:30 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/08 18:11:20 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/12 06:23:14 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void	get_minimap_texture(t_data *data)
 	data->mini_texture[M_FLOOR] = load_texture(data, FLOOR_TEXTURE, TILE_SIZE);
 	data->mini_texture[M_WALL] = load_texture(data, WALL_TEXTURE, TILE_SIZE);
 	data->mini_texture[M_OUT] = load_texture(data, OUT_TEXTURE, TILE_SIZE);
+	data->mini_texture[M_CLOSE] = load_texture(data, CLOSED_TEXTURE,
+			TILE_SIZE);
+	data->mini_texture[M_OPEN] = load_texture(data, OPEN_TEXTURE,
+			TILE_SIZE);
+	data->mini_texture[M_CHANGE] = load_texture(data, CHANGING_TEXTURE,
+			TILE_SIZE);
 }
 
 void	get_wall_texture(t_data *data)
@@ -44,4 +50,11 @@ void	get_wall_texture(t_data *data)
 	data->texture[SO] = load_texture(data, data->text[SO], TEXTURE_SIZE);
 	data->texture[WE] = load_texture(data, data->text[WE], TEXTURE_SIZE);
 	data->texture[EA] = load_texture(data, data->text[EA], TEXTURE_SIZE);
+	data->door_textures[D_OPEN] = load_texture(data, DOOR_OPEN, TEXTURE_SIZE);
+	data->door_textures[D_2] = load_texture(data, DOOR_2, TEXTURE_SIZE);
+	data->door_textures[D_3] = load_texture(data, DOOR_3, TEXTURE_SIZE);
+	data->door_textures[D_4] = load_texture(data, DOOR_4, TEXTURE_SIZE);
+	data->door_textures[D_5] = load_texture(data, DOOR_5, TEXTURE_SIZE);
+	data->door_textures[D_CLOSED] = load_texture(data, DOOR_CLOSED,
+			TEXTURE_SIZE);
 }

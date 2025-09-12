@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 19:30:31 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/12 20:58:39 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,32 @@ void	free_pars_info(t_data *data)
 		free(data->text[WE]);
 	if (data->text[EA])
 		free(data->text[EA]);
+}
+
+static void	free_textures_2(t_data *data)
+{
+	if (data->door_textures[D_CLOSED])
+	{
+		mlx_destroy_image(data->win->mlx,
+			data->door_textures[D_CLOSED]->texture);
+		ft_freeall("%m", &data->door_textures[D_CLOSED]);
+	}
+	if (data->door_textures[D_OPEN])
+	{
+		mlx_destroy_image(data->win->mlx, data->door_textures[D_OPEN]->texture);
+		ft_freeall("%m", &data->door_textures[D_OPEN]);
+	}
+	if (data->door_textures[D_2])
+	{
+		mlx_destroy_image(data->win->mlx,
+			data->door_textures[D_2]->texture);
+		ft_freeall("%m", &data->door_textures[D_2]);
+	}
+	if (data->door_textures[D_3])
+	{
+		mlx_destroy_image(data->win->mlx, data->door_textures[D_3]->texture);
+		ft_freeall("%m", &data->door_textures[D_3]);
+	}
 }
 
 static void	free_textures(t_data *data)
@@ -50,6 +76,8 @@ static void	free_textures(t_data *data)
 		mlx_destroy_image(data->win->mlx, data->texture[WE]->texture);
 		ft_freeall("%m", &data->texture[WE]);
 	}
+	free_textures_2(data);
+	free_textures_3(data);
 }
 
 static void	free_m_map(t_data *data)
@@ -69,6 +97,16 @@ static void	free_m_map(t_data *data)
 		mlx_destroy_image(data->win->mlx, data->mini_texture[M_OUT]->texture);
 		ft_freeall("%m", &data->mini_texture[M_OUT]);
 	}
+	if (data->mini_texture[M_CLOSE])
+	{
+		mlx_destroy_image(data->win->mlx, data->mini_texture[M_CLOSE]->texture);
+		ft_freeall("%m", &data->mini_texture[M_CLOSE]);
+	}
+	if (data->mini_texture[M_OPEN])
+	{
+		mlx_destroy_image(data->win->mlx, data->mini_texture[M_OPEN]->texture);
+		ft_freeall("%m", &data->mini_texture[M_OPEN]);
+	}
 }
 
 void	exit_w_code(int code, t_data *data)
@@ -85,12 +123,6 @@ void	exit_w_code(int code, t_data *data)
 		mlx_destroy_display(data->win->mlx);
 		free(data->win->mlx);
 	}
-	ft_freeall("%m%m", &data->win, &data);
+	ft_freeall("%m%m%m", &data->vars, &data->win, &data);
 	exit(code);
-}
-
-int	clean_quit(t_data *data)
-{
-	exit_w_code(0, data);
-	return (0);
 }

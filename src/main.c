@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 19:06:02 by abosc            ###   ########.fr       */
+/*   Updated: 2025/09/12 05:50:40 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	game_loop(t_data *data)
 	fps_newtime = data->time;
 	if (ms_frame <= data->time - data->old_time)
 	{
-		fps_counter++;
+		if (++fps_counter % 2)
+			change_door_status(&data->map);
 		data->old_time = data->time;
 		moving(data, data->move, data->player);
 		player_move(data->map, data->player, data->move);
@@ -73,6 +74,9 @@ int	main(int argc, char **argv)
 	data = ft_calloc(sizeof(t_data));
 	if (!data)
 		return (1);
+	data->vars = ft_calloc(sizeof(t_vars));
+	if (!data->vars)
+		return (free(data), 1);
 	if (!parser(data, argv[1]))
 		return (1);
 	if (!_mlx_init(data))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/08 14:00:55 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/12 06:21:10 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 # define STRUCTURES_H
 
 # include "cub3d.h"
+
+enum					e_door_status
+{
+	D_OPEN,
+	D_2,
+	D_3,
+	D_4,
+	D_5,
+	D_CLOSED,
+};
 
 enum					e_extremes
 {
@@ -34,22 +44,10 @@ typedef enum e_mini_text
 	M_FLOOR,
 	M_WALL,
 	M_OUT,
+	M_CLOSE,
+	M_OPEN,
+	M_CHANGE,
 }						t_mini_text;
-
-typedef struct s_camera
-{
-	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
-	int					map_x;
-	int					map_y;
-	double				delta_dist_x;
-	double				delta_dist_y;
-	double				side_dist_x;
-	double				side_dist_y;
-	int					step_x;
-	int					step_y;
-}						t_camera;
 
 typedef enum e_img_orientation
 {
@@ -152,15 +150,44 @@ typedef struct s_pixel_rendering
 	double				step;
 	double				tex_pos;
 	double				tex_y;
-}						t_pixel_rendering;
+	int					draw[2];
+	int					line_height;
+}						t_rendering;
+
+typedef struct s_vars
+{
+	int					draw[2];
+	int					line_height;
+	int					side;
+	int					x;
+	int					i;
+}						t_vars;
+
+typedef struct s_camera
+{
+	double				camera_x;
+	double				ray_dir_x;
+	double				ray_dir_y;
+	int					map_x;
+	int					map_y;
+	double				delta_dist_x;
+	double				delta_dist_y;
+	double				side_dist_x;
+	double				side_dist_y;
+	int					step_x;
+	int					step_y;
+	int					side;
+	bool				hit;
+}						t_camera;
 
 typedef struct s_data
 {
 	char				*text[4];
 	t_texture			*texture[4];
-	t_texture			*mini_texture[4];
+	t_texture			*mini_texture[6];
+	t_texture			*door_textures[6];
 	char				*colors[2];
-	int					rgb[3];
+	unsigned int		rgb[3];
 	size_t				fps_counter;
 	size_t				old_time;
 	size_t				time;
@@ -168,7 +195,12 @@ typedef struct s_data
 	t_map				map;
 	t_window			*win;
 	t_player			*player;
-	t_pixel_rendering	rendering;
+	t_rendering			*w_rendering;
+	t_camera			*cam;
+	t_rendering			**d_rendering;
+	t_camera			**door;
+	int					nmb_of_doors;
+	t_vars				*vars;
 }						t_data;
 
 #endif

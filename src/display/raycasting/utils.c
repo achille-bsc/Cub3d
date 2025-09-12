@@ -5,42 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 03:26:53 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/12 03:18:20 by lvan-bre         ###   ########.fr       */
+/*   Created: 2025/09/10 21:42:38 by leane             #+#    #+#             */
+/*   Updated: 2025/09/12 06:18:37 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned long long	get_time(void)
+void	init_cam_structs(t_data *data)
 {
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	data->cam = ft_calloc(sizeof(t_camera));
+	if (!data->cam)
+		exit_w_code(1, data);
+	data->w_rendering = ft_calloc(sizeof(t_camera));
+	if (!data->w_rendering)
+		(free(data->cam), exit_w_code(1, data));
 }
 
-char	*skipchar(char *src, int offset, char skiped)
+bool	is_voided_door(char c)
 {
-	char	*buffer;
-	int		i;
-
-	i = offset;
-	while (src[i] == skiped)
-		i++;
-	buffer = ft_strdup(src + i);
-	return (buffer);
-}
-
-void	ft_freecam(void **cam)
-{
-	int	i;
-
-	i = 0;
-	while (cam[i])
-	{
-		free(cam[i]);
-		i++;
-	}
-	free(cam);
+	if (c == 'q' || c == 'w' || c == 'e' || c == 'r' || c == 'Q' || c == 'W'
+		|| c == 'E' || c == 'R' || c == 'O')
+		return (true);
+	return (false);
 }

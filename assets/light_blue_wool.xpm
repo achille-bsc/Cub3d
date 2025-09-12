@@ -1,0 +1,34 @@
+/* XPM */
+static char *_20f4e3151044ed1c91eae4d5787b186wZ88NBnm5ETEKURL[] = {
+/* columns rows colors chars-per-pixel */
+"20 20 8 1 ",
+"  c #37ACD8",
+". c #43BBE0",
+"X c #3BB3DB",
+"o c #3FB7DE",
+"O c #2E9FD1",
+"+ c #33A6D5",
+"@ c #47C0E3",
+"# c #2A96CD",
+/* pixels */
+"O+O#O . O+o.+#O X+##",
+" Xoo...X+++OOOO##OO+",
+"o..o.@@o +    X+  XX",
+"..XXX..oXXX..@@@.@@.",
+"X  ..   Xo++o@.X X@.",
+"o ++X..+##O  OOo. ##",
+"O##+. O##OO#O+OO+O#O",
+"   X.+OO+       X   ",
+"..@@@XXXXoo..oX@@@.o",
+"++X@@...@.OO ..oo...",
+"oo+O .. ++O++OO  +OO",
+"+ ++XO#O  O o.o Xooo",
+"XoXo. + XoXo...XoXX.",
+"oo........oo  X +OOX",
+"OO+XX  XoXOO+ X##O X",
+"++O##.@ ## ooX.@@. #",
+"XXXXo@@X+O# o.@oX..o",
+"@@...@.oXX XX XXXXXX",
+"oooX oXX.@@.X+  XX +",
+"#OX@XOOX@@X+ ..OO @@"
+};

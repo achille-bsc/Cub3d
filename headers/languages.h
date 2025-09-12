@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/06 15:54:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:58:56 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # define FLOOR_TEXTURE		"assets/black.xpm"
 # define OUT_TEXTURE		"assets/Lava.xpm"
 # define WALL_TEXTURE		"assets/cobble.xpm"
+# define CLOSED_TEXTURE		"assets/red_wool.xpm"
+# define OPEN_TEXTURE		"assets/green_wool.xpm"
+# define CHANGING_TEXTURE	"assets/light_blue_wool.xpm"
+
+# define DOOR_OPEN			"assets/Door-6.xpm"
+# define DOOR_CLOSED		"assets/Door-1.xpm"
+# define DOOR_2				"assets/Door-2.xpm"
+# define DOOR_3				"assets/Door-3.xpm"
+# define DOOR_4				"assets/Door-4.xpm"
+# define DOOR_5				"assets/Door-5.xpm"
 
 /* ERRORS */
 
@@ -47,11 +57,13 @@
 cub3d\n"
 # define _NO_SPAWN			"Fatal error: no spawn found\n"
 # define _OPEN_MAP			"Fatal error: open map : (%i,%i)\n"
+# define _DOOR_NEXT_TO_VOID "Fatal error: door is next to void : (%i,%i)\n"
 
 # define _MLXINIT			"Fatal error: failed to init mlx\n"
 # define _WININIT			"Fatal error: failed to init window\n"
 # define _IMGINIT			"Fatal error: failed to init image\n"
 # define _ASSET_INIT		"Fatal error: failed to init texture\n"
-# define _GET_ADDR			"Fatal error: failed to get address from image\n"
+# define _GET_ADDR			"Fatal error: failed to get image address\n"
+# define _TEXT_ADDR			"Fatal error: failed to get texture address\n"
 
 #endif
