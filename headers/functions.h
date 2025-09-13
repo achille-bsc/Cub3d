@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 12:18:16 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 13:17:17 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ void				change_door_status(t_map *map);
 /* EXIT */
 
 void				exit_w_code(int code, t_data *data);
-
 
 #endif

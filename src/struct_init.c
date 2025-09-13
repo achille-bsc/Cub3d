@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 10:51:35 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 11:51:09 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 13:02:36 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_matrix(void **matrix)
 	}
 	free(matrix);
 }
-
 
 static t_rendering	**init_door_render_matrix(void)
 {
