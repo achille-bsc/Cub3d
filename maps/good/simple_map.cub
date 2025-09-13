@@ -1,7 +1,7 @@
-NO ./assets/north.xpm
-SO ./assets/south.xpm
-WE ./assets/west.xpm
-EA ./assets/east.xpm
+NO ./assets/test_north.xpm
+SO ./assets/test_south.xpm
+WE ./assets/test_west.xpm
+EA ./assets/test_east.xpm
 
 C 255,30,0
 F 220,100,0

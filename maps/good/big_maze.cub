@@ -1,10 +1,10 @@
-SO ./assets/south.xpm
-EA ./assets/east.xpm
-NO ./assets/north.xpm
-WE ./assets/west.xpm
+SO ./assets/Stone_tiled_bricks_01.xpm
+EA ./assets/Stone_tiled_bricks_01.xpm
+NO ./assets/Stone_tiled_bricks_01.xpm
+WE ./assets/Stone_tiled_bricks_01.xpm
 
-F 220,100,0
-C 255,30,0
+F 76,51,49
+C 255,108,37
 
 
       111 1111111111111111

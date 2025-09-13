@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:05:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 06:42:06 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 14:30:27 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ static void	display_door_msg(t_data *data, t_window *win)
 
 static void	check_for_doors(t_data *data, t_map map, double pos[2])
 {
-	if (map.map[(int)pos[Y]][(int)(pos[X] + 0.80)] == 'C')
+	if (map.map[(int)pos[Y]][(int)(pos[X] + 0.60)] == 'C')
 		display_door_msg(data, data->win);
-	else if (map.map[(int)pos[Y]][(int)(pos[X] - 0.80)] == 'C')
+	else if (map.map[(int)pos[Y]][(int)(pos[X] - 0.60)] == 'C')
 		display_door_msg(data, data->win);
-	else if (map.map[(int)(pos[Y] + 0.80)][(int)pos[X]] == 'C')
+	else if (map.map[(int)(pos[Y] + 0.60)][(int)pos[X]] == 'C')
 		display_door_msg(data, data->win);
-	else if (map.map[(int)(pos[Y] - 0.80)][(int)pos[X]] == 'C')
+	else if (map.map[(int)(pos[Y] - 0.60)][(int)pos[X]] == 'C')
 		display_door_msg(data, data->win);
 }
 
