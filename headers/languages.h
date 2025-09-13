@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 06:40:53 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:07:18 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 # define _EMPTY_FILE		"Fatal error: opened file is empty\n"
 # define _RGB_FORMAT		"Fatal error: please put red, green, and blue\
  values\n"
+# define _NUMERIC_COLOR     "Fatal error: please put only numeric args\
+ separated by commas\n"
+# define _TOO_MUCH_COMMAS   "Fatal error: too many commas detected\n"
 # define _RGB_RANGE			"Fatal error: rgb value must be between 0 and 255\n"
 
 # define _CEILING			"Fatal error: failed to init ceiling color\n"

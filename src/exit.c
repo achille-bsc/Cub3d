@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 12:21:11 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:14:45 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,13 @@ void	exit_w_code(int code, t_data *data)
 		&data->vars);
 	free_textures(data);
 	free_m_map(data);
-	mlx_mouse_show(data->win->mlx, data->win->window);
 	free_render(data->d_rendering);
 	free_door(data->door);
 	if (data->win->window)
 		mlx_destroy_window(data->win->mlx, data->win->window);
 	if (data->win->mlx)
 	{
+		mlx_mouse_show(data->win->mlx, data->win->window);
 		mlx_loop_end(data->win->mlx);
 		mlx_destroy_display(data->win->mlx);
 		free(data->win->mlx);

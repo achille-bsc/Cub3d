@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:05:01 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/08/29 06:11:33 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:11:43 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_parsing_errors	is_all_data_parsed(t_data *data)
 	return (DISPATCH_OK);
 }
 
-static bool	parse_colors(t_data *data, char *file)
+static bool	_parse_colors(t_data *data, char *file)
 {
 	if (ft_strncmp("C ", file, 2) == 0)
 	{
@@ -99,10 +99,11 @@ bool	dispatch_data(t_data *data, char **file)
 	{
 		if (!parse_img(data, file[i]))
 			return (false);
-		if (!parse_colors(data, file[i]))
+		if (!_parse_colors(data, file[i]))
 			return (false);
 		res = is_all_data_parsed(data);
-		if (_is_map(file[i]) && res == DISPATCH_OK)
+		i++;
+		if (res == DISPATCH_OK)
 		{
 			data->map.map = ft_arraydup(file + i);
 			if (!data->map.map)
@@ -111,7 +112,6 @@ bool	dispatch_data(t_data *data, char **file)
 		}
 		else if (_is_map(file[i]) && res != DISPATCH_OK)
 			return (dispatch_error_handling(res), false);
-		i++;
 	}
 	return (ft_printf(_MAP_DATA), false);
 }

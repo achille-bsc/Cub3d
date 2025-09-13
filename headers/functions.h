@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 13:17:17 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:07:35 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ bool				dispatch_data(t_data *data, char **file);
 void				dispatch_error_handling(t_parsing_errors err);
 bool				map_parsing(t_data *data, char **map);
 bool				player_four_dirs(t_data *data);
+void				parse_colors(t_data *data, char **color, int i);
+void				check_color_chars(t_data *data, char *color);
 
 /* MINIMAP */
 

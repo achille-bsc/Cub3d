@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:43:06 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 12:21:03 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:09:27 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,21 @@ bool	player_four_dirs(t_data *data)
 	return (true);
 }
 
-static bool	is_rgb_value(int color)
-{
-	if (color < 0 || color > 255)
-		return (ft_printf(_RGB_RANGE), false);
-	return (true);
-}
-
 static bool	colors_verification(t_data *data)
 {
 	char	**color;
-	int		rgb[3];
 	int		i;
 
 	i = 0;
 	while (i < 2)
 	{
+		check_color_chars(data, data->colors[i]);
 		color = ft_split(data->colors[i], ',');
 		if (!color)
 			return (false);
 		if (ft_darraylen(color) != 3)
 			return (ft_printf(_RGB_FORMAT), ft_freedarray(color), false);
-		rgb[RED] = ft_atoi(color[RED]);
-		rgb[GREEN] = ft_atoi(color[GREEN]);
-		rgb[BLUE] = ft_atoi(color[BLUE]);
-		ft_freedarray(color);
-		if (!is_rgb_value(rgb[RED]) || !is_rgb_value(rgb[GREEN])
-			|| !is_rgb_value(rgb[BLUE]))
-			return (false);
-		data->rgb[i] = (255 << 24) + (rgb[RED] << 16) + (rgb[GREEN] << 8)
-			+ rgb[BLUE];
+		parse_colors(data, color, i);
 		i++;
 	}
 	data->rgb[PLAYER] = (255 << 16);

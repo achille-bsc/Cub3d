@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/13 13:15:11 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/13 16:09:16 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,7 @@ SRC		=	main.c utils.c exit.c math.c exit_2.c struct_init.c					\
 			$(RC)/raycasting.c	$(RC)/dda.c	 		$(RC)/raycaster_put_image.c	\
 			$(RC)/utils.c														\
 			$(PS)/parsing.c		$(PS)/dispatch_data.c	$(PS)/error_handling.c	\
-			$(PS)/map_parsing.c	$(PS)/utils.c
+			$(PS)/map_parsing.c	$(PS)/utils.c			$(PS)/parse_color.c		\
 
 
 #	OBJS CONVERSION
