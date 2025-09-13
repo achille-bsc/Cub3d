@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:07:06 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 00:03:20 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 08:13:48 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	events(t_data *data)
 	mlx_hook(data->win->window, KEYPRESS, (1L << 0), *press, data);
 	mlx_hook(data->win->window, KEYRELEASE, (1L << 1), *release, data);
 	mlx_hook(data->win->window, ESCAPE, (1L << 17), *clean_quit, data);
+	mlx_mouse_hide(data->win->mlx, data->win->window);
 }

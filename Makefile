@@ -6,7 +6,7 @@
 #    By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/08 01:08:11 by lvan-bre          #+#    #+#              #
-#    Updated: 2025/09/12 21:07:11 by lvan-bre         ###   ########.fr        #
+#    Updated: 2025/09/13 08:20:09 by lvan-bre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CC					:=	gcc
 CFLAGS				:=	-Wextra -Wall -Werror -g
-MLXFLAGS			:=	 -L/usr/bin -lX11 -lXext -lXrandr -lXi -lXinerama -lXcursor -lm -lz
+MLXFLAGS			:=	 -L/usr/bin -lX11 -lXext -lXrandr -lXi -lXinerama -lXcursor -lm -lz -lXfixes
 VALFLAGS			:=	--leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --track-origins=yes --suppressions=/home/lvan-bre/Tronc_commun/Foxy_munch/additional_files/readline.supp
 
 # COMMANDS
