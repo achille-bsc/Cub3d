@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 05:52:30 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 06:35:45 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 09:40:29 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void	free_textures_3(t_data *data)
 		ft_freeall("%m", &data->door_text);
 	}
 }
-
