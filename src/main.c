@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 06:37:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 07:35:52 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static bool	_mlx_init(t_data *data)
 		return (printf(_WININIT), false);
 	get_wall_texture(data);
 	get_minimap_texture(data);
+	mlx_mouse_move(data->win->mlx, data->win->window, WIDTH / 2, HEIGHT / 2);
 	return (true);
 }
 
@@ -55,7 +56,7 @@ static int	game_loop(t_data *data)
 			change_door_status(&data->map);
 		data->old_time = data->time;
 		calculate_plane(data, data->player);
-		player_move(data->map, data->player, data->move);
+		player_move(data->win, data->map, data->player, data->move);
 		display(data);
 	}
 	if (ONE_SEC <= fps_newtime - fps_oldtime)
@@ -83,6 +84,7 @@ int	main(int argc, char **argv)
 	data->bck_color = init_bckcolor(data, 0x80525252);
 	if (!parser(data, argv[1]))
 		return (1);
+	data->player->mouse_last_pos = WIDTH / 2;
 	if (!_mlx_init(data))
 		return (1);
 	events(data);

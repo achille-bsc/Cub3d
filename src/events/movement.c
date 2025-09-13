@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 15:24:19 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 06:43:21 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 07:28:33 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ static void	move_right(t_player *player, t_map map)
 		player->pos[Y] = new_y;
 }
 
-void	player_move(t_map map, t_player *player, t_movement move)
+void	player_move(t_window *win, t_map map, t_player *player, t_movement move)
 {
-	turning_cam(player, move);
+	turning_cam(win, player, move);
 	if (move.sprint)
 		player->sprint = 2;
 	else

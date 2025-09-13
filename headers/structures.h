@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 06:36:00 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 07:46:07 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_player
 	double				spawn[4];
 	int					**map;
 	int					sprint;
+	int					mouse_last_pos;
 }						t_player;
 
 typedef struct s_window

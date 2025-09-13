@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 06:46:47 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 07:27:28 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ void				pixel_put_transparency(t_data *data, int x, int y);
 /* GAMEPLAY */
 
 void				events(t_data *data);
-void				player_move(t_map map, t_player *player, t_movement move);
-void				turning_cam(t_player *player, t_movement move);
+void				player_move(t_window *win, t_map map, t_player *player,
+						t_movement move);
+void				turning_cam(t_window *win, t_player *player,
+						t_movement move);
 int					minimap_display(t_data *data);
 int					debug_info(t_data *data);
 int					re_center_cam(t_data *data);
