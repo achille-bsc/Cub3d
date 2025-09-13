@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 15:24:19 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 07:28:33 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 09:38:19 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,26 @@ static void	move_forward(t_player *player, t_map map)
 
 	new_x = player->pos[X] + player->vec[X] * MV_SPEED * player->sprint;
 	new_y = player->pos[Y] + player->vec[Y] * MV_SPEED * player->sprint;
-	if (map.map[(int)player->pos[Y]][(int)new_x]
-		&& map.map[(int)player->pos[Y]][(int)new_x] != '1'
-		&& map.map[(int)player->pos[Y]][(int)new_x] != ' '
-		&& map.map[(int)player->pos[Y]][(int)new_x] != 'C')
-		player->pos[X] = new_x;
-	if (map.map[(int)new_y][(int)player->pos[X]]
-		&& map.map[(int)new_y][(int)player->pos[X]] != '1'
-		&& map.map[(int)new_y][(int)player->pos[X]] != ' '
-		&& map.map[(int)new_y][(int)player->pos[X]] != 'C')
-		player->pos[Y] = new_y;
+	if (new_x < player->pos[X])
+	{
+		if (ifss(map, (int)(new_x - 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	else
+	{
+		if (ifss(map, (int)(new_x + 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	if (new_y < player->pos[Y])
+	{
+		if (ifss(map, (int)(player->pos[X]), (int)(new_y - 0.1)))
+			player->pos[Y] = new_y;
+	}
+	else
+	{
+		if (ifss(map, (int)player->pos[X], (int)(new_y + 0.1)))
+			player->pos[Y] = new_y;
+	}
 }
 
 static void	move_backward(t_player *player, t_map map)
@@ -38,16 +48,26 @@ static void	move_backward(t_player *player, t_map map)
 
 	new_x = player->pos[X] - player->vec[X] * MV_SPEED * player->sprint;
 	new_y = player->pos[Y] - player->vec[Y] * MV_SPEED * player->sprint;
-	if (map.map[(int)player->pos[Y]][(int)new_x]
-		&& map.map[(int)player->pos[Y]][(int)new_x] != '1'
-		&& map.map[(int)player->pos[Y]][(int)new_x] != ' '
-		&& map.map[(int)player->pos[Y]][(int)new_x] != 'C')
-		player->pos[X] = new_x;
-	if (map.map[(int)new_y][(int)player->pos[X]]
-		&& map.map[(int)new_y][(int)player->pos[X]] != '1'
-		&& map.map[(int)new_y][(int)player->pos[X]] != ' '
-		&& map.map[(int)new_y][(int)player->pos[X]] != 'C')
-		player->pos[Y] = new_y;
+	if (new_x < player->pos[X])
+	{
+		if (ifss(map, (int)(new_x - 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	else
+	{
+		if (ifss(map, (int)(new_x + 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	if (new_y < player->pos[Y])
+	{
+		if (ifss(map, (int)(player->pos[X]), (int)(new_y - 0.1)))
+			player->pos[Y] = new_y;
+	}
+	else
+	{
+		if (ifss(map, (int)player->pos[X], (int)(new_y + 0.1)))
+			player->pos[Y] = new_y;
+	}
 }
 
 static void	move_left(t_player *player, t_map map)
@@ -57,16 +77,26 @@ static void	move_left(t_player *player, t_map map)
 
 	new_x = player->pos[X] + player->vec[Y] * MV_SPEED * player->sprint;
 	new_y = player->pos[Y] - player->vec[X] * MV_SPEED * player->sprint;
-	if (map.map[(int)player->pos[Y]][(int)new_x]
-		&& map.map[(int)player->pos[Y]][(int)new_x] != '1'
-		&& map.map[(int)player->pos[Y]][(int)new_x] != ' '
-		&& map.map[(int)player->pos[Y]][(int)new_x] != 'C')
-		player->pos[X] = new_x;
-	if (map.map[(int)new_y][(int)player->pos[X]]
-		&& map.map[(int)new_y][(int)player->pos[X]] != '1'
-		&& map.map[(int)new_y][(int)player->pos[X]] != ' '
-		&& map.map[(int)new_y][(int)player->pos[X]] != 'C')
-		player->pos[Y] = new_y;
+	if (new_x < player->pos[X])
+	{
+		if (ifss(map, (int)(new_x - 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	else
+	{
+		if (ifss(map, (int)(new_x + 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	if (new_y < player->pos[Y])
+	{
+		if (ifss(map, (int)(player->pos[X]), (int)(new_y - 0.1)))
+			player->pos[Y] = new_y;
+	}
+	else
+	{
+		if (ifss(map, (int)player->pos[X], (int)(new_y + 0.1)))
+			player->pos[Y] = new_y;
+	}
 }
 
 static void	move_right(t_player *player, t_map map)
@@ -76,16 +106,26 @@ static void	move_right(t_player *player, t_map map)
 
 	new_x = player->pos[X] - player->vec[Y] * MV_SPEED * player->sprint;
 	new_y = player->pos[Y] + player->vec[X] * MV_SPEED * player->sprint;
-	if (map.map[(int)player->pos[Y]][(int)new_x]
-		&& map.map[(int)player->pos[Y]][(int)new_x] != '1'
-		&& map.map[(int)player->pos[Y]][(int)new_x] != ' '
-		&& map.map[(int)player->pos[Y]][(int)new_x] != 'C')
-		player->pos[X] = new_x;
-	if (map.map[(int)new_y][(int)player->pos[X]]
-		&& map.map[(int)new_y][(int)player->pos[X]] != '1'
-		&& map.map[(int)new_y][(int)player->pos[X]] != ' '
-		&& map.map[(int)new_y][(int)player->pos[X]] != 'C')
-		player->pos[Y] = new_y;
+	if (new_x < player->pos[X])
+	{
+		if (ifss(map, (int)(new_x - 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	else
+	{
+		if (ifss(map, (int)(new_x + 0.1), player->pos[Y]))
+			player->pos[X] = new_x;
+	}
+	if (new_y < player->pos[Y])
+	{
+		if (ifss(map, (int)(player->pos[X]), (int)(new_y - 0.1)))
+			player->pos[Y] = new_y;
+	}
+	else
+	{
+		if (ifss(map, (int)player->pos[X], (int)(new_y + 0.1)))
+			player->pos[Y] = new_y;
+	}
 }
 
 void	player_move(t_window *win, t_map map, t_player *player, t_movement move)
