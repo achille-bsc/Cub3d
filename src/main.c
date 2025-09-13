@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 11:08:28 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:58:08 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ static bool	_mlx_init(t_data *data)
 {
 	data->win->mlx = mlx_init();
 	if (!data->win->mlx)
-		return (printf(_MLXINIT), false);
+		return (exit_w_code(1, data), ft_printf(_MLXINIT), false);
 	data->win->window = mlx_new_window(data->win->mlx, WIDTH, HEIGHT, NAME);
 	if (!data->win->window)
-		return (printf(_WININIT), false);
+		return (exit_w_code(1, data), printf(_WININIT), false);
+	mlx_mouse_hide(data->win->mlx, data->win->window);
 	get_wall_texture(data);
 	get_minimap_texture(data);
 	mlx_mouse_move(data->win->mlx, data->win->window, WIDTH / 2, HEIGHT / 2);

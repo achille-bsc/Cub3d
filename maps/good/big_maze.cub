@@ -4,7 +4,7 @@ NO ./assets/Stone_tiled_bricks_01.xpm
 WE ./assets/Stone_tiled_bricks_01.xpm
 
 F 76,51,49
-C 205,75,8,,,,,
+C 205,75,8
 
       111 1111111111111111
      10011100000000011111111
