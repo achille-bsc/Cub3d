@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:09:43 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/12 05:40:15 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:38:14 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ int	respawn(t_data *data)
 
 int	door_action(double pos[2], char **map)
 {
-	if (map[(int)pos[Y]][(int)(pos[X] + 0.40)] == 'C')
-		map[(int)pos[Y]][(int)(pos[X] + 0.40)] = 'q';
-	else if (map[(int)pos[Y]][(int)(pos[X] + 0.40)] == 'O')
-		map[(int)pos[Y]][(int)(pos[X] + 0.40)] = 'Q';
-	if (map[(int)pos[Y]][(int)(pos[X] - 0.40)] == 'C')
-		map[(int)pos[Y]][(int)(pos[X] - 0.40)] = 'q';
-	else if (map[(int)pos[Y]][(int)(pos[X] - 0.40)] == 'O')
-		map[(int)pos[Y]][(int)(pos[X] - 0.40)] = 'Q';
-	if (map[(int)(pos[Y] + 0.40)][(int)(pos[X])] == 'C')
-		map[(int)(pos[Y] + 0.40)][(int)(pos[X])] = 'q';
-	else if (map[(int)(pos[Y] + 0.40)][(int)(pos[X])] == 'O')
-		map[(int)(pos[Y] + 0.40)][(int)(pos[X])] = 'Q';
-	if (map[(int)(pos[Y] - 0.40)][(int)(pos[X])] == 'C')
-		map[(int)(pos[Y] - 0.40)][(int)(pos[X])] = 'q';
-	else if (map[(int)(pos[Y] - 0.40)][(int)(pos[X])] == 'O')
-		map[(int)(pos[Y] - 0.40)][(int)(pos[X])] = 'Q';
+	if (map[(int)pos[Y]][(int)(pos[X] + 0.80)] == 'C')
+		map[(int)pos[Y]][(int)(pos[X] + 0.80)] = 'q';
+	else if (map[(int)pos[Y]][(int)(pos[X] + 0.80)] == 'O')
+		map[(int)pos[Y]][(int)(pos[X] + 0.80)] = 'Q';
+	if (map[(int)pos[Y]][(int)(pos[X] - 0.80)] == 'C')
+		map[(int)pos[Y]][(int)(pos[X] - 0.80)] = 'q';
+	else if (map[(int)pos[Y]][(int)(pos[X] - 0.80)] == 'O')
+		map[(int)pos[Y]][(int)(pos[X] - 0.80)] = 'Q';
+	if (map[(int)(pos[Y] + 0.80)][(int)(pos[X])] == 'C')
+		map[(int)(pos[Y] + 0.80)][(int)(pos[X])] = 'q';
+	else if (map[(int)(pos[Y] + 0.80)][(int)(pos[X])] == 'O')
+		map[(int)(pos[Y] + 0.80)][(int)(pos[X])] = 'Q';
+	if (map[(int)(pos[Y] - 0.80)][(int)(pos[X])] == 'C')
+		map[(int)(pos[Y] - 0.80)][(int)(pos[X])] = 'q';
+	else if (map[(int)(pos[Y] - 0.80)][(int)(pos[X])] == 'O')
+		map[(int)(pos[Y] - 0.80)][(int)(pos[X])] = 'Q';
 	if (map[(int)pos[Y]][(int)pos[X]] == 'Q')
 		map[(int)pos[Y]][(int)pos[X]] = 'O';
 	return (0);

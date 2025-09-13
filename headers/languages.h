@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:36:02 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 20:58:56 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:40:53 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define DOOR_3				"assets/Door-3.xpm"
 # define DOOR_4				"assets/Door-4.xpm"
 # define DOOR_5				"assets/Door-5.xpm"
+
+# define DOOR_TEXT			"assets/open_door.xpm"
 
 /* ERRORS */
 

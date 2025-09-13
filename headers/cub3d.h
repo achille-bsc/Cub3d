@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:34:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 00:01:31 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:40:23 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@
 # define MINIMAP_SIZE_X			500
 # define MINIMAP_SIZE_Y			300
 # define MINIMAP_BORDER_SIZE	5
+
+# define DOOR_TEXT_HEIGHT		19
+# define DOOR_TEXT_WIDTH		158
+# define DOOR_TEXT_Y_START		200
+# define DOOR_BCKGRND_START		20
+# define MAX_DOOR				20
 
 # define DBL_MAX				4294967295
 

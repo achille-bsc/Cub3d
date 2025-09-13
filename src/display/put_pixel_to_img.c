@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   put_pixel_to_img.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:44:10 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/10 23:39:15 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/13 06:38:47 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	pixel_put_transparency(t_data *data, int x, int y)
+{
+	int		*dst_ptr;
+	int		dst;
+	double	a;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	if (data->bck_color->alpha == 0)
+		return ((void)ft_printf("returning...\n"));
+	dst_ptr = (int *)(data->win->img_ptr + (y * data->win->line_length + x
+				* (data->win->bpp / 8)));
+	dst = *dst_ptr;
+	data->bck_color->bckgrnd_r = (dst >> 16) & 0xFF;
+	data->bck_color->bckgrnd_g = (dst >> 8) & 0xFF;
+	data->bck_color->bckgrnd_b = dst & 0xFF;
+	a = data->bck_color->alpha / 255.0;
+	data->bck_color->r = (int)(data->bck_color->src_r * a
+			+ data->bck_color->bckgrnd_r * (1 - a));
+	data->bck_color->g = (int)(data->bck_color->src_g * a
+			+ data->bck_color->bckgrnd_g * (1 - a));
+	data->bck_color->b = (int)(data->bck_color->src_b * a
+			+ data->bck_color->bckgrnd_b * (1 - a));
+	*dst_ptr = (0xFF << 24) | (data->bck_color->r << 16)
+		| (data->bck_color->g << 8) | data->bck_color->b;
+}
 
 void	my_minimap_pixel_put(t_window *win, int x, int y, int color)
 {

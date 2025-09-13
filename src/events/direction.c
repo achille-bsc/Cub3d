@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 22:42:00 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/05 22:57:46 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:37:05 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ void	turning_cam(t_player *player, t_movement move)
 		if (player->dir > 2 * M_PI)
 			player->dir -= 2 * M_PI;
 	}
+	player->vec[X] = cos(player->dir);
+	player->vec[Y] = sin(player->dir);
 }

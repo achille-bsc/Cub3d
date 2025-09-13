@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 05:53:53 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:46:47 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void				my_mlx_pixel_put(t_window *win, int x, int y, int color);
 int					get_color_from_texture(t_texture *texture, int x, int y);
 void				select_texture(t_data *data, t_camera *cam,
 						t_rendering *rendering);
+void				pixel_put_transparency(t_data *data, int x, int y);
 
 /* GAMEPLAY */
 
 void				events(t_data *data);
 void				player_move(t_map map, t_player *player, t_movement move);
 void				turning_cam(t_player *player, t_movement move);
-void				moving(t_data *data, t_movement move, t_player *player);
 int					minimap_display(t_data *data);
 int					debug_info(t_data *data);
 int					re_center_cam(t_data *data);

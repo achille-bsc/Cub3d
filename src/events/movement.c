@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 15:24:19 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/09 00:34:39 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/13 06:43:21 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static void	move_right(t_player *player, t_map map)
 
 void	player_move(t_map map, t_player *player, t_movement move)
 {
+	turning_cam(player, move);
 	if (move.sprint)
 		player->sprint = 2;
 	else
@@ -102,5 +103,4 @@ void	player_move(t_map map, t_player *player, t_movement move)
 		move_left(player, map);
 	if (move.right)
 		move_right(player, map);
-	turning_cam(player, move);
 }

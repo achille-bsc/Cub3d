@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:37:32 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 06:21:10 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:36:00 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,12 +180,27 @@ typedef struct s_camera
 	bool				hit;
 }						t_camera;
 
+typedef struct s_colors
+{
+	int					alpha;
+	int					r;
+	int					g;
+	int					b;
+	int					src_r;
+	int					src_g;
+	int					src_b;
+	int					bckgrnd_r;
+	int					bckgrnd_g;
+	int					bckgrnd_b;
+}						t_colors;
+
 typedef struct s_data
 {
 	char				*text[4];
 	t_texture			*texture[4];
 	t_texture			*mini_texture[6];
 	t_texture			*door_textures[6];
+	t_texture			*door_text;
 	char				*colors[2];
 	unsigned int		rgb[3];
 	size_t				fps_counter;
@@ -201,6 +216,7 @@ typedef struct s_data
 	t_camera			**door;
 	int					nmb_of_doors;
 	t_vars				*vars;
+	t_colors			*bck_color;
 }						t_data;
 
 #endif

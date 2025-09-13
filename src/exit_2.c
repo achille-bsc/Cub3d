@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 05:52:30 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/12 06:26:51 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:35:45 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ void	free_textures_3(t_data *data)
 			data->mini_texture[M_CHANGE]->texture);
 		ft_freeall("%m", &data->mini_texture[M_CHANGE]);
 	}
+	if (data->door_text)
+	{
+		mlx_destroy_image(data->win->mlx, data->door_text->texture);
+		ft_freeall("%m", &data->door_text);
+	}
 }
+

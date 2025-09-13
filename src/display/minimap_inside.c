@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_inside.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sellith <sellith@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 07:02:09 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/08 22:37:27 by sellith          ###   ########.fr       */
+/*   Updated: 2025/09/13 06:39:20 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	minimap_put_borders_y(t_window *win)
 	while (x <= WIDTH - MINIMAP_START_X + MINIMAP_BORDER_SIZE
 		&& y <= MINIMAP_START_Y)
 	{
-		my_mlx_pixel_put(win, x, y, 0x000000);
+		my_mlx_pixel_put(win, x, y, 0xFF000000);
 		my_mlx_pixel_put(win, x, y + MINIMAP_SIZE_Y + MINIMAP_BORDER_SIZE,
-			0x000000);
+			0xFF000000);
 		x++;
 		if (x == WIDTH - MINIMAP_START_X + MINIMAP_BORDER_SIZE)
 		{
@@ -107,9 +107,9 @@ void	minimap_put_borders_x(t_window *win)
 	while (y <= MINIMAP_SIZE_Y + MINIMAP_START_Y + MINIMAP_BORDER_SIZE
 		&& x <= WIDTH - MINIMAP_START_X + MINIMAP_BORDER_SIZE)
 	{
-		my_mlx_pixel_put(win, x, y, 0x000000);
+		my_mlx_pixel_put(win, x, y, 0xFF000000);
 		my_mlx_pixel_put(win, x - MINIMAP_SIZE_X - MINIMAP_BORDER_SIZE,
-			y, 0x000000);
+			y, 0xFF000000);
 		y++;
 		if (y == MINIMAP_SIZE_Y + MINIMAP_START_Y + MINIMAP_BORDER_SIZE)
 		{

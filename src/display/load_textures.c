@@ -6,11 +6,32 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:21:30 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 06:23:14 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:41:15 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static t_texture	*load_door_text(t_data *data, char *asset_file,
+	int width, int height)
+{
+	t_texture	*texture;
+
+	texture = ft_calloc(sizeof(t_texture));
+	if (!texture)
+		exit_w_code(1, data);
+	texture->texture = mlx_xpm_file_to_image(data->win->mlx, asset_file,
+			&width, &height);
+	if (!texture->texture)
+		return (free(texture), ft_printf(_ASSET_INIT), exit_w_code(1, data)
+			, NULL);
+	texture->addr = mlx_get_data_addr(texture->texture,
+			&(texture->bpp), &(texture->size_line),
+			&(texture->endian));
+	if (!texture->addr)
+		return (ft_printf(_GET_ADDR), exit_w_code(1, data), NULL);
+	return (texture);
+}
 
 static t_texture	*load_texture(t_data *data, char *asset_file, int size)
 {
@@ -57,4 +78,6 @@ void	get_wall_texture(t_data *data)
 	data->door_textures[D_5] = load_texture(data, DOOR_5, TEXTURE_SIZE);
 	data->door_textures[D_CLOSED] = load_texture(data, DOOR_CLOSED,
 			TEXTURE_SIZE);
+	data->door_text = load_door_text(data, DOOR_TEXT, DOOR_TEXT_WIDTH,
+			DOOR_TEXT_HEIGHT);
 }

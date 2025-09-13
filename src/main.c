@@ -6,21 +6,24 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 05:50:40 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 06:37:57 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	moving(t_data *data, t_movement move, t_player *player)
+static t_colors	*init_bckcolor(t_data *data, unsigned int argb)
 {
-	if (move.backward || move.forward || move.left || move.right
-		|| move.dir_up || move.dir_down || move.dir_left || move.dir_right)
-	{
-		player->vec[X] = cos(player->dir);
-		player->vec[Y] = sin(player->dir);
-		calculate_plane(data, player);
-	}
+	t_colors	*colors;
+
+	colors = ft_calloc(sizeof(t_colors));
+	if (!colors)
+		exit_w_code(1, data);
+	colors->alpha = (argb >> 24) & 0xFF;
+	colors->r = (argb >> 16) & 0xFF;
+	colors->g = (argb >> 8) & 0xFF;
+	colors->b = argb & 0xFF;
+	return (colors);
 }
 
 static bool	_mlx_init(t_data *data)
@@ -51,7 +54,7 @@ static int	game_loop(t_data *data)
 		if (++fps_counter % 2)
 			change_door_status(&data->map);
 		data->old_time = data->time;
-		moving(data, data->move, data->player);
+		calculate_plane(data, data->player);
 		player_move(data->map, data->player, data->move);
 		display(data);
 	}
@@ -77,6 +80,7 @@ int	main(int argc, char **argv)
 	data->vars = ft_calloc(sizeof(t_vars));
 	if (!data->vars)
 		return (free(data), 1);
+	data->bck_color = init_bckcolor(data, 0x80525252);
 	if (!parser(data, argv[1]))
 		return (1);
 	if (!_mlx_init(data))
