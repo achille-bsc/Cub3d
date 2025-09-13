@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leane <leane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 05:09:08 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/11 01:13:36 by leane            ###   ########.fr       */
+/*   Updated: 2025/09/13 13:11:12 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	check_ff_both_x(char **dummy, int x, int y)
 	int	size_up;
 	int	size_down;
 
+	size_up = 0;
+	size_down = 0;
 	if (y >= 1 && dummy[y - 1])
 		size_up = ft_strlen(dummy[y - 1]);
 	if (dummy[y + 1])

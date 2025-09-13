@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:45 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 08:13:42 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 12:21:11 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,14 @@ static void	free_m_map(t_data *data)
 void	exit_w_code(int code, t_data *data)
 {
 	free_pars_info(data);
-	ft_freeall("%d%d%m%m", &data->map.map, &data->map.dummy, &data->player,
-		&data->bck_color);
+	ft_freeall("%d%d%m%m%m%m%m", &data->map.map, &data->map.dummy,
+		&data->player, &data->bck_color, &data->cam, &data->w_rendering,
+		&data->vars);
 	free_textures(data);
 	free_m_map(data);
 	mlx_mouse_show(data->win->mlx, data->win->window);
+	free_render(data->d_rendering);
+	free_door(data->door);
 	if (data->win->window)
 		mlx_destroy_window(data->win->mlx, data->win->window);
 	if (data->win->mlx)
@@ -125,6 +128,6 @@ void	exit_w_code(int code, t_data *data)
 		mlx_destroy_display(data->win->mlx);
 		free(data->win->mlx);
 	}
-	ft_freeall("%m%m%m", &data->vars, &data->win, &data);
+	ft_freeall("%m%m", &data->win, &data);
 	exit(code);
 }

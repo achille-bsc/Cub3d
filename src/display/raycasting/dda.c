@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:08:23 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/12 06:19:10 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 12:11:10 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,6 @@ void	rays_dir_setter(t_camera *cam, double pos[2])
 	}
 }
 
-void	copy_cam(t_data *data, t_camera *cam, t_camera **door, int i)
-{
-	door[i] = ft_calloc(sizeof(t_camera));
-	if (!door[i])
-	{
-		ft_freecam((void **)door);
-		ft_freecam((void **)data->d_rendering);
-		(ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering),
-			exit_w_code(1, data));
-	}
-	data->d_rendering[i] = ft_calloc(sizeof(t_rendering));
-	if (!data->d_rendering[i])
-	{
-		ft_freecam((void **)door);
-		ft_freecam((void **)data->d_rendering);
-		(ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering),
-			exit_w_code(1, data));
-	}
-	ft_memcpy(door[i], cam, sizeof(t_camera));
-}
-
 void	rays_dist_calculator(t_data *data, t_camera *cam, t_camera **door,
 	char **map)
 {
@@ -98,7 +77,7 @@ void	rays_dist_calculator(t_data *data, t_camera *cam, t_camera **door,
 			&& !is_voided_door(map[cam->map_y][cam->map_x]))
 			cam->hit = true;
 		if (is_voided_door(map[cam->map_y][cam->map_x]))
-			copy_cam(data, cam, door, i--);
+			ft_memcpy(door[i--], cam, sizeof(t_camera));
 	}
 }
 
