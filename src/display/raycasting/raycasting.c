@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/12 05:29:14 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 12:23:33 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,17 @@ void	draw_frame(t_player *player, t_data *data)
 {
 	int	x;
 
-	init_cam_structs(data);
 	x = -1;
 	while (++x < WIDTH)
 	{
 		cam_val_setter(player, data->cam, x);
 		rays_dir_setter(data->cam, player->pos);
 		data->nmb_of_doors = get_nmb_of_doors(data->cam, data->map.map);
-		data->door = ft_calloc(sizeof(t_camera *) * (data->nmb_of_doors + 1));
-		if (!data->door)
-			return (ft_freeall("%m%m%m", &data->cam, &data->w_rendering,
-					&data->d_rendering), exit_w_code(1, data));
-		data->d_rendering = ft_calloc(sizeof(t_rendering *)
-				* (data->nmb_of_doors + 1));
-		if (!data->d_rendering)
-			return (ft_freeall("%m%m%m%m", &data->cam, &data->w_rendering,
-					&data->d_rendering, &data->door), exit_w_code(1, data));
+		if (data->nmb_of_doors > MAX_DOOR)
+			data->nmb_of_doors = MAX_DOOR;
 		rays_dist_calculator(data, data->cam, data->door, data->map.map);
 		pixels_rendering(data, data->cam, data->door, x);
 		ft_bzero(data->cam, sizeof(t_camera));
-		ft_freecam((void **)data->door);
-		ft_freecam((void **)data->d_rendering);
+		ft_bzero(data->w_rendering, sizeof(t_rendering));
 	}
-	ft_freeall("%m%m", &data->cam, &data->w_rendering);
 }

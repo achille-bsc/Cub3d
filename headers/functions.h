@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:35:25 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 09:37:27 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 12:18:16 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define FUNCTIONS_H
 
 # include "cub3d.h"
+
+/* MEMORY */
+
+bool				calloc_init(t_data *data);
+void				free_pars_info(t_data *data);
+void				free_textures_3(t_data *data);
+void				free_door(t_camera **door);
+void				free_render(t_rendering **render);
 
 /* PARSING */
 
@@ -63,7 +71,6 @@ void				calculate_plane(t_data *data, t_player *player);
 /* DISPLAY */
 
 bool				display(t_data *data);
-void				init_cam_structs(t_data *data);
 void				cam_val_setter(t_player *player, t_camera *cam, int x);
 void				rays_dir_setter(t_camera *cam, double pos[2]);
 void				rays_dist_calculator(t_data *data, t_camera *cam,
@@ -93,7 +100,6 @@ void				change_door_status(t_map *map);
 /* EXIT */
 
 void				exit_w_code(int code, t_data *data);
-void				free_pars_info(t_data *data);
-void				free_textures_3(t_data *data);
+
 
 #endif

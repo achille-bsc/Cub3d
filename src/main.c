@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 23:04:29 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 07:35:52 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/13 11:08:28 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ int	main(int argc, char **argv)
 	data = ft_calloc(sizeof(t_data));
 	if (!data)
 		return (1);
-	data->vars = ft_calloc(sizeof(t_vars));
-	if (!data->vars)
-		return (free(data), 1);
+	if (!calloc_init(data))
+		return (1);
 	data->bck_color = init_bckcolor(data, 0x80525252);
 	if (!parser(data, argv[1]))
 		return (1);
