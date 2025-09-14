@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:09:43 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 14:22:21 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/14 19:26:09 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	door_action(double pos[2], char **map)
 	else if (map[(int)(pos[Y] - 0.60)][(int)(pos[X])] == 'O')
 		map[(int)(pos[Y] - 0.60)][(int)(pos[X])] = 'Q';
 	if (map[(int)pos[Y]][(int)pos[X]] == 'Q')
+		map[(int)pos[Y]][(int)pos[X]] = 'O';
+	if (map[(int)pos[Y]][(int)pos[X]] == 'C')
 		map[(int)pos[Y]][(int)pos[X]] = 'O';
 	return (0);
 }

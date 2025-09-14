@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 22:42:00 by lvan-bre          #+#    #+#             */
-/*   Updated: 2025/09/13 08:09:57 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/14 19:22:46 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	mouse_handling(t_player *player, t_window *win)
 	int	y;
 
 	mlx_mouse_get_pos(win->mlx, win->window, &x, &y);
-	player->dir += (double)(((x - player->mouse_last_pos) / 500.0));
+	player->dir += (double)(((x - player->mouse_last_pos) / 1000.0));
 	if (player->dir > 2 * M_PI)
 		player->dir -= 2 * M_PI;
 	else if (player->dir < 0)
@@ -30,6 +30,8 @@ static void	mouse_handling(t_player *player, t_window *win)
 	}
 	else
 		player->mouse_last_pos = x;
+	if (y > HEIGHT - 400 || y < 200)
+		mlx_mouse_move(win->mlx, win->window, x, HEIGHT / 2);
 }
 
 void	turning_cam(t_window *win, t_player *player, t_movement move)

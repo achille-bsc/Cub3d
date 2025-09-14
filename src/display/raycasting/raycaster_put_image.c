@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:55:34 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 18:56:55 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:03:18 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ void	put_image_1(t_data *data, t_rendering *rendering, t_camera *cam,
 	int			y;
 
 	y = rendering->draw[0];
-	rendering->tex_x = (int)(rendering->wall_x * TEXTURE_SIZE);
+	rendering->tex_x = (int)(-rendering->wall_x * TEXTURE_SIZE);
 	rendering->step = 1.0 * TEXTURE_SIZE / rendering->line_height;
 	rendering->tex_pos = (rendering->draw[0] - HEIGHT / 2
 			+ rendering->line_height / 2) * rendering->step;
 	texture = get_texture(data, orientation, cam, data->map.map);
 	while (y <= rendering->draw[1])
 	{
-		rendering->tex_y = (int)rendering->tex_pos
-			& (TEXTURE_SIZE - 1);
+		rendering->tex_y = (int)rendering->tex_pos + 1;
 		if (!texture || !texture->addr)
 			(ft_printf(_TEXT_ADDR), exit_w_code(1, data));
 		my_mlx_pixel_put(data->win, data->vars->x, y,
@@ -80,8 +79,7 @@ void	put_image_2(t_data *data, t_rendering *rendering, t_camera *cam,
 	texture = get_texture(data, orientation, cam, data->map.map);
 	while (y <= rendering->draw[1])
 	{
-		rendering->tex_y = (int)rendering->tex_pos
-			& (TEXTURE_SIZE - 1);
+		rendering->tex_y = (int)rendering->tex_pos;
 		if (!texture || !texture->addr)
 			(ft_printf(_TEXT_ADDR), exit_w_code(1, data));
 		my_mlx_pixel_put(data->win, data->vars->x, y,
