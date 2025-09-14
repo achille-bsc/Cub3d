@@ -6,7 +6,7 @@
 /*   By: lvan-bre <lvan-bre@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:53:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/09/13 12:23:33 by lvan-bre         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:46:37 by lvan-bre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static void	draw_background(t_data *data, t_rendering *render, int x)
 	int	floor_line_height;
 
 	render->line_height = (int)(HEIGHT / render->perp_wall_dist);
-	render->draw[0] = -render->line_height / 2 + HEIGHT / 2;
-	if (render->draw[0] < 0)
-		render->draw[0] = 0;
-	render->draw[1] = render->line_height / 2 + HEIGHT / 2;
-	if (render->draw[1] >= HEIGHT)
-		render->draw[1] = HEIGHT - 1;
+	render->draw[BEGIN] = -render->line_height / 2 + HEIGHT / 2;
+	if (render->draw[BEGIN] < 0)
+		render->draw[BEGIN] = 0;
+	render->draw[END] = render->line_height / 2 + HEIGHT / 2;
+	if (render->draw[END] >= HEIGHT)
+		render->draw[END] = HEIGHT - 1;
 	y = 0;
-	while (y < render->draw[0])
+	while (y < render->draw[BEGIN])
 		my_mlx_pixel_put(data->win, x, y++, data->rgb[CEILING]);
-	floor_line_height = render->draw[1] + 1;
+	floor_line_height = render->draw[END] + 1;
 	while (floor_line_height < HEIGHT)
 		my_mlx_pixel_put(data->win, x, floor_line_height++, data->rgb[FLOOR]);
 }
@@ -51,6 +51,7 @@ static void	init_pixel_art(t_data *data, t_camera *cam,
 		rendering->wall_x = data->player->pos[X]
 			+ rendering->perp_wall_dist * cam->ray_dir_x;
 	rendering->wall_x -= floor(rendering->wall_x);
+	rendering->tex_x = (int)(rendering->wall_x * TEXTURE_SIZE);
 }
 
 void	pixels_rendering(t_data *data, t_camera *cam, t_camera **door, int x)
